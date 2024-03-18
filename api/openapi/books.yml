@@ -1,0 +1,56 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Books
+  description: Books
+servers:
+  - url: https://{hostname}/api
+    variables:
+      hostname:
+        default: localhost
+security:
+  - bearerAuth: []
+paths:
+  /books/{id}:
+    get:
+      operationId: getBookById
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: Book id
+      responses:
+        '200':
+          description: Get book by id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Book:
+      type: object
+      required:
+        - title
+      properties:
+        tittle:
+          type: string
+    Error:
+      type: object
+      required:
+        - slug
+        - message
+      properties:
+        slug:
+          type: string
+        message:
+          type: string
