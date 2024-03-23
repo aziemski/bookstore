@@ -1,34 +1,24 @@
 package main
 
 import (
-	"log/slog"
-	"os"
-
 	"github.com/aziemski/bookstore/internal/books/ports"
-
 	"github.com/aziemski/bookstore/internal/x/xecho/xmiddleware"
+	"github.com/aziemski/bookstore/internal/x/xlog"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
-	log := slog.New(slog.NewTextHandler(
-		os.Stdout,
-		&slog.HandlerOptions{
-			AddSource:   false,
-			Level:       slog.LevelDebug,
-			ReplaceAttr: nil,
-		}))
-	slog.SetDefault(log)
+	log := xlog.GetLogger()
 
 	e := echo.New()
 	e.HideBanner = true
 
+	e.Use(middleware.Recover())
 	e.Use(xmiddleware.RequestLogger(log))
 
 	httpServer := &ports.HTTPServer{}
 	httpServer.RegisterWith(e)
-
-	// apiGroup := e.Group("api")
 
 	e.Logger.Fatal(e.Start("localhost:8080"))
 }

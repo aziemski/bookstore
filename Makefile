@@ -60,8 +60,8 @@ run:
 lint: golangci-lint ## Run lint.
 	$(GOLANGCI_LINT) run -v ./...
 
-.PHONY: lint.fix
-lint.fix: golangci-lint ## Fix lint errors.
+.PHONY: fmt
+fmt: golangci-lint ## Fix lint errors.
 	$(GOLANGCI_LINT) run -v --fix ./...
 
 .PHONY: test
