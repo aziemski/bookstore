@@ -13,7 +13,7 @@ security:
 paths:
   /books/{id}:
     get:
-      operationId: getBookById
+      operationId: getBookByID
       parameters:
         - in: path
           name: id

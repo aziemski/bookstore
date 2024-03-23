@@ -38,7 +38,7 @@ $(OAPI_CODEGEN): $(LOCALBIN)
 .PHONY: golangci-lint
 golangci-lint: $(GOLANGCI_LINT) ## Download golangci-lint locally if necessary.
 $(GOLANGCI_LINT): $(LOCALBIN)
-	GOBIN=$(LOCALBIN) go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.56.2
+	GOBIN=$(LOCALBIN) go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.57.1
 
 .PHONY: download-tools
 download-tools: ## Download all go tools
@@ -58,11 +58,11 @@ run:
 
 .PHONY: lint
 lint: golangci-lint ## Run lint.
-	$(GOLANGCI_LINT) run -v -c .golangci-fmt.yml
+	$(GOLANGCI_LINT) run -v ./...
 
-.PHONY: lint-fix
-lint-fix: golangci-lint ## Fix lint errors.
-	$(GOLANGCI_LINT) run -v -c .golangci-fmt.yml --fix ./...
+.PHONY: lint.fix
+lint.fix: golangci-lint ## Fix lint errors.
+	$(GOLANGCI_LINT) run -v --fix ./...
 
 .PHONY: test
 test:  ## Run tests

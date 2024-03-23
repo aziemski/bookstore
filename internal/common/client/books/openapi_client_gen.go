@@ -89,12 +89,12 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
-	// GetBookById request
-	GetBookById(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetBookByID request
+	GetBookByID(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *Client) GetBookById(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetBookByIdRequest(c.Server, id)
+func (c *Client) GetBookByID(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetBookByIDRequest(c.Server, id)
 	if err != nil {
 		return nil, err
 	}
@@ -105,8 +105,8 @@ func (c *Client) GetBookById(ctx context.Context, id openapi_types.UUID, reqEdit
 	return c.Client.Do(req)
 }
 
-// NewGetBookByIdRequest generates requests for GetBookById
-func NewGetBookByIdRequest(server string, id openapi_types.UUID) (*http.Request, error) {
+// NewGetBookByIDRequest generates requests for GetBookByID
+func NewGetBookByIDRequest(server string, id openapi_types.UUID) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -182,18 +182,18 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
-	// GetBookByIdWithResponse request
-	GetBookByIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetBookByIdResponse, error)
+	// GetBookByIDWithResponse request
+	GetBookByIDWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetBookByIDResponse, error)
 }
 
-type GetBookByIdResponse struct {
+type GetBookByIDResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *Book
 }
 
 // Status returns HTTPResponse.Status
-func (r GetBookByIdResponse) Status() string {
+func (r GetBookByIDResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -201,31 +201,31 @@ func (r GetBookByIdResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetBookByIdResponse) StatusCode() int {
+func (r GetBookByIDResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-// GetBookByIdWithResponse request returning *GetBookByIdResponse
-func (c *ClientWithResponses) GetBookByIdWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetBookByIdResponse, error) {
-	rsp, err := c.GetBookById(ctx, id, reqEditors...)
+// GetBookByIDWithResponse request returning *GetBookByIDResponse
+func (c *ClientWithResponses) GetBookByIDWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetBookByIDResponse, error) {
+	rsp, err := c.GetBookByID(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetBookByIdResponse(rsp)
+	return ParseGetBookByIDResponse(rsp)
 }
 
-// ParseGetBookByIdResponse parses an HTTP response from a GetBookByIdWithResponse call
-func ParseGetBookByIdResponse(rsp *http.Response) (*GetBookByIdResponse, error) {
+// ParseGetBookByIDResponse parses an HTTP response from a GetBookByIDWithResponse call
+func ParseGetBookByIDResponse(rsp *http.Response) (*GetBookByIDResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetBookByIdResponse{
+	response := &GetBookByIDResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

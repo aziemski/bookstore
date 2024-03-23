@@ -15,7 +15,7 @@ func RequestLogger(log *slog.Logger) echo.MiddlewareFunc {
 		LogURI:      true,
 		LogError:    true,
 		HandleError: true, // forwards error to the global error handler, so it can decide appropriate status code
-		LogValuesFunc: func(c echo.Context, v middleware.RequestLoggerValues) error {
+		LogValuesFunc: func(_ echo.Context, v middleware.RequestLoggerValues) error {
 			if v.Error == nil {
 				log.LogAttrs(context.Background(), slog.LevelInfo, "req",
 					slog.String("uri", v.URI),

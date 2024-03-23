@@ -16,7 +16,7 @@ import (
 type ServerInterface interface {
 
 	// (GET /books/{id})
-	GetBookById(ctx echo.Context, id openapi_types.UUID) error
+	GetBookByID(ctx echo.Context, id openapi_types.UUID) error
 }
 
 // ServerInterfaceWrapper converts echo contexts to parameters.
@@ -24,8 +24,8 @@ type ServerInterfaceWrapper struct {
 	Handler ServerInterface
 }
 
-// GetBookById converts echo context to params.
-func (w *ServerInterfaceWrapper) GetBookById(ctx echo.Context) error {
+// GetBookByID converts echo context to params.
+func (w *ServerInterfaceWrapper) GetBookByID(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "id" -------------
 	var id openapi_types.UUID
@@ -38,7 +38,7 @@ func (w *ServerInterfaceWrapper) GetBookById(ctx echo.Context) error {
 	ctx.Set(BearerAuthScopes, []string{})
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetBookById(ctx, id)
+	err = w.Handler.GetBookByID(ctx, id)
 	return err
 }
 
@@ -70,6 +70,6 @@ func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL 
 		Handler: si,
 	}
 
-	router.GET(baseURL+"/books/:id", wrapper.GetBookById)
+	router.GET(baseURL+"/books/:id", wrapper.GetBookByID)
 
 }

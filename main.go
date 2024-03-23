@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/aziemski/bookstore/internal/books/ports"
 	"log/slog"
 	"os"
+
+	"github.com/aziemski/bookstore/internal/books/ports"
 
 	"github.com/aziemski/bookstore/internal/x/xecho/xmiddleware"
 	"github.com/labstack/echo/v4"
@@ -24,11 +25,10 @@ func main() {
 
 	e.Use(xmiddleware.RequestLogger(log))
 
-	httpServer := &ports.HttpServer{}
+	httpServer := &ports.HTTPServer{}
 	httpServer.RegisterWith(e)
 
-	//apiGroup := e.Group("api")
+	// apiGroup := e.Group("api")
 
 	e.Logger.Fatal(e.Start("localhost:8080"))
-
 }
