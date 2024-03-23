@@ -27,6 +27,20 @@ func (bu *BookUpdate) Where(ps ...predicate.Book) *BookUpdate {
 	return bu
 }
 
+// SetTitle sets the "title" field.
+func (bu *BookUpdate) SetTitle(s string) *BookUpdate {
+	bu.mutation.SetTitle(s)
+	return bu
+}
+
+// SetNillableTitle sets the "title" field if the given value is not nil.
+func (bu *BookUpdate) SetNillableTitle(s *string) *BookUpdate {
+	if s != nil {
+		bu.SetTitle(*s)
+	}
+	return bu
+}
+
 // Mutation returns the BookMutation object of the builder.
 func (bu *BookUpdate) Mutation() *BookMutation {
 	return bu.mutation
@@ -59,14 +73,30 @@ func (bu *BookUpdate) ExecX(ctx context.Context) {
 	}
 }
 
+// check runs all checks and user-defined validators on the builder.
+func (bu *BookUpdate) check() error {
+	if v, ok := bu.mutation.Title(); ok {
+		if err := book.TitleValidator(v); err != nil {
+			return &ValidationError{Name: "title", err: fmt.Errorf(`entgo: validator failed for field "Book.title": %w`, err)}
+		}
+	}
+	return nil
+}
+
 func (bu *BookUpdate) sqlSave(ctx context.Context) (n int, err error) {
-	_spec := sqlgraph.NewUpdateSpec(book.Table, book.Columns, sqlgraph.NewFieldSpec(book.FieldID, field.TypeInt))
+	if err := bu.check(); err != nil {
+		return n, err
+	}
+	_spec := sqlgraph.NewUpdateSpec(book.Table, book.Columns, sqlgraph.NewFieldSpec(book.FieldID, field.TypeString))
 	if ps := bu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
+	}
+	if value, ok := bu.mutation.Title(); ok {
+		_spec.SetField(book.FieldTitle, field.TypeString, value)
 	}
 	if n, err = sqlgraph.UpdateNodes(ctx, bu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
@@ -86,6 +116,20 @@ type BookUpdateOne struct {
 	fields   []string
 	hooks    []Hook
 	mutation *BookMutation
+}
+
+// SetTitle sets the "title" field.
+func (buo *BookUpdateOne) SetTitle(s string) *BookUpdateOne {
+	buo.mutation.SetTitle(s)
+	return buo
+}
+
+// SetNillableTitle sets the "title" field if the given value is not nil.
+func (buo *BookUpdateOne) SetNillableTitle(s *string) *BookUpdateOne {
+	if s != nil {
+		buo.SetTitle(*s)
+	}
+	return buo
 }
 
 // Mutation returns the BookMutation object of the builder.
@@ -133,8 +177,21 @@ func (buo *BookUpdateOne) ExecX(ctx context.Context) {
 	}
 }
 
+// check runs all checks and user-defined validators on the builder.
+func (buo *BookUpdateOne) check() error {
+	if v, ok := buo.mutation.Title(); ok {
+		if err := book.TitleValidator(v); err != nil {
+			return &ValidationError{Name: "title", err: fmt.Errorf(`entgo: validator failed for field "Book.title": %w`, err)}
+		}
+	}
+	return nil
+}
+
 func (buo *BookUpdateOne) sqlSave(ctx context.Context) (_node *Book, err error) {
-	_spec := sqlgraph.NewUpdateSpec(book.Table, book.Columns, sqlgraph.NewFieldSpec(book.FieldID, field.TypeInt))
+	if err := buo.check(); err != nil {
+		return _node, err
+	}
+	_spec := sqlgraph.NewUpdateSpec(book.Table, book.Columns, sqlgraph.NewFieldSpec(book.FieldID, field.TypeString))
 	id, ok := buo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`entgo: missing "Book.id" for update`)}
@@ -158,6 +215,9 @@ func (buo *BookUpdateOne) sqlSave(ctx context.Context) (_node *Book, err error) 
 				ps[i](selector)
 			}
 		}
+	}
+	if value, ok := buo.mutation.Title(); ok {
+		_spec.SetField(book.FieldTitle, field.TypeString, value)
 	}
 	_node = &Book{config: buo.config}
 	_spec.Assign = _node.assignValues

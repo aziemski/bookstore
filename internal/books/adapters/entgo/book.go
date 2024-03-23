@@ -13,9 +13,11 @@ import (
 
 // Book is the model entity for the Book schema.
 type Book struct {
-	config
+	config `json:"-"`
 	// ID of the ent.
-	ID           int `json:"id,omitempty"`
+	ID string `json:"id,omitempty"`
+	// Title holds the value of the "title" field.
+	Title        string `json:"title,omitempty"`
 	selectValues sql.SelectValues
 }
 
@@ -24,8 +26,8 @@ func (*Book) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case book.FieldID:
-			values[i] = new(sql.NullInt64)
+		case book.FieldID, book.FieldTitle:
+			values[i] = new(sql.NullString)
 		default:
 			values[i] = new(sql.UnknownType)
 		}
@@ -42,11 +44,17 @@ func (b *Book) assignValues(columns []string, values []any) error {
 	for i := range columns {
 		switch columns[i] {
 		case book.FieldID:
-			value, ok := values[i].(*sql.NullInt64)
-			if !ok {
-				return fmt.Errorf("unexpected type %T for field id", value)
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field id", values[i])
+			} else if value.Valid {
+				b.ID = value.String
 			}
-			b.ID = int(value.Int64)
+		case book.FieldTitle:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field title", values[i])
+			} else if value.Valid {
+				b.Title = value.String
+			}
 		default:
 			b.selectValues.Set(columns[i], values[i])
 		}
@@ -82,7 +90,9 @@ func (b *Book) Unwrap() *Book {
 func (b *Book) String() string {
 	var builder strings.Builder
 	builder.WriteString("Book(")
-	builder.WriteString(fmt.Sprintf("id=%v", b.ID))
+	builder.WriteString(fmt.Sprintf("id=%v, ", b.ID))
+	builder.WriteString("title=")
+	builder.WriteString(b.Title)
 	builder.WriteByte(')')
 	return builder.String()
 }

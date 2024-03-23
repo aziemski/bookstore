@@ -81,8 +81,8 @@ func (bq *BookQuery) FirstX(ctx context.Context) *Book {
 
 // FirstID returns the first Book ID from the query.
 // Returns a *NotFoundError when no Book ID was found.
-func (bq *BookQuery) FirstID(ctx context.Context) (id int, err error) {
-	var ids []int
+func (bq *BookQuery) FirstID(ctx context.Context) (id string, err error) {
+	var ids []string
 	if ids, err = bq.Limit(1).IDs(setContextOp(ctx, bq.ctx, "FirstID")); err != nil {
 		return
 	}
@@ -94,7 +94,7 @@ func (bq *BookQuery) FirstID(ctx context.Context) (id int, err error) {
 }
 
 // FirstIDX is like FirstID, but panics if an error occurs.
-func (bq *BookQuery) FirstIDX(ctx context.Context) int {
+func (bq *BookQuery) FirstIDX(ctx context.Context) string {
 	id, err := bq.FirstID(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
@@ -132,8 +132,8 @@ func (bq *BookQuery) OnlyX(ctx context.Context) *Book {
 // OnlyID is like Only, but returns the only Book ID in the query.
 // Returns a *NotSingularError when more than one Book ID is found.
 // Returns a *NotFoundError when no entities are found.
-func (bq *BookQuery) OnlyID(ctx context.Context) (id int, err error) {
-	var ids []int
+func (bq *BookQuery) OnlyID(ctx context.Context) (id string, err error) {
+	var ids []string
 	if ids, err = bq.Limit(2).IDs(setContextOp(ctx, bq.ctx, "OnlyID")); err != nil {
 		return
 	}
@@ -149,7 +149,7 @@ func (bq *BookQuery) OnlyID(ctx context.Context) (id int, err error) {
 }
 
 // OnlyIDX is like OnlyID, but panics if an error occurs.
-func (bq *BookQuery) OnlyIDX(ctx context.Context) int {
+func (bq *BookQuery) OnlyIDX(ctx context.Context) string {
 	id, err := bq.OnlyID(ctx)
 	if err != nil {
 		panic(err)
@@ -177,7 +177,7 @@ func (bq *BookQuery) AllX(ctx context.Context) []*Book {
 }
 
 // IDs executes the query and returns a list of Book IDs.
-func (bq *BookQuery) IDs(ctx context.Context) (ids []int, err error) {
+func (bq *BookQuery) IDs(ctx context.Context) (ids []string, err error) {
 	if bq.ctx.Unique == nil && bq.path != nil {
 		bq.Unique(true)
 	}
@@ -189,7 +189,7 @@ func (bq *BookQuery) IDs(ctx context.Context) (ids []int, err error) {
 }
 
 // IDsX is like IDs, but panics if an error occurs.
-func (bq *BookQuery) IDsX(ctx context.Context) []int {
+func (bq *BookQuery) IDsX(ctx context.Context) []string {
 	ids, err := bq.IDs(ctx)
 	if err != nil {
 		panic(err)
@@ -257,6 +257,18 @@ func (bq *BookQuery) Clone() *BookQuery {
 
 // GroupBy is used to group vertices by one or more fields/columns.
 // It is often used with aggregate functions, like: count, max, mean, min, sum.
+//
+// Example:
+//
+//	var v []struct {
+//		Title string `json:"title,omitempty"`
+//		Count int `json:"count,omitempty"`
+//	}
+//
+//	client.Book.Query().
+//		GroupBy(book.FieldTitle).
+//		Aggregate(entgo.Count()).
+//		Scan(ctx, &v)
 func (bq *BookQuery) GroupBy(field string, fields ...string) *BookGroupBy {
 	bq.ctx.Fields = append([]string{field}, fields...)
 	grbuild := &BookGroupBy{build: bq}
@@ -268,6 +280,16 @@ func (bq *BookQuery) GroupBy(field string, fields ...string) *BookGroupBy {
 
 // Select allows the selection one or more fields/columns for the given query,
 // instead of selecting all fields in the entity.
+//
+// Example:
+//
+//	var v []struct {
+//		Title string `json:"title,omitempty"`
+//	}
+//
+//	client.Book.Query().
+//		Select(book.FieldTitle).
+//		Scan(ctx, &v)
 func (bq *BookQuery) Select(fields ...string) *BookSelect {
 	bq.ctx.Fields = append(bq.ctx.Fields, fields...)
 	sbuild := &BookSelect{BookQuery: bq}
@@ -342,7 +364,7 @@ func (bq *BookQuery) sqlCount(ctx context.Context) (int, error) {
 }
 
 func (bq *BookQuery) querySpec() *sqlgraph.QuerySpec {
-	_spec := sqlgraph.NewQuerySpec(book.Table, book.Columns, sqlgraph.NewFieldSpec(book.FieldID, field.TypeInt))
+	_spec := sqlgraph.NewQuerySpec(book.Table, book.Columns, sqlgraph.NewFieldSpec(book.FieldID, field.TypeString))
 	_spec.From = bq.sql
 	if unique := bq.ctx.Unique; unique != nil {
 		_spec.Unique = *unique

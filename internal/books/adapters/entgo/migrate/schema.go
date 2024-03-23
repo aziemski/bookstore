@@ -10,7 +10,8 @@ import (
 var (
 	// BooksColumns holds the columns for the "books" table.
 	BooksColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeInt, Increment: true},
+		{Name: "id", Type: field.TypeString, Unique: true, Size: 32},
+		{Name: "title", Type: field.TypeString},
 	}
 	// BooksTable holds the schema information for the "books" table.
 	BooksTable = &schema.Table{

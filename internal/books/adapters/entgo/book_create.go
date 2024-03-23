@@ -4,6 +4,7 @@ package entgo
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
@@ -16,6 +17,18 @@ type BookCreate struct {
 	config
 	mutation *BookMutation
 	hooks    []Hook
+}
+
+// SetTitle sets the "title" field.
+func (bc *BookCreate) SetTitle(s string) *BookCreate {
+	bc.mutation.SetTitle(s)
+	return bc
+}
+
+// SetID sets the "id" field.
+func (bc *BookCreate) SetID(s string) *BookCreate {
+	bc.mutation.SetID(s)
+	return bc
 }
 
 // Mutation returns the BookMutation object of the builder.
@@ -52,6 +65,19 @@ func (bc *BookCreate) ExecX(ctx context.Context) {
 
 // check runs all checks and user-defined validators on the builder.
 func (bc *BookCreate) check() error {
+	if _, ok := bc.mutation.Title(); !ok {
+		return &ValidationError{Name: "title", err: errors.New(`entgo: missing required field "Book.title"`)}
+	}
+	if v, ok := bc.mutation.Title(); ok {
+		if err := book.TitleValidator(v); err != nil {
+			return &ValidationError{Name: "title", err: fmt.Errorf(`entgo: validator failed for field "Book.title": %w`, err)}
+		}
+	}
+	if v, ok := bc.mutation.ID(); ok {
+		if err := book.IDValidator(v); err != nil {
+			return &ValidationError{Name: "id", err: fmt.Errorf(`entgo: validator failed for field "Book.id": %w`, err)}
+		}
+	}
 	return nil
 }
 
@@ -66,8 +92,13 @@ func (bc *BookCreate) sqlSave(ctx context.Context) (*Book, error) {
 		}
 		return nil, err
 	}
-	id := _spec.ID.Value.(int64)
-	_node.ID = int(id)
+	if _spec.ID.Value != nil {
+		if id, ok := _spec.ID.Value.(string); ok {
+			_node.ID = id
+		} else {
+			return nil, fmt.Errorf("unexpected Book.ID type: %T", _spec.ID.Value)
+		}
+	}
 	bc.mutation.id = &_node.ID
 	bc.mutation.done = true
 	return _node, nil
@@ -76,8 +107,16 @@ func (bc *BookCreate) sqlSave(ctx context.Context) (*Book, error) {
 func (bc *BookCreate) createSpec() (*Book, *sqlgraph.CreateSpec) {
 	var (
 		_node = &Book{config: bc.config}
-		_spec = sqlgraph.NewCreateSpec(book.Table, sqlgraph.NewFieldSpec(book.FieldID, field.TypeInt))
+		_spec = sqlgraph.NewCreateSpec(book.Table, sqlgraph.NewFieldSpec(book.FieldID, field.TypeString))
 	)
+	if id, ok := bc.mutation.ID(); ok {
+		_node.ID = id
+		_spec.ID.Value = id
+	}
+	if value, ok := bc.mutation.Title(); ok {
+		_spec.SetField(book.FieldTitle, field.TypeString, value)
+		_node.Title = value
+	}
 	return _node, _spec
 }
 
@@ -125,10 +164,6 @@ func (bcb *BookCreateBulk) Save(ctx context.Context) ([]*Book, error) {
 					return nil, err
 				}
 				mutation.id = &nodes[i].ID
-				if specs[i].ID.Value != nil {
-					id := specs[i].ID.Value.(int64)
-					nodes[i].ID = int(id)
-				}
 				mutation.done = true
 				return nodes[i], nil
 			})

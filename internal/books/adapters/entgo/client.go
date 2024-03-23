@@ -257,7 +257,7 @@ func (c *BookClient) UpdateOne(b *Book) *BookUpdateOne {
 }
 
 // UpdateOneID returns an update builder for the given id.
-func (c *BookClient) UpdateOneID(id int) *BookUpdateOne {
+func (c *BookClient) UpdateOneID(id string) *BookUpdateOne {
 	mutation := newBookMutation(c.config, OpUpdateOne, withBookID(id))
 	return &BookUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
@@ -274,7 +274,7 @@ func (c *BookClient) DeleteOne(b *Book) *BookDeleteOne {
 }
 
 // DeleteOneID returns a builder for deleting the given entity by its id.
-func (c *BookClient) DeleteOneID(id int) *BookDeleteOne {
+func (c *BookClient) DeleteOneID(id string) *BookDeleteOne {
 	builder := c.Delete().Where(book.ID(id))
 	builder.mutation.id = &id
 	builder.mutation.op = OpDeleteOne
@@ -291,12 +291,12 @@ func (c *BookClient) Query() *BookQuery {
 }
 
 // Get returns a Book entity by its id.
-func (c *BookClient) Get(ctx context.Context, id int) (*Book, error) {
+func (c *BookClient) Get(ctx context.Context, id string) (*Book, error) {
 	return c.Query().Where(book.ID(id)).Only(ctx)
 }
 
 // GetX is like Get, but panics if an error occurs.
-func (c *BookClient) GetX(ctx context.Context, id int) *Book {
+func (c *BookClient) GetX(ctx context.Context, id string) *Book {
 	obj, err := c.Get(ctx, id)
 	if err != nil {
 		panic(err)
