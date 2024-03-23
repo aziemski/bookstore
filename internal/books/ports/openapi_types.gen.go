@@ -9,5 +9,5 @@ const (
 
 // Book defines model for Book.
 type Book struct {
-	Tittle *string `json:"tittle,omitempty"`
+	Title string `json:"title"`
 }

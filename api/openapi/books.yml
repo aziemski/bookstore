@@ -42,7 +42,7 @@ components:
       required:
         - title
       properties:
-        tittle:
+        title:
           type: string
     Error:
       type: object
