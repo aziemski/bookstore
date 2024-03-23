@@ -47,6 +47,7 @@ download-tools: moq oapi_codegen golangci-lint
 .PHONY: generate
 generate: oapi_codegen moq ## Generate boilerplate
 	@./hack/openapi-http.sh books internal/books/ports ports
+	$(GO) generate ./...
 
 .PHONY: build
 build: ## Build app
