@@ -5,6 +5,7 @@ go 1.22.1
 require (
 	entgo.io/ent v0.13.1
 	github.com/labstack/echo/v4 v4.11.4
+	github.com/mattn/go-sqlite3 v1.14.16
 	github.com/oapi-codegen/runtime v1.1.1
 )
 

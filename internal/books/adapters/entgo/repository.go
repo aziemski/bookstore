@@ -4,8 +4,6 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/aziemski/bookstore/internal/x/xlog"
-
 	"github.com/aziemski/bookstore/internal/books/domain/books"
 )
 
@@ -17,22 +15,7 @@ type Repository struct {
 	log *slog.Logger
 }
 
-func NewRepository(log *slog.Logger) *Repository {
-	if log == nil {
-		log = xlog.GetLogger()
-	}
-
-	client, err := Open("sqlite3", "file:ent?mode=memory&cache=shared&_fk=1")
-	if err != nil {
-		log.Error("unexpected Open err", xlog.Err(err))
-		panic(err)
-	}
-
-	if err = client.Schema.Create(context.Background()); err != nil {
-		log.Error("unexpected client.Schema.Create err", xlog.Err(err))
-		panic(err)
-	}
-
+func NewRepository(client *Client, log *slog.Logger) *Repository {
 	return &Repository{
 		client: client,
 		log:    log,

@@ -28,6 +28,7 @@ func (h *HTTPServer) GetBookByID(c echo.Context, id openapi_types.UUID) error {
 	ctx := c.Request().Context()
 
 	b, err := h.app.Queries.GetBookByID.Handle(ctx, id.String())
+
 	if err != nil {
 		return c.JSON(http.StatusNotFound, nil)
 	}

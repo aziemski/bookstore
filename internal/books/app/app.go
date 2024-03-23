@@ -11,5 +11,5 @@ type Commands struct {
 }
 
 type Queries struct {
-	GetBookByID query.GetByIDBookHandler
+	GetBookByID *query.GetByIDBookHandler
 }

@@ -23,4 +23,5 @@ go.work
 
 bin
 .idea
-.DS_Store
+
+bookstore.db
