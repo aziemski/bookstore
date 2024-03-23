@@ -7,7 +7,6 @@ import (
 	"github.com/aziemski/bookstore/internal/books/app"
 
 	"github.com/labstack/echo/v4"
-	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 var _ ServerInterface = (*HTTPServer)(nil)
@@ -24,10 +23,10 @@ func NewHTTPServer(app *app.App, log *slog.Logger) *HTTPServer {
 	}
 }
 
-func (h *HTTPServer) GetBookByID(c echo.Context, id openapi_types.UUID) error {
+func (h *HTTPServer) GetBookByID(c echo.Context, id string) error {
 	ctx := c.Request().Context()
 
-	b, err := h.app.Queries.GetBookByID.Handle(ctx, id.String())
+	b, err := h.app.Queries.GetBookByID.Handle(ctx, id)
 
 	if err != nil {
 		return c.JSON(http.StatusNotFound, nil)

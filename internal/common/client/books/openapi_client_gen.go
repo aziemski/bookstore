@@ -13,7 +13,6 @@ import (
 	"strings"
 
 	"github.com/oapi-codegen/runtime"
-	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 // RequestEditorFn  is the function signature for the RequestEditor callback function
@@ -90,10 +89,10 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 // The interface specification for the client above.
 type ClientInterface interface {
 	// GetBookByID request
-	GetBookByID(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetBookByID(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *Client) GetBookByID(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetBookByID(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetBookByIDRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -106,7 +105,7 @@ func (c *Client) GetBookByID(ctx context.Context, id openapi_types.UUID, reqEdit
 }
 
 // NewGetBookByIDRequest generates requests for GetBookByID
-func NewGetBookByIDRequest(server string, id openapi_types.UUID) (*http.Request, error) {
+func NewGetBookByIDRequest(server string, id string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -183,7 +182,7 @@ func WithBaseURL(baseURL string) ClientOption {
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
 	// GetBookByIDWithResponse request
-	GetBookByIDWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetBookByIDResponse, error)
+	GetBookByIDWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetBookByIDResponse, error)
 }
 
 type GetBookByIDResponse struct {
@@ -209,7 +208,7 @@ func (r GetBookByIDResponse) StatusCode() int {
 }
 
 // GetBookByIDWithResponse request returning *GetBookByIDResponse
-func (c *ClientWithResponses) GetBookByIDWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetBookByIDResponse, error) {
+func (c *ClientWithResponses) GetBookByIDWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetBookByIDResponse, error) {
 	rsp, err := c.GetBookByID(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err

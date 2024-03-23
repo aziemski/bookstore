@@ -19,7 +19,6 @@ paths:
           name: id
           schema:
             type: string
-            format: uuid
           required: true
           description: Book id
       responses:

@@ -9,14 +9,13 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/oapi-codegen/runtime"
-	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
 
 	// (GET /books/{id})
-	GetBookByID(ctx echo.Context, id openapi_types.UUID) error
+	GetBookByID(ctx echo.Context, id string) error
 }
 
 // ServerInterfaceWrapper converts echo contexts to parameters.
@@ -28,7 +27,7 @@ type ServerInterfaceWrapper struct {
 func (w *ServerInterfaceWrapper) GetBookByID(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "id" -------------
-	var id openapi_types.UUID
+	var id string
 
 	err = runtime.BindStyledParameterWithOptions("simple", "id", ctx.Param("id"), &id, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
 	if err != nil {
