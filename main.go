@@ -5,11 +5,11 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/aziemski/bookstore/internal/books/domain/books"
-
 	"github.com/aziemski/bookstore/internal/books/adapters/entgo"
 	"github.com/aziemski/bookstore/internal/books/app"
+	"github.com/aziemski/bookstore/internal/books/app/command"
 	"github.com/aziemski/bookstore/internal/books/app/query"
+	"github.com/aziemski/bookstore/internal/books/domain/books"
 	"github.com/aziemski/bookstore/internal/books/ports"
 	"github.com/aziemski/bookstore/internal/x/xecho/xmiddleware"
 	"github.com/aziemski/bookstore/internal/x/xlog"
@@ -43,6 +43,9 @@ func main() {
 	repo := entgo.NewRepository(dbClient, log)
 
 	a := &app.App{
+		Commands: app.Commands{
+			AddBook: command.NewAddBoolHandler(repo, log),
+		},
 		Queries: app.Queries{
 			GetBookByID: query.NewGetByIDBookHandler(repo, log),
 		},

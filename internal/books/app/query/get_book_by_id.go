@@ -5,7 +5,6 @@ import (
 	"log/slog"
 
 	"github.com/aziemski/bookstore/internal/books/adapters/entgo"
-
 	"github.com/aziemski/bookstore/internal/books/domain/books"
 )
 
