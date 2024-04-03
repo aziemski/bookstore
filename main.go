@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"github.com/aziemski/bookstore/internal/books/ports/web"
 	"log/slog"
 	"time"
 
@@ -55,6 +56,11 @@ func main() {
 	httpServer.RegisterWith(e)
 
 	go createFixtures(repo, log)
+
+	e.GET("/", func(c echo.Context) error {
+		component := web.Hello("htmlx")
+		return component.Render(c.Request().Context(), c.Response().Writer)
+	})
 
 	e.Logger.Fatal(e.Start("localhost:8080"))
 }
