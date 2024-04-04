@@ -9,7 +9,6 @@ import (
 )
 
 func SetupRoutes(e *echo.Echo) {
-
 	ah := &about.Handler{}
 	hh := &home.Handler{}
 	bdh := &bookdetails.Handler{}

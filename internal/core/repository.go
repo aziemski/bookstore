@@ -54,3 +54,7 @@ func (r *Repository) FindByID(ctx context.Context, id string) (*Book, error) {
 		Description: "",
 	}, nil
 }
+
+func (r *Repository) GetTotalCount(ctx context.Context) (int, error) {
+	return r.db.Book.Query().Count(ctx)
+}

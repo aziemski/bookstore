@@ -58,6 +58,11 @@ func main() {
 
 func createFixtures(repo *core.Repository, log *slog.Logger) {
 	try := func() error {
+		if c, err := repo.GetTotalCount(context.Background()); c > 0 && err == nil {
+			log.Info("book records found ", "count", c)
+			return nil
+		}
+
 		time.Sleep(3 * time.Second)
 		log.Info("Inserting book")
 		_, err := repo.InsertNew(context.Background(), &core.NewBookSpec{

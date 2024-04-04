@@ -21,10 +21,12 @@ templ HomeIndex(name string) {
             </ul>
         </nav>
         <div class="search">
-            <label>
-                <input type="text" placeholder="Search..."/>
-            </label>
-            <button type="submit">Find!</button>
+            <form action="/search" method="GET">
+                 <label>
+                     <input type="text" placeholder="Search..." id="q" name="q"/>
+                   </label>
+                 <button type="submit">Find!</button>
+            </form>
         </div>
     </header>
     <div class="main">
