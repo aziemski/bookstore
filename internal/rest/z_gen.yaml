@@ -1,0 +1,6 @@
+package: rest
+output: zz_gen.server.go
+generate:
+  echo-server: true
+  embedded-spec: true
+  models: true

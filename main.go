@@ -2,16 +2,13 @@ package main
 
 import (
 	"context"
-	"github.com/aziemski/bookstore/internal/books/ports/web"
 	"log/slog"
 	"time"
 
-	"github.com/aziemski/bookstore/internal/books/adapters/entgo"
-	"github.com/aziemski/bookstore/internal/books/app"
-	"github.com/aziemski/bookstore/internal/books/app/command"
-	"github.com/aziemski/bookstore/internal/books/app/query"
-	"github.com/aziemski/bookstore/internal/books/domain/books"
-	"github.com/aziemski/bookstore/internal/books/ports"
+	"github.com/aziemski/bookstore/internal/core"
+	"github.com/aziemski/bookstore/internal/core/db"
+	"github.com/aziemski/bookstore/internal/rest"
+	"github.com/aziemski/bookstore/internal/web"
 	"github.com/aziemski/bookstore/internal/x/xecho/xmiddleware"
 	"github.com/aziemski/bookstore/internal/x/xlog"
 	"github.com/labstack/echo/v4"
@@ -24,13 +21,15 @@ func main() {
 	log := xlog.GetLogger()
 
 	e := echo.New()
+	e.Static("/", "assets")
+
 	e.HideBanner = true
 
 	e.Use(middleware.Recover())
 	e.Use(xmiddleware.RequestLogger(log))
 
-	// dbClient, err := entgo.Open("sqlite3", "file:ent?mode=memory&cache=shared&_fk=1")
-	dbClient, err := entgo.Open("sqlite3", "file:./bookstore.db?_fk=1")
+	// dbClient, err := db.Open("sqlite3", "file:ent?mode=memory&cache=shared&_fk=1")
+	dbClient, err := db.Open("sqlite3", "file:./bookstore.db?_fk=1")
 	if err != nil {
 		log.Error("unexpected db.Open err", xlog.Err(err))
 		panic(err)
@@ -41,35 +40,23 @@ func main() {
 		panic(err)
 	}
 
-	repo := entgo.NewRepository(dbClient, log)
+	repo := core.NewRepository(dbClient)
 
-	a := &app.App{
-		Commands: app.Commands{
-			AddBook: command.NewAddBoolHandler(repo, log),
-		},
-		Queries: app.Queries{
-			GetBookByID: query.NewGetByIDBookHandler(repo, log),
-		},
-	}
-
-	httpServer := ports.NewHTTPServer(a, log)
-	httpServer.RegisterWith(e)
+	restServer := rest.NewServer()
+	restServer.RegisterWith(e)
 
 	go createFixtures(repo, log)
 
-	e.GET("/", func(c echo.Context) error {
-		component := web.Hello("htmlx")
-		return component.Render(c.Request().Context(), c.Response().Writer)
-	})
+	web.SetupRoutes(e)
 
 	e.Logger.Fatal(e.Start("localhost:8080"))
 }
 
-func createFixtures(repo *entgo.Repository, log *slog.Logger) {
+func createFixtures(repo *core.Repository, log *slog.Logger) {
 	try := func() error {
 		time.Sleep(3 * time.Second)
 		log.Info("Inserting book")
-		_, err := repo.InsertNew(context.Background(), &books.NewBookSpec{
+		_, err := repo.InsertNew(context.Background(), &core.NewBookSpec{
 			ID:          "123",
 			Title:       "Some title",
 			Description: "Description",
