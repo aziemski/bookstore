@@ -19,7 +19,7 @@ import (
 )
 
 func main() {
-	address := flag.String("a", ":8080", "server:port")
+	address := flag.String("a", "localhost:8080", "server:port")
 	flag.Parse()
 
 	log := xlog.GetLogger()

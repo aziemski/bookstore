@@ -1,5 +1,76 @@
 package homeviews
 
 templ HomeIndex(name string) {
-	<div>Home, { name }</div>
+	<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Bookstore</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+    </head>
+    <body>
+    <header>
+        <div class="logo">
+            <a href="">Bookstore</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">Categories</a></li>
+                <li><a href="">About Project</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="search">
+            <label>
+                <input type="text" placeholder="Search..."/>
+            </label>
+            <button type="submit">Find!</button>
+        </div>
+    </header>
+    <div class="main">
+        <div class="welcome-content">
+            <h1>Welcome to Bookstore</h1>
+            <p>Find your next favourite book today</p>
+        </div>
+
+        <div class="main-content">
+            <h2>Featured Books</h2>
+            <div class="books">
+                <div class="book">
+                    <img src="https://httpcats.com/201.jpg" alt=""/>
+                    <h3>Book Title 201</h3>
+                    <p>Author Name</p>
+                    <p>$5.99</p>
+                </div>
+                <div class="book">
+                    <img src="https://httpcats.com/101.jpg" alt=""/>
+                    <h3>Book Title 101</h3>
+                    <p>Author Name</p>
+                    <p>$20.55</p>
+                </div>
+                <div class="book">
+                    <img src="https://http.dog/303.jpg" alt=""/>
+                    <h3>Book Title 303</h3>
+                    <p>Author Name</p>
+                    <p>$10.12</p>
+                </div>
+                <div class="book">
+                    <img src="https://http.dog/404.jpg" alt=""/>
+                    <h3>Book Title 404 </h3>
+                    <p>Author Name</p>
+                    <p>$14.32</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Bookstore. All right reserved </p>
+    </footer>
+
+    </body>
+
+    </html>
 }
