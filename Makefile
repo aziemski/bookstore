@@ -53,6 +53,10 @@ generate: oapi_codegen moq templ ## Generate boilerplate
 templ: ## Generate views
 	templ generate ./...
 
+.PHONY: templ
+templ.watch: ## Watch templates and generate views
+	fswatch -o -e ".*" -i "\\.templ*" . | templ generate ./...
+
 .PHONY: build
 build: ## Build app
 	GOBIN=$(LOCALBIN) $(GO) install -ldflags $(LDFLAGS)  ./...
