@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/aziemski/bookstore/internal/core"
-	"github.com/aziemski/bookstore/internal/core/db"
+	"github.com/aziemski/bookstore/internal/core/ent"
 	"github.com/aziemski/bookstore/internal/rest"
 	"github.com/aziemski/bookstore/internal/web"
 	"github.com/aziemski/bookstore/internal/x/xecho/xmiddleware"
@@ -28,8 +28,8 @@ func main() {
 	e.Use(middleware.Recover())
 	e.Use(xmiddleware.RequestLogger(log))
 
-	// dbClient, err := db.Open("sqlite3", "file:ent?mode=memory&cache=shared&_fk=1")
-	dbClient, err := db.Open("sqlite3", "file:./bookstore.db?_fk=1")
+	// dbClient, err := ent.Open("sqlite3", "file:ent?mode=memory&cache=shared&_fk=1")
+	dbClient, err := ent.Open("sqlite3", "file:./bookstore.db?_fk=1")
 	if err != nil {
 		log.Error("unexpected db.Open err", xlog.Err(err))
 		panic(err)

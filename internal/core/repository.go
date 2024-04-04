@@ -2,9 +2,7 @@ package core
 
 import (
 	"context"
-
-	"github.com/aziemski/bookstore/internal/books/domain/books"
-	"github.com/aziemski/bookstore/internal/core/db"
+	"github.com/aziemski/bookstore/internal/core/ent"
 )
 
 type Book struct {
@@ -20,15 +18,15 @@ type NewBookSpec struct {
 }
 
 type Repository struct {
-	client *db.Client
+	db *ent.Client
 }
 
-func NewRepository(client *db.Client) *Repository {
-	return &Repository{client: client}
+func NewRepository(db *ent.Client) *Repository {
+	return &Repository{db: db}
 }
 
-func (r *Repository) InsertNew(ctx context.Context, in *NewBookSpec) (*books.Book, error) {
-	b, err := r.client.Book.Create().
+func (r *Repository) InsertNew(ctx context.Context, in *NewBookSpec) (*Book, error) {
+	b, err := r.db.Book.Create().
 		SetID(in.ID).
 		SetTitle(in.Title).
 		Save(ctx)
@@ -36,7 +34,7 @@ func (r *Repository) InsertNew(ctx context.Context, in *NewBookSpec) (*books.Boo
 		return nil, err
 	}
 
-	return &books.Book{
+	return &Book{
 		ID:          b.ID,
 		Title:       b.Title,
 		Description: "",
@@ -44,7 +42,7 @@ func (r *Repository) InsertNew(ctx context.Context, in *NewBookSpec) (*books.Boo
 }
 
 func (r *Repository) FindByID(ctx context.Context, id string) (*Book, error) {
-	b, err := r.client.Book.Get(ctx, id)
+	b, err := r.db.Book.Get(ctx, id)
 	if err != nil {
 		return nil, err
 	}

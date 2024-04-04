@@ -4,7 +4,7 @@ package book
 
 import (
 	"entgo.io/ent/dialect/sql"
-	"github.com/aziemski/bookstore/internal/core/db/predicate"
+	"github.com/aziemski/bookstore/internal/core/ent/predicate"
 )
 
 // ID filters vertices based on their ID field.
