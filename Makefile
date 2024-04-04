@@ -54,7 +54,7 @@ build: ## Build app
 
 .PHONY: run
 run:
-	$(GO) run .
+	$(GO) run . -a localhost:8080
 
 .PHONY: lint
 lint: golangci-lint ## Run lint.

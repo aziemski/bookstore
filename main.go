@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"log/slog"
 	"time"
 
@@ -18,6 +19,9 @@ import (
 )
 
 func main() {
+	address := flag.String("a", ":8080", "server:port")
+	flag.Parse()
+
 	log := xlog.GetLogger()
 
 	e := echo.New()
@@ -49,7 +53,7 @@ func main() {
 
 	web.SetupRoutes(e)
 
-	e.Logger.Fatal(e.Start("localhost:8080"))
+	e.Logger.Fatal(e.Start(*address))
 }
 
 func createFixtures(repo *core.Repository, log *slog.Logger) {
