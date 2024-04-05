@@ -11,8 +11,10 @@ type Server struct {
 	repo *core.Repository
 }
 
-func NewServer() *Server {
-	return &Server{}
+func NewServer(repo *core.Repository) *Server {
+	return &Server{
+		repo: repo,
+	}
 }
 
 func (s *Server) GetBookByID(c echo.Context, id string) error {

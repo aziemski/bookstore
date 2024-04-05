@@ -2,8 +2,11 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"flag"
+	"fmt"
 	"log/slog"
+	"os"
 	"time"
 
 	"github.com/aziemski/bookstore/internal/core"
@@ -46,7 +49,7 @@ func main() {
 
 	repo := core.NewRepository(dbClient)
 
-	restServer := rest.NewServer()
+	restServer := rest.NewServer(repo)
 	restServer.RegisterWith(e)
 
 	go createFixtures(repo, log)
@@ -56,26 +59,59 @@ func main() {
 	e.Logger.Fatal(e.Start(*address))
 }
 
+type FakeBook struct {
+	Title       string `json:"title"`
+	Author      string `json:"author"`
+	Description string `json:"description"`
+	ImageLink   string `json:"image_link"`
+	Category    string `json:"category"`
+	Featured    bool   `json:"featured"`
+}
+
+func readFakeBooks(log *slog.Logger) []FakeBook {
+	var books []FakeBook
+
+	file, err := os.Open("assets/fake_books.json")
+	if err != nil {
+		log.Error("unexpected os.Open() err", xlog.Err(err))
+		return books
+	}
+	defer func() {
+		_ = file.Close()
+	}()
+
+	decoder := json.NewDecoder(file)
+	if err := decoder.Decode(&books); err != nil {
+		log.Error("unexpected decoder.Decode() err", xlog.Err(err))
+		return nil
+	}
+
+	return books
+}
+
 func createFixtures(repo *core.Repository, log *slog.Logger) {
 	try := func() error {
 		if c, err := repo.GetTotalCount(context.Background()); c > 0 && err == nil {
 			log.Info("book records found ", "count", c)
 			return nil
 		}
-
 		time.Sleep(3 * time.Second)
-		log.Info("Inserting book")
-		_, err := repo.InsertNew(context.Background(), &core.NewBookSpec{
-			ID:          "123",
-			Title:       "Some title",
-			Description: "Description",
-		})
 
-		if err != nil {
-			log.Warn("Cannot save book", xlog.Err(err))
+		fakeBooks := readFakeBooks(log)
+		for i, fb := range fakeBooks {
+			log.Info("Inserting book")
+			_, err := repo.InsertNew(context.Background(), &core.NewBookSpec{
+				ID:          fmt.Sprintf("b%d", i),
+				Title:       fb.Title,
+				Description: fb.Description,
+			})
+			if err != nil {
+				log.Warn("Cannot save book", xlog.Err(err))
+				return err
+			}
 		}
 
-		return err
+		return nil
 	}
 
 	ctx, cancel := context.WithDeadline(context.Background(), time.Now().Add(10*time.Second))
