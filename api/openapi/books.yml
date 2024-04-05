@@ -4,12 +4,10 @@ info:
   title: Books
   description: Books
 servers:
-  - url: https://{hostname}/api
+  - url: https://{hostname}/api/v1
     variables:
       hostname:
-        default: localhost
-security:
-  - bearerAuth: []
+        default: anybook.online
 paths:
   /books/{id}:
     get:
@@ -30,11 +28,6 @@ paths:
                 $ref: '#/components/schemas/Book'
 
 components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
   schemas:
     Book:
       type: object

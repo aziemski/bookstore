@@ -18,10 +18,6 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
-const (
-	BearerAuthScopes = "bearerAuth.Scopes"
-)
-
 // Book defines model for Book.
 type Book struct {
 	Title string `json:"title"`
@@ -49,8 +45,6 @@ func (w *ServerInterfaceWrapper) GetBookByID(ctx echo.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter id: %s", err))
 	}
-
-	ctx.Set(BearerAuthScopes, []string{})
 
 	// Invoke the callback with all the unmarshaled arguments
 	err = w.Handler.GetBookByID(ctx, id)
@@ -92,13 +86,12 @@ func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL 
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"H4sIAAAAAAAC/2xSTW/bMAz9KwG3o1Fl2023FcOK7roBOwQ5yDJTq3MkjaIDGIb++0DKaTKgJ309Pb73",
-	"yBV8OucUMXIBu0LxI56dbh9T+iNrppSROKDecuAJdbNkBAuFKcQXqLUDwr9zIBzAHjbYsbvCUv+KnhVW",
-	"0M8UePkppRppj46Qvs483k7fE50dg4Ufv39B14QJU3uFN+aROUMV4hBPSf4PWDyFzCFFsGqjCLwJfztf",
-	"kEpDfHrYP+yhdpAyRpcDWPiiVx1kx6MqNL18M2sYqhxfkGWRYJzUeR7AwhOykD8uz9/0K7kzMlIBe3hP",
-	"1C4MIKLBahnoIDp1qPe3MJlm3Py794I/CrjkFEsL8/N+L4tPkTGqTJfzFLwKNa9FBKx3fB8JT2Dhg7lN",
-	"gtnGwOgMaLj/639C3kkiu34RG7XW+86q4fueHo6isiBdrnHMNG29K9aYdUyFxX01kn8HF0fB9VMzdH1s",
-	"vT25eZKxmJJ3kzxJ9WP9FwAA//9JKsV0yQIAAA==",
+	"H4sIAAAAAAAC/2xRwa7aMBD8FTTtMcKhvfmIKiG+AXFwkoWYJrZrb5CiyP9erUNKn8Rp7fV4Z3ZmQevH",
+	"4B05TtALUtvTaMrx6P1vqSH6QJEtlS5bHqgc5kDQSBytuyPnCpH+TDZSB315wa7VBvPNg1pGFpx1Ny8T",
+	"OkpttIGtd9CFLqHaCP7dnxTTijjs632NXMEHciZYaPwsrQrBcF/kqUa+qcV2Wa53YimygBGecweNE7EM",
+	"P87nX+VrNCMxxQR9+SRqZzuIaOhCgwrOjKKw9N9Lc5yoehn4yaCrgFPwLq1O/qhrKa13TK7INCEMti1C",
+	"1SOJgOW/ed8j3aDxTb0TU6+4VMmqmPtV/4l4J47smlnWyLlgEsXntu8UB2j0zCFppZbeJ5b1sjLBqudB",
+	"AjDRmmZYRW/va343Mw0MDeNmYdl7N1hHQnPNfwMAAP//EPGYFVoCAAA=",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

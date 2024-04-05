@@ -4,7 +4,6 @@ import (
 	"context"
 	"embed"
 	"flag"
-
 	"github.com/aziemski/bookstore/internal/core"
 	"github.com/aziemski/bookstore/internal/core/ent"
 	"github.com/aziemski/bookstore/internal/core/fixures"
@@ -20,7 +19,8 @@ import (
 )
 
 //go:embed static/css/*.css
-var cssDir embed.FS
+//go:embed static/docs/api/*.html
+var staticFiles embed.FS
 
 func main() {
 	address := flag.String("a", "localhost:8080", "server:port")
@@ -31,7 +31,7 @@ func main() {
 	log := xlog.GetLogger()
 
 	e := echo.New()
-	e.StaticFS("/", cssDir)
+	e.StaticFS("/", staticFiles)
 
 	e.HideBanner = true
 

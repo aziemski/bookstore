@@ -48,6 +48,7 @@ download-tools: moq oapi_codegen golangci-lint
 generate: oapi_codegen moq ## Generate boilerplate
 	$(GO) generate ./...
 	@make templ
+	@openapi-generator generate -i api/openapi/books.yml -g html2  -o static/docs/api
 
 .PHONY: templ
 templ: ## Generate views
