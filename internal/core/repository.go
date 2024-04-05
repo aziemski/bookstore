@@ -2,10 +2,11 @@ package core
 
 import (
 	"context"
+	"log/slog"
+
 	"github.com/aziemski/bookstore/internal/core/ent"
 	"github.com/aziemski/bookstore/internal/core/ent/book"
 	"github.com/aziemski/bookstore/internal/x/xlog"
-	"log/slog"
 )
 
 type Book struct {

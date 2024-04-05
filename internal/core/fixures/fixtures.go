@@ -5,10 +5,11 @@ import (
 	"embed"
 	"encoding/json"
 	"fmt"
-	"github.com/aziemski/bookstore/internal/core"
-	"github.com/aziemski/bookstore/internal/x/xlog"
 	"log/slog"
 	"time"
+
+	"github.com/aziemski/bookstore/internal/core"
+	"github.com/aziemski/bookstore/internal/x/xlog"
 )
 
 //go:embed assets/fake_data.json
@@ -16,7 +17,6 @@ var fakeDataDir embed.FS
 
 type (
 	FakeData struct {
-		string
 		LoremIpsum string     `json:"lorem_ipsum"`
 		Books      []FakeBook `json:"books"`
 	}
@@ -30,27 +30,6 @@ type (
 		Featured  bool   `json:"featured"`
 	}
 )
-
-func readFakeData(log *slog.Logger) FakeData {
-	result := FakeData{}
-
-	file, err := fakeDataDir.Open("assets/fake_data.json")
-	if err != nil {
-		log.Error("unexpected os.Open() err", xlog.Err(err))
-		return result
-	}
-	defer func() {
-		_ = file.Close()
-	}()
-
-	decoder := json.NewDecoder(file)
-	if err := decoder.Decode(&result); err != nil {
-		log.Error("unexpected decoder.Decode() err", xlog.Err(err))
-		return result
-	}
-
-	return result
-}
 
 func Populate(repo *core.Repository, log *slog.Logger) {
 	try := func() error {
@@ -95,4 +74,25 @@ func Populate(repo *core.Repository, log *slog.Logger) {
 			}
 		}
 	}
+}
+
+func readFakeData(log *slog.Logger) FakeData {
+	result := FakeData{}
+
+	file, err := fakeDataDir.Open("assets/fake_data.json")
+	if err != nil {
+		log.Error("unexpected os.Open() err", xlog.Err(err))
+		return result
+	}
+	defer func() {
+		_ = file.Close()
+	}()
+
+	decoder := json.NewDecoder(file)
+	if err = decoder.Decode(&result); err != nil {
+		log.Error("unexpected decoder.Decode() err", xlog.Err(err))
+		return result
+	}
+
+	return result
 }

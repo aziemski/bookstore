@@ -4,6 +4,7 @@ import (
 	"context"
 	"embed"
 	"flag"
+
 	"github.com/aziemski/bookstore/internal/core"
 	"github.com/aziemski/bookstore/internal/core/ent"
 	"github.com/aziemski/bookstore/internal/core/fixures"
