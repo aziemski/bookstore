@@ -42,10 +42,9 @@ templ HomeIndex(books []core.Book) {
             <div class="books">
             for _, book := range books {
                 <div class="book">
-                    <img src="https://httpcats.com/201.jpg" alt=""/>
+                    <img src={book.ImageLink} alt=""/>
                     <h3>{book.Title}</h3>
-                    <p>Author Name</p>
-                    <p>$5.99</p>
+                    <p>{book.Author}</p>
                 </div>
             }
             </div>
