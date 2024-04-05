@@ -99,14 +99,14 @@ func createFixtures(repo *core.Repository, log *slog.Logger) {
 
 		fakeBooks := readFakeBooks(log)
 		for i, fb := range fakeBooks {
-			log.Info("Inserting book")
+			log.Info("inserting book")
 			_, err := repo.InsertNew(context.Background(), &core.NewBookSpec{
 				ID:          fmt.Sprintf("b%d", i),
 				Title:       fb.Title,
 				Description: fb.Description,
 			})
 			if err != nil {
-				log.Warn("Cannot save book", xlog.Err(err))
+				log.Warn("cannot save book", xlog.Err(err))
 				return err
 			}
 		}
@@ -119,7 +119,7 @@ func createFixtures(repo *core.Repository, log *slog.Logger) {
 	for {
 		select {
 		case <-ctx.Done():
-			log.Warn("Received cancellation signal due to deadline.")
+			log.Warn("received cancellation signal due to deadline.")
 			return
 		default:
 			if err := try(); err == nil {

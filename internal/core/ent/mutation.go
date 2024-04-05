@@ -33,6 +33,10 @@ type BookMutation struct {
 	typ           string
 	id            *string
 	title         *string
+	author        *string
+	description   *string
+	category      *string
+	featured      *bool
 	clearedFields map[string]struct{}
 	done          bool
 	oldValue      func(context.Context) (*Book, error)
@@ -179,6 +183,150 @@ func (m *BookMutation) ResetTitle() {
 	m.title = nil
 }
 
+// SetAuthor sets the "author" field.
+func (m *BookMutation) SetAuthor(s string) {
+	m.author = &s
+}
+
+// Author returns the value of the "author" field in the mutation.
+func (m *BookMutation) Author() (r string, exists bool) {
+	v := m.author
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldAuthor returns the old "author" field's value of the Book entity.
+// If the Book object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *BookMutation) OldAuthor(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldAuthor is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldAuthor requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldAuthor: %w", err)
+	}
+	return oldValue.Author, nil
+}
+
+// ResetAuthor resets all changes to the "author" field.
+func (m *BookMutation) ResetAuthor() {
+	m.author = nil
+}
+
+// SetDescription sets the "description" field.
+func (m *BookMutation) SetDescription(s string) {
+	m.description = &s
+}
+
+// Description returns the value of the "description" field in the mutation.
+func (m *BookMutation) Description() (r string, exists bool) {
+	v := m.description
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldDescription returns the old "description" field's value of the Book entity.
+// If the Book object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *BookMutation) OldDescription(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldDescription is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldDescription requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldDescription: %w", err)
+	}
+	return oldValue.Description, nil
+}
+
+// ResetDescription resets all changes to the "description" field.
+func (m *BookMutation) ResetDescription() {
+	m.description = nil
+}
+
+// SetCategory sets the "category" field.
+func (m *BookMutation) SetCategory(s string) {
+	m.category = &s
+}
+
+// Category returns the value of the "category" field in the mutation.
+func (m *BookMutation) Category() (r string, exists bool) {
+	v := m.category
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCategory returns the old "category" field's value of the Book entity.
+// If the Book object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *BookMutation) OldCategory(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCategory is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCategory requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCategory: %w", err)
+	}
+	return oldValue.Category, nil
+}
+
+// ResetCategory resets all changes to the "category" field.
+func (m *BookMutation) ResetCategory() {
+	m.category = nil
+}
+
+// SetFeatured sets the "featured" field.
+func (m *BookMutation) SetFeatured(b bool) {
+	m.featured = &b
+}
+
+// Featured returns the value of the "featured" field in the mutation.
+func (m *BookMutation) Featured() (r bool, exists bool) {
+	v := m.featured
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldFeatured returns the old "featured" field's value of the Book entity.
+// If the Book object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *BookMutation) OldFeatured(ctx context.Context) (v bool, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldFeatured is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldFeatured requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldFeatured: %w", err)
+	}
+	return oldValue.Featured, nil
+}
+
+// ResetFeatured resets all changes to the "featured" field.
+func (m *BookMutation) ResetFeatured() {
+	m.featured = nil
+}
+
 // Where appends a list predicates to the BookMutation builder.
 func (m *BookMutation) Where(ps ...predicate.Book) {
 	m.predicates = append(m.predicates, ps...)
@@ -213,9 +361,21 @@ func (m *BookMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *BookMutation) Fields() []string {
-	fields := make([]string, 0, 1)
+	fields := make([]string, 0, 5)
 	if m.title != nil {
 		fields = append(fields, book.FieldTitle)
+	}
+	if m.author != nil {
+		fields = append(fields, book.FieldAuthor)
+	}
+	if m.description != nil {
+		fields = append(fields, book.FieldDescription)
+	}
+	if m.category != nil {
+		fields = append(fields, book.FieldCategory)
+	}
+	if m.featured != nil {
+		fields = append(fields, book.FieldFeatured)
 	}
 	return fields
 }
@@ -227,6 +387,14 @@ func (m *BookMutation) Field(name string) (ent.Value, bool) {
 	switch name {
 	case book.FieldTitle:
 		return m.Title()
+	case book.FieldAuthor:
+		return m.Author()
+	case book.FieldDescription:
+		return m.Description()
+	case book.FieldCategory:
+		return m.Category()
+	case book.FieldFeatured:
+		return m.Featured()
 	}
 	return nil, false
 }
@@ -238,6 +406,14 @@ func (m *BookMutation) OldField(ctx context.Context, name string) (ent.Value, er
 	switch name {
 	case book.FieldTitle:
 		return m.OldTitle(ctx)
+	case book.FieldAuthor:
+		return m.OldAuthor(ctx)
+	case book.FieldDescription:
+		return m.OldDescription(ctx)
+	case book.FieldCategory:
+		return m.OldCategory(ctx)
+	case book.FieldFeatured:
+		return m.OldFeatured(ctx)
 	}
 	return nil, fmt.Errorf("unknown Book field %s", name)
 }
@@ -253,6 +429,34 @@ func (m *BookMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetTitle(v)
+		return nil
+	case book.FieldAuthor:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetAuthor(v)
+		return nil
+	case book.FieldDescription:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetDescription(v)
+		return nil
+	case book.FieldCategory:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCategory(v)
+		return nil
+	case book.FieldFeatured:
+		v, ok := value.(bool)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetFeatured(v)
 		return nil
 	}
 	return fmt.Errorf("unknown Book field %s", name)
@@ -305,6 +509,18 @@ func (m *BookMutation) ResetField(name string) error {
 	switch name {
 	case book.FieldTitle:
 		m.ResetTitle()
+		return nil
+	case book.FieldAuthor:
+		m.ResetAuthor()
+		return nil
+	case book.FieldDescription:
+		m.ResetDescription()
+		return nil
+	case book.FieldCategory:
+		m.ResetCategory()
+		return nil
+	case book.FieldFeatured:
+		m.ResetFeatured()
 		return nil
 	}
 	return fmt.Errorf("unknown Book field %s", name)

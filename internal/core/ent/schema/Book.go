@@ -18,6 +18,14 @@ func (Book) Fields() []ent.Field {
 			MaxLen(32), //nolint:gomnd // magic number is ok here
 		field.String("title").
 			NotEmpty(),
+		field.String("author").
+			NotEmpty(),
+		field.String("description").
+			NotEmpty(),
+		field.String("category").
+			NotEmpty(),
+		field.Bool("featured").
+			Default(false),
 	}
 }
 

@@ -12,6 +12,10 @@ var (
 	BooksColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeString, Unique: true, Size: 32},
 		{Name: "title", Type: field.TypeString},
+		{Name: "author", Type: field.TypeString},
+		{Name: "description", Type: field.TypeString},
+		{Name: "category", Type: field.TypeString},
+		{Name: "featured", Type: field.TypeBool, Default: false},
 	}
 	// BooksTable holds the schema information for the "books" table.
 	BooksTable = &schema.Table{

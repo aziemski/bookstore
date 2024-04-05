@@ -17,7 +17,15 @@ type Book struct {
 	// ID of the ent.
 	ID string `json:"id,omitempty"`
 	// Title holds the value of the "title" field.
-	Title        string `json:"title,omitempty"`
+	Title string `json:"title,omitempty"`
+	// Author holds the value of the "author" field.
+	Author string `json:"author,omitempty"`
+	// Description holds the value of the "description" field.
+	Description string `json:"description,omitempty"`
+	// Category holds the value of the "category" field.
+	Category string `json:"category,omitempty"`
+	// Featured holds the value of the "featured" field.
+	Featured     bool `json:"featured,omitempty"`
 	selectValues sql.SelectValues
 }
 
@@ -26,7 +34,9 @@ func (*Book) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case book.FieldID, book.FieldTitle:
+		case book.FieldFeatured:
+			values[i] = new(sql.NullBool)
+		case book.FieldID, book.FieldTitle, book.FieldAuthor, book.FieldDescription, book.FieldCategory:
 			values[i] = new(sql.NullString)
 		default:
 			values[i] = new(sql.UnknownType)
@@ -54,6 +64,30 @@ func (b *Book) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field title", values[i])
 			} else if value.Valid {
 				b.Title = value.String
+			}
+		case book.FieldAuthor:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field author", values[i])
+			} else if value.Valid {
+				b.Author = value.String
+			}
+		case book.FieldDescription:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field description", values[i])
+			} else if value.Valid {
+				b.Description = value.String
+			}
+		case book.FieldCategory:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field category", values[i])
+			} else if value.Valid {
+				b.Category = value.String
+			}
+		case book.FieldFeatured:
+			if value, ok := values[i].(*sql.NullBool); !ok {
+				return fmt.Errorf("unexpected type %T for field featured", values[i])
+			} else if value.Valid {
+				b.Featured = value.Bool
 			}
 		default:
 			b.selectValues.Set(columns[i], values[i])
@@ -93,6 +127,18 @@ func (b *Book) String() string {
 	builder.WriteString(fmt.Sprintf("id=%v, ", b.ID))
 	builder.WriteString("title=")
 	builder.WriteString(b.Title)
+	builder.WriteString(", ")
+	builder.WriteString("author=")
+	builder.WriteString(b.Author)
+	builder.WriteString(", ")
+	builder.WriteString("description=")
+	builder.WriteString(b.Description)
+	builder.WriteString(", ")
+	builder.WriteString("category=")
+	builder.WriteString(b.Category)
+	builder.WriteString(", ")
+	builder.WriteString("featured=")
+	builder.WriteString(fmt.Sprintf("%v", b.Featured))
 	builder.WriteByte(')')
 	return builder.String()
 }

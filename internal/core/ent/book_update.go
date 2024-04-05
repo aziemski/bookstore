@@ -41,6 +41,62 @@ func (bu *BookUpdate) SetNillableTitle(s *string) *BookUpdate {
 	return bu
 }
 
+// SetAuthor sets the "author" field.
+func (bu *BookUpdate) SetAuthor(s string) *BookUpdate {
+	bu.mutation.SetAuthor(s)
+	return bu
+}
+
+// SetNillableAuthor sets the "author" field if the given value is not nil.
+func (bu *BookUpdate) SetNillableAuthor(s *string) *BookUpdate {
+	if s != nil {
+		bu.SetAuthor(*s)
+	}
+	return bu
+}
+
+// SetDescription sets the "description" field.
+func (bu *BookUpdate) SetDescription(s string) *BookUpdate {
+	bu.mutation.SetDescription(s)
+	return bu
+}
+
+// SetNillableDescription sets the "description" field if the given value is not nil.
+func (bu *BookUpdate) SetNillableDescription(s *string) *BookUpdate {
+	if s != nil {
+		bu.SetDescription(*s)
+	}
+	return bu
+}
+
+// SetCategory sets the "category" field.
+func (bu *BookUpdate) SetCategory(s string) *BookUpdate {
+	bu.mutation.SetCategory(s)
+	return bu
+}
+
+// SetNillableCategory sets the "category" field if the given value is not nil.
+func (bu *BookUpdate) SetNillableCategory(s *string) *BookUpdate {
+	if s != nil {
+		bu.SetCategory(*s)
+	}
+	return bu
+}
+
+// SetFeatured sets the "featured" field.
+func (bu *BookUpdate) SetFeatured(b bool) *BookUpdate {
+	bu.mutation.SetFeatured(b)
+	return bu
+}
+
+// SetNillableFeatured sets the "featured" field if the given value is not nil.
+func (bu *BookUpdate) SetNillableFeatured(b *bool) *BookUpdate {
+	if b != nil {
+		bu.SetFeatured(*b)
+	}
+	return bu
+}
+
 // Mutation returns the BookMutation object of the builder.
 func (bu *BookUpdate) Mutation() *BookMutation {
 	return bu.mutation
@@ -80,6 +136,21 @@ func (bu *BookUpdate) check() error {
 			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "Book.title": %w`, err)}
 		}
 	}
+	if v, ok := bu.mutation.Author(); ok {
+		if err := book.AuthorValidator(v); err != nil {
+			return &ValidationError{Name: "author", err: fmt.Errorf(`ent: validator failed for field "Book.author": %w`, err)}
+		}
+	}
+	if v, ok := bu.mutation.Description(); ok {
+		if err := book.DescriptionValidator(v); err != nil {
+			return &ValidationError{Name: "description", err: fmt.Errorf(`ent: validator failed for field "Book.description": %w`, err)}
+		}
+	}
+	if v, ok := bu.mutation.Category(); ok {
+		if err := book.CategoryValidator(v); err != nil {
+			return &ValidationError{Name: "category", err: fmt.Errorf(`ent: validator failed for field "Book.category": %w`, err)}
+		}
+	}
 	return nil
 }
 
@@ -97,6 +168,18 @@ func (bu *BookUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := bu.mutation.Title(); ok {
 		_spec.SetField(book.FieldTitle, field.TypeString, value)
+	}
+	if value, ok := bu.mutation.Author(); ok {
+		_spec.SetField(book.FieldAuthor, field.TypeString, value)
+	}
+	if value, ok := bu.mutation.Description(); ok {
+		_spec.SetField(book.FieldDescription, field.TypeString, value)
+	}
+	if value, ok := bu.mutation.Category(); ok {
+		_spec.SetField(book.FieldCategory, field.TypeString, value)
+	}
+	if value, ok := bu.mutation.Featured(); ok {
+		_spec.SetField(book.FieldFeatured, field.TypeBool, value)
 	}
 	if n, err = sqlgraph.UpdateNodes(ctx, bu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
@@ -128,6 +211,62 @@ func (buo *BookUpdateOne) SetTitle(s string) *BookUpdateOne {
 func (buo *BookUpdateOne) SetNillableTitle(s *string) *BookUpdateOne {
 	if s != nil {
 		buo.SetTitle(*s)
+	}
+	return buo
+}
+
+// SetAuthor sets the "author" field.
+func (buo *BookUpdateOne) SetAuthor(s string) *BookUpdateOne {
+	buo.mutation.SetAuthor(s)
+	return buo
+}
+
+// SetNillableAuthor sets the "author" field if the given value is not nil.
+func (buo *BookUpdateOne) SetNillableAuthor(s *string) *BookUpdateOne {
+	if s != nil {
+		buo.SetAuthor(*s)
+	}
+	return buo
+}
+
+// SetDescription sets the "description" field.
+func (buo *BookUpdateOne) SetDescription(s string) *BookUpdateOne {
+	buo.mutation.SetDescription(s)
+	return buo
+}
+
+// SetNillableDescription sets the "description" field if the given value is not nil.
+func (buo *BookUpdateOne) SetNillableDescription(s *string) *BookUpdateOne {
+	if s != nil {
+		buo.SetDescription(*s)
+	}
+	return buo
+}
+
+// SetCategory sets the "category" field.
+func (buo *BookUpdateOne) SetCategory(s string) *BookUpdateOne {
+	buo.mutation.SetCategory(s)
+	return buo
+}
+
+// SetNillableCategory sets the "category" field if the given value is not nil.
+func (buo *BookUpdateOne) SetNillableCategory(s *string) *BookUpdateOne {
+	if s != nil {
+		buo.SetCategory(*s)
+	}
+	return buo
+}
+
+// SetFeatured sets the "featured" field.
+func (buo *BookUpdateOne) SetFeatured(b bool) *BookUpdateOne {
+	buo.mutation.SetFeatured(b)
+	return buo
+}
+
+// SetNillableFeatured sets the "featured" field if the given value is not nil.
+func (buo *BookUpdateOne) SetNillableFeatured(b *bool) *BookUpdateOne {
+	if b != nil {
+		buo.SetFeatured(*b)
 	}
 	return buo
 }
@@ -184,6 +323,21 @@ func (buo *BookUpdateOne) check() error {
 			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "Book.title": %w`, err)}
 		}
 	}
+	if v, ok := buo.mutation.Author(); ok {
+		if err := book.AuthorValidator(v); err != nil {
+			return &ValidationError{Name: "author", err: fmt.Errorf(`ent: validator failed for field "Book.author": %w`, err)}
+		}
+	}
+	if v, ok := buo.mutation.Description(); ok {
+		if err := book.DescriptionValidator(v); err != nil {
+			return &ValidationError{Name: "description", err: fmt.Errorf(`ent: validator failed for field "Book.description": %w`, err)}
+		}
+	}
+	if v, ok := buo.mutation.Category(); ok {
+		if err := book.CategoryValidator(v); err != nil {
+			return &ValidationError{Name: "category", err: fmt.Errorf(`ent: validator failed for field "Book.category": %w`, err)}
+		}
+	}
 	return nil
 }
 
@@ -218,6 +372,18 @@ func (buo *BookUpdateOne) sqlSave(ctx context.Context) (_node *Book, err error) 
 	}
 	if value, ok := buo.mutation.Title(); ok {
 		_spec.SetField(book.FieldTitle, field.TypeString, value)
+	}
+	if value, ok := buo.mutation.Author(); ok {
+		_spec.SetField(book.FieldAuthor, field.TypeString, value)
+	}
+	if value, ok := buo.mutation.Description(); ok {
+		_spec.SetField(book.FieldDescription, field.TypeString, value)
+	}
+	if value, ok := buo.mutation.Category(); ok {
+		_spec.SetField(book.FieldCategory, field.TypeString, value)
+	}
+	if value, ok := buo.mutation.Featured(); ok {
+		_spec.SetField(book.FieldFeatured, field.TypeBool, value)
 	}
 	_node = &Book{config: buo.config}
 	_spec.Assign = _node.assignValues

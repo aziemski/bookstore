@@ -25,6 +25,38 @@ func (bc *BookCreate) SetTitle(s string) *BookCreate {
 	return bc
 }
 
+// SetAuthor sets the "author" field.
+func (bc *BookCreate) SetAuthor(s string) *BookCreate {
+	bc.mutation.SetAuthor(s)
+	return bc
+}
+
+// SetDescription sets the "description" field.
+func (bc *BookCreate) SetDescription(s string) *BookCreate {
+	bc.mutation.SetDescription(s)
+	return bc
+}
+
+// SetCategory sets the "category" field.
+func (bc *BookCreate) SetCategory(s string) *BookCreate {
+	bc.mutation.SetCategory(s)
+	return bc
+}
+
+// SetFeatured sets the "featured" field.
+func (bc *BookCreate) SetFeatured(b bool) *BookCreate {
+	bc.mutation.SetFeatured(b)
+	return bc
+}
+
+// SetNillableFeatured sets the "featured" field if the given value is not nil.
+func (bc *BookCreate) SetNillableFeatured(b *bool) *BookCreate {
+	if b != nil {
+		bc.SetFeatured(*b)
+	}
+	return bc
+}
+
 // SetID sets the "id" field.
 func (bc *BookCreate) SetID(s string) *BookCreate {
 	bc.mutation.SetID(s)
@@ -38,6 +70,7 @@ func (bc *BookCreate) Mutation() *BookMutation {
 
 // Save creates the Book in the database.
 func (bc *BookCreate) Save(ctx context.Context) (*Book, error) {
+	bc.defaults()
 	return withHooks(ctx, bc.sqlSave, bc.mutation, bc.hooks)
 }
 
@@ -63,6 +96,14 @@ func (bc *BookCreate) ExecX(ctx context.Context) {
 	}
 }
 
+// defaults sets the default values of the builder before save.
+func (bc *BookCreate) defaults() {
+	if _, ok := bc.mutation.Featured(); !ok {
+		v := book.DefaultFeatured
+		bc.mutation.SetFeatured(v)
+	}
+}
+
 // check runs all checks and user-defined validators on the builder.
 func (bc *BookCreate) check() error {
 	if _, ok := bc.mutation.Title(); !ok {
@@ -72,6 +113,33 @@ func (bc *BookCreate) check() error {
 		if err := book.TitleValidator(v); err != nil {
 			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "Book.title": %w`, err)}
 		}
+	}
+	if _, ok := bc.mutation.Author(); !ok {
+		return &ValidationError{Name: "author", err: errors.New(`ent: missing required field "Book.author"`)}
+	}
+	if v, ok := bc.mutation.Author(); ok {
+		if err := book.AuthorValidator(v); err != nil {
+			return &ValidationError{Name: "author", err: fmt.Errorf(`ent: validator failed for field "Book.author": %w`, err)}
+		}
+	}
+	if _, ok := bc.mutation.Description(); !ok {
+		return &ValidationError{Name: "description", err: errors.New(`ent: missing required field "Book.description"`)}
+	}
+	if v, ok := bc.mutation.Description(); ok {
+		if err := book.DescriptionValidator(v); err != nil {
+			return &ValidationError{Name: "description", err: fmt.Errorf(`ent: validator failed for field "Book.description": %w`, err)}
+		}
+	}
+	if _, ok := bc.mutation.Category(); !ok {
+		return &ValidationError{Name: "category", err: errors.New(`ent: missing required field "Book.category"`)}
+	}
+	if v, ok := bc.mutation.Category(); ok {
+		if err := book.CategoryValidator(v); err != nil {
+			return &ValidationError{Name: "category", err: fmt.Errorf(`ent: validator failed for field "Book.category": %w`, err)}
+		}
+	}
+	if _, ok := bc.mutation.Featured(); !ok {
+		return &ValidationError{Name: "featured", err: errors.New(`ent: missing required field "Book.featured"`)}
 	}
 	if v, ok := bc.mutation.ID(); ok {
 		if err := book.IDValidator(v); err != nil {
@@ -117,6 +185,22 @@ func (bc *BookCreate) createSpec() (*Book, *sqlgraph.CreateSpec) {
 		_spec.SetField(book.FieldTitle, field.TypeString, value)
 		_node.Title = value
 	}
+	if value, ok := bc.mutation.Author(); ok {
+		_spec.SetField(book.FieldAuthor, field.TypeString, value)
+		_node.Author = value
+	}
+	if value, ok := bc.mutation.Description(); ok {
+		_spec.SetField(book.FieldDescription, field.TypeString, value)
+		_node.Description = value
+	}
+	if value, ok := bc.mutation.Category(); ok {
+		_spec.SetField(book.FieldCategory, field.TypeString, value)
+		_node.Category = value
+	}
+	if value, ok := bc.mutation.Featured(); ok {
+		_spec.SetField(book.FieldFeatured, field.TypeBool, value)
+		_node.Featured = value
+	}
 	return _node, _spec
 }
 
@@ -138,6 +222,7 @@ func (bcb *BookCreateBulk) Save(ctx context.Context) ([]*Book, error) {
 	for i := range bcb.builders {
 		func(i int, root context.Context) {
 			builder := bcb.builders[i]
+			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*BookMutation)
 				if !ok {
