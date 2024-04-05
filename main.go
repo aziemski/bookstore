@@ -21,6 +21,9 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+//go:embed static/css/*.css
+var cssDir embed.FS
+
 func main() {
 	address := flag.String("a", "localhost:8080", "server:port")
 	flag.Parse()
@@ -28,7 +31,7 @@ func main() {
 	log := xlog.GetLogger()
 
 	e := echo.New()
-	e.Static("/", "assets")
+	e.StaticFS("/", cssDir)
 
 	e.HideBanner = true
 
