@@ -1,13 +1,20 @@
 package search
 
 import (
+	"log/slog"
+
+	"github.com/aziemski/bookstore/internal/core"
 	"github.com/aziemski/bookstore/internal/web/search/searchviews"
 	"github.com/aziemski/bookstore/internal/x/xecho"
 	"github.com/labstack/echo/v4"
-	"log/slog"
 )
 
 type Handler struct {
+	r *core.Repository
+}
+
+func NewHandler(r *core.Repository) *Handler {
+	return &Handler{r: r}
 }
 
 func (h *Handler) Handle(c echo.Context) error {
@@ -20,7 +27,9 @@ func (h *Handler) Handle(c echo.Context) error {
 		slog.Error("bind error", "err", err)
 	}
 
-	sv := searchviews.SearchResult(q)
+	books := h.r.Find(q)
+
+	sv := searchviews.SearchResult(q, books)
 
 	return xecho.RenderView(c, sv)
 }

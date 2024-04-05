@@ -80,6 +80,11 @@ func (r *Repository) FindFeaturedBooks(ctx context.Context) []Book {
 	return result
 }
 
+func (r *Repository) Find(q string) []Book {
+	var result []Book
+	return result
+}
+
 func ent2core(in *ent.Book) Book {
 	return Book{
 		ID:          in.ID,

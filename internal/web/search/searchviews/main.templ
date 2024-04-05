@@ -1,5 +1,66 @@
 package searchviews
 
-templ SearchResult(name string) {
-	<div>Search result, { name }</div>
+import (
+	"fmt"
+
+    "github.com/aziemski/bookstore/internal/core"
+)
+
+
+templ SearchResult(query string, books []core.Book) {
+	<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Bookstore</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+    </head>
+    <body>
+    <header>
+        <div class="logo">
+            <a href="">Bookstore</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="/about">About Project</a></li>
+            </ul>
+        </nav>
+        <div class="search">
+            <form action="/search" method="GET">
+                 <label>
+                     <input type="text" placeholder="Search..." id="q" name="q" value={query}/>
+                   </label>
+                 <button type="submit">Find!</button>
+            </form>
+        </div>
+    </header>
+    <div class="main">
+
+        <div class="main-content">
+            <h2>Results for: {query} </h2>
+            <div class="books">
+            for _, book := range books {
+                <div class="book">
+                    <a href={ templ.URL(fmt.Sprintf("/details/%s", book.ID)) }>
+                        <span>
+                            <img src={book.ImageLink} alt=""/>
+                        </span>
+                    </a>
+                    <h3>{book.Title}</h3>
+                    <p>{book.Author}</p>
+                </div>
+            }
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Bookstore. All right reserved </p>
+    </footer>
+
+    </body>
+
+    </html>
 }
