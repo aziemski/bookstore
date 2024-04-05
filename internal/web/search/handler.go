@@ -18,6 +18,8 @@ func NewHandler(r *core.Repository) *Handler {
 }
 
 func (h *Handler) Handle(c echo.Context) error {
+	ctx := c.Request().Context()
+
 	q := ""
 	l := 1
 	if err := echo.QueryParamsBinder(c).
@@ -27,7 +29,7 @@ func (h *Handler) Handle(c echo.Context) error {
 		slog.Error("bind error", "err", err)
 	}
 
-	books := h.r.Find(q)
+	books := h.r.Find(ctx, q)
 
 	sv := searchviews.SearchResult(q, books)
 

@@ -80,8 +80,30 @@ func (r *Repository) FindFeaturedBooks(ctx context.Context) []Book {
 	return result
 }
 
-func (r *Repository) Find(q string) []Book {
+func (r *Repository) Find(ctx context.Context, q string) []Book {
 	var result []Book
+
+	found, err := r.db.Book.Query().
+		Where(
+			book.Or(
+				book.TitleContains(q),
+				book.AuthorContains(q),
+				book.SummaryContains(q),
+				book.DescriptionContains(q),
+				book.CategoryContains(q),
+			)).
+		All(ctx)
+
+	if err != nil {
+		slog.Error("sql, unexpected FindFeaturedBooks err", xlog.Err(err))
+		return result
+	}
+
+	for _, in := range found {
+		out := ent2core(in)
+		result = append(result, out)
+	}
+
 	return result
 }
 
