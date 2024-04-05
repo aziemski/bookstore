@@ -34,8 +34,10 @@ type BookMutation struct {
 	id            *string
 	title         *string
 	author        *string
+	summary       *string
 	description   *string
 	category      *string
+	image_link    *string
 	featured      *bool
 	clearedFields map[string]struct{}
 	done          bool
@@ -219,6 +221,42 @@ func (m *BookMutation) ResetAuthor() {
 	m.author = nil
 }
 
+// SetSummary sets the "summary" field.
+func (m *BookMutation) SetSummary(s string) {
+	m.summary = &s
+}
+
+// Summary returns the value of the "summary" field in the mutation.
+func (m *BookMutation) Summary() (r string, exists bool) {
+	v := m.summary
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldSummary returns the old "summary" field's value of the Book entity.
+// If the Book object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *BookMutation) OldSummary(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldSummary is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldSummary requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldSummary: %w", err)
+	}
+	return oldValue.Summary, nil
+}
+
+// ResetSummary resets all changes to the "summary" field.
+func (m *BookMutation) ResetSummary() {
+	m.summary = nil
+}
+
 // SetDescription sets the "description" field.
 func (m *BookMutation) SetDescription(s string) {
 	m.description = &s
@@ -291,6 +329,42 @@ func (m *BookMutation) ResetCategory() {
 	m.category = nil
 }
 
+// SetImageLink sets the "image_link" field.
+func (m *BookMutation) SetImageLink(s string) {
+	m.image_link = &s
+}
+
+// ImageLink returns the value of the "image_link" field in the mutation.
+func (m *BookMutation) ImageLink() (r string, exists bool) {
+	v := m.image_link
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldImageLink returns the old "image_link" field's value of the Book entity.
+// If the Book object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *BookMutation) OldImageLink(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldImageLink is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldImageLink requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldImageLink: %w", err)
+	}
+	return oldValue.ImageLink, nil
+}
+
+// ResetImageLink resets all changes to the "image_link" field.
+func (m *BookMutation) ResetImageLink() {
+	m.image_link = nil
+}
+
 // SetFeatured sets the "featured" field.
 func (m *BookMutation) SetFeatured(b bool) {
 	m.featured = &b
@@ -361,18 +435,24 @@ func (m *BookMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *BookMutation) Fields() []string {
-	fields := make([]string, 0, 5)
+	fields := make([]string, 0, 7)
 	if m.title != nil {
 		fields = append(fields, book.FieldTitle)
 	}
 	if m.author != nil {
 		fields = append(fields, book.FieldAuthor)
 	}
+	if m.summary != nil {
+		fields = append(fields, book.FieldSummary)
+	}
 	if m.description != nil {
 		fields = append(fields, book.FieldDescription)
 	}
 	if m.category != nil {
 		fields = append(fields, book.FieldCategory)
+	}
+	if m.image_link != nil {
+		fields = append(fields, book.FieldImageLink)
 	}
 	if m.featured != nil {
 		fields = append(fields, book.FieldFeatured)
@@ -389,10 +469,14 @@ func (m *BookMutation) Field(name string) (ent.Value, bool) {
 		return m.Title()
 	case book.FieldAuthor:
 		return m.Author()
+	case book.FieldSummary:
+		return m.Summary()
 	case book.FieldDescription:
 		return m.Description()
 	case book.FieldCategory:
 		return m.Category()
+	case book.FieldImageLink:
+		return m.ImageLink()
 	case book.FieldFeatured:
 		return m.Featured()
 	}
@@ -408,10 +492,14 @@ func (m *BookMutation) OldField(ctx context.Context, name string) (ent.Value, er
 		return m.OldTitle(ctx)
 	case book.FieldAuthor:
 		return m.OldAuthor(ctx)
+	case book.FieldSummary:
+		return m.OldSummary(ctx)
 	case book.FieldDescription:
 		return m.OldDescription(ctx)
 	case book.FieldCategory:
 		return m.OldCategory(ctx)
+	case book.FieldImageLink:
+		return m.OldImageLink(ctx)
 	case book.FieldFeatured:
 		return m.OldFeatured(ctx)
 	}
@@ -437,6 +525,13 @@ func (m *BookMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetAuthor(v)
 		return nil
+	case book.FieldSummary:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetSummary(v)
+		return nil
 	case book.FieldDescription:
 		v, ok := value.(string)
 		if !ok {
@@ -450,6 +545,13 @@ func (m *BookMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetCategory(v)
+		return nil
+	case book.FieldImageLink:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetImageLink(v)
 		return nil
 	case book.FieldFeatured:
 		v, ok := value.(bool)
@@ -513,11 +615,17 @@ func (m *BookMutation) ResetField(name string) error {
 	case book.FieldAuthor:
 		m.ResetAuthor()
 		return nil
+	case book.FieldSummary:
+		m.ResetSummary()
+		return nil
 	case book.FieldDescription:
 		m.ResetDescription()
 		return nil
 	case book.FieldCategory:
 		m.ResetCategory()
+		return nil
+	case book.FieldImageLink:
+		m.ResetImageLink()
 		return nil
 	case book.FieldFeatured:
 		m.ResetFeatured()

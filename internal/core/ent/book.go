@@ -20,10 +20,14 @@ type Book struct {
 	Title string `json:"title,omitempty"`
 	// Author holds the value of the "author" field.
 	Author string `json:"author,omitempty"`
+	// Summary holds the value of the "summary" field.
+	Summary string `json:"summary,omitempty"`
 	// Description holds the value of the "description" field.
 	Description string `json:"description,omitempty"`
 	// Category holds the value of the "category" field.
 	Category string `json:"category,omitempty"`
+	// ImageLink holds the value of the "image_link" field.
+	ImageLink string `json:"image_link,omitempty"`
 	// Featured holds the value of the "featured" field.
 	Featured     bool `json:"featured,omitempty"`
 	selectValues sql.SelectValues
@@ -36,7 +40,7 @@ func (*Book) scanValues(columns []string) ([]any, error) {
 		switch columns[i] {
 		case book.FieldFeatured:
 			values[i] = new(sql.NullBool)
-		case book.FieldID, book.FieldTitle, book.FieldAuthor, book.FieldDescription, book.FieldCategory:
+		case book.FieldID, book.FieldTitle, book.FieldAuthor, book.FieldSummary, book.FieldDescription, book.FieldCategory, book.FieldImageLink:
 			values[i] = new(sql.NullString)
 		default:
 			values[i] = new(sql.UnknownType)
@@ -71,6 +75,12 @@ func (b *Book) assignValues(columns []string, values []any) error {
 			} else if value.Valid {
 				b.Author = value.String
 			}
+		case book.FieldSummary:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field summary", values[i])
+			} else if value.Valid {
+				b.Summary = value.String
+			}
 		case book.FieldDescription:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field description", values[i])
@@ -82,6 +92,12 @@ func (b *Book) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field category", values[i])
 			} else if value.Valid {
 				b.Category = value.String
+			}
+		case book.FieldImageLink:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field image_link", values[i])
+			} else if value.Valid {
+				b.ImageLink = value.String
 			}
 		case book.FieldFeatured:
 			if value, ok := values[i].(*sql.NullBool); !ok {
@@ -131,11 +147,17 @@ func (b *Book) String() string {
 	builder.WriteString("author=")
 	builder.WriteString(b.Author)
 	builder.WriteString(", ")
+	builder.WriteString("summary=")
+	builder.WriteString(b.Summary)
+	builder.WriteString(", ")
 	builder.WriteString("description=")
 	builder.WriteString(b.Description)
 	builder.WriteString(", ")
 	builder.WriteString("category=")
 	builder.WriteString(b.Category)
+	builder.WriteString(", ")
+	builder.WriteString("image_link=")
+	builder.WriteString(b.ImageLink)
 	builder.WriteString(", ")
 	builder.WriteString("featured=")
 	builder.WriteString(fmt.Sprintf("%v", b.Featured))

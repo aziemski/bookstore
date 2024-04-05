@@ -13,8 +13,10 @@ var (
 		{Name: "id", Type: field.TypeString, Unique: true, Size: 32},
 		{Name: "title", Type: field.TypeString},
 		{Name: "author", Type: field.TypeString},
+		{Name: "summary", Type: field.TypeString},
 		{Name: "description", Type: field.TypeString},
 		{Name: "category", Type: field.TypeString},
+		{Name: "image_link", Type: field.TypeString},
 		{Name: "featured", Type: field.TypeBool, Default: false},
 	}
 	// BooksTable holds the schema information for the "books" table.

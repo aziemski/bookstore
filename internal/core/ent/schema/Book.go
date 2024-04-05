@@ -20,9 +20,13 @@ func (Book) Fields() []ent.Field {
 			NotEmpty(),
 		field.String("author").
 			NotEmpty(),
+		field.String("summary").
+			NotEmpty(),
 		field.String("description").
 			NotEmpty(),
 		field.String("category").
+			NotEmpty(),
+		field.String("image_link").
 			NotEmpty(),
 		field.Bool("featured").
 			Default(false),

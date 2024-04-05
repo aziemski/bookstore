@@ -72,6 +72,11 @@ func Author(v string) predicate.Book {
 	return predicate.Book(sql.FieldEQ(FieldAuthor, v))
 }
 
+// Summary applies equality check predicate on the "summary" field. It's identical to SummaryEQ.
+func Summary(v string) predicate.Book {
+	return predicate.Book(sql.FieldEQ(FieldSummary, v))
+}
+
 // Description applies equality check predicate on the "description" field. It's identical to DescriptionEQ.
 func Description(v string) predicate.Book {
 	return predicate.Book(sql.FieldEQ(FieldDescription, v))
@@ -80,6 +85,11 @@ func Description(v string) predicate.Book {
 // Category applies equality check predicate on the "category" field. It's identical to CategoryEQ.
 func Category(v string) predicate.Book {
 	return predicate.Book(sql.FieldEQ(FieldCategory, v))
+}
+
+// ImageLink applies equality check predicate on the "image_link" field. It's identical to ImageLinkEQ.
+func ImageLink(v string) predicate.Book {
+	return predicate.Book(sql.FieldEQ(FieldImageLink, v))
 }
 
 // Featured applies equality check predicate on the "featured" field. It's identical to FeaturedEQ.
@@ -217,6 +227,71 @@ func AuthorContainsFold(v string) predicate.Book {
 	return predicate.Book(sql.FieldContainsFold(FieldAuthor, v))
 }
 
+// SummaryEQ applies the EQ predicate on the "summary" field.
+func SummaryEQ(v string) predicate.Book {
+	return predicate.Book(sql.FieldEQ(FieldSummary, v))
+}
+
+// SummaryNEQ applies the NEQ predicate on the "summary" field.
+func SummaryNEQ(v string) predicate.Book {
+	return predicate.Book(sql.FieldNEQ(FieldSummary, v))
+}
+
+// SummaryIn applies the In predicate on the "summary" field.
+func SummaryIn(vs ...string) predicate.Book {
+	return predicate.Book(sql.FieldIn(FieldSummary, vs...))
+}
+
+// SummaryNotIn applies the NotIn predicate on the "summary" field.
+func SummaryNotIn(vs ...string) predicate.Book {
+	return predicate.Book(sql.FieldNotIn(FieldSummary, vs...))
+}
+
+// SummaryGT applies the GT predicate on the "summary" field.
+func SummaryGT(v string) predicate.Book {
+	return predicate.Book(sql.FieldGT(FieldSummary, v))
+}
+
+// SummaryGTE applies the GTE predicate on the "summary" field.
+func SummaryGTE(v string) predicate.Book {
+	return predicate.Book(sql.FieldGTE(FieldSummary, v))
+}
+
+// SummaryLT applies the LT predicate on the "summary" field.
+func SummaryLT(v string) predicate.Book {
+	return predicate.Book(sql.FieldLT(FieldSummary, v))
+}
+
+// SummaryLTE applies the LTE predicate on the "summary" field.
+func SummaryLTE(v string) predicate.Book {
+	return predicate.Book(sql.FieldLTE(FieldSummary, v))
+}
+
+// SummaryContains applies the Contains predicate on the "summary" field.
+func SummaryContains(v string) predicate.Book {
+	return predicate.Book(sql.FieldContains(FieldSummary, v))
+}
+
+// SummaryHasPrefix applies the HasPrefix predicate on the "summary" field.
+func SummaryHasPrefix(v string) predicate.Book {
+	return predicate.Book(sql.FieldHasPrefix(FieldSummary, v))
+}
+
+// SummaryHasSuffix applies the HasSuffix predicate on the "summary" field.
+func SummaryHasSuffix(v string) predicate.Book {
+	return predicate.Book(sql.FieldHasSuffix(FieldSummary, v))
+}
+
+// SummaryEqualFold applies the EqualFold predicate on the "summary" field.
+func SummaryEqualFold(v string) predicate.Book {
+	return predicate.Book(sql.FieldEqualFold(FieldSummary, v))
+}
+
+// SummaryContainsFold applies the ContainsFold predicate on the "summary" field.
+func SummaryContainsFold(v string) predicate.Book {
+	return predicate.Book(sql.FieldContainsFold(FieldSummary, v))
+}
+
 // DescriptionEQ applies the EQ predicate on the "description" field.
 func DescriptionEQ(v string) predicate.Book {
 	return predicate.Book(sql.FieldEQ(FieldDescription, v))
@@ -345,6 +420,71 @@ func CategoryEqualFold(v string) predicate.Book {
 // CategoryContainsFold applies the ContainsFold predicate on the "category" field.
 func CategoryContainsFold(v string) predicate.Book {
 	return predicate.Book(sql.FieldContainsFold(FieldCategory, v))
+}
+
+// ImageLinkEQ applies the EQ predicate on the "image_link" field.
+func ImageLinkEQ(v string) predicate.Book {
+	return predicate.Book(sql.FieldEQ(FieldImageLink, v))
+}
+
+// ImageLinkNEQ applies the NEQ predicate on the "image_link" field.
+func ImageLinkNEQ(v string) predicate.Book {
+	return predicate.Book(sql.FieldNEQ(FieldImageLink, v))
+}
+
+// ImageLinkIn applies the In predicate on the "image_link" field.
+func ImageLinkIn(vs ...string) predicate.Book {
+	return predicate.Book(sql.FieldIn(FieldImageLink, vs...))
+}
+
+// ImageLinkNotIn applies the NotIn predicate on the "image_link" field.
+func ImageLinkNotIn(vs ...string) predicate.Book {
+	return predicate.Book(sql.FieldNotIn(FieldImageLink, vs...))
+}
+
+// ImageLinkGT applies the GT predicate on the "image_link" field.
+func ImageLinkGT(v string) predicate.Book {
+	return predicate.Book(sql.FieldGT(FieldImageLink, v))
+}
+
+// ImageLinkGTE applies the GTE predicate on the "image_link" field.
+func ImageLinkGTE(v string) predicate.Book {
+	return predicate.Book(sql.FieldGTE(FieldImageLink, v))
+}
+
+// ImageLinkLT applies the LT predicate on the "image_link" field.
+func ImageLinkLT(v string) predicate.Book {
+	return predicate.Book(sql.FieldLT(FieldImageLink, v))
+}
+
+// ImageLinkLTE applies the LTE predicate on the "image_link" field.
+func ImageLinkLTE(v string) predicate.Book {
+	return predicate.Book(sql.FieldLTE(FieldImageLink, v))
+}
+
+// ImageLinkContains applies the Contains predicate on the "image_link" field.
+func ImageLinkContains(v string) predicate.Book {
+	return predicate.Book(sql.FieldContains(FieldImageLink, v))
+}
+
+// ImageLinkHasPrefix applies the HasPrefix predicate on the "image_link" field.
+func ImageLinkHasPrefix(v string) predicate.Book {
+	return predicate.Book(sql.FieldHasPrefix(FieldImageLink, v))
+}
+
+// ImageLinkHasSuffix applies the HasSuffix predicate on the "image_link" field.
+func ImageLinkHasSuffix(v string) predicate.Book {
+	return predicate.Book(sql.FieldHasSuffix(FieldImageLink, v))
+}
+
+// ImageLinkEqualFold applies the EqualFold predicate on the "image_link" field.
+func ImageLinkEqualFold(v string) predicate.Book {
+	return predicate.Book(sql.FieldEqualFold(FieldImageLink, v))
+}
+
+// ImageLinkContainsFold applies the ContainsFold predicate on the "image_link" field.
+func ImageLinkContainsFold(v string) predicate.Book {
+	return predicate.Book(sql.FieldContainsFold(FieldImageLink, v))
 }
 
 // FeaturedEQ applies the EQ predicate on the "featured" field.

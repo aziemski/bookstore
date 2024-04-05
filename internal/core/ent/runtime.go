@@ -21,16 +21,24 @@ func init() {
 	bookDescAuthor := bookFields[2].Descriptor()
 	// book.AuthorValidator is a validator for the "author" field. It is called by the builders before save.
 	book.AuthorValidator = bookDescAuthor.Validators[0].(func(string) error)
+	// bookDescSummary is the schema descriptor for summary field.
+	bookDescSummary := bookFields[3].Descriptor()
+	// book.SummaryValidator is a validator for the "summary" field. It is called by the builders before save.
+	book.SummaryValidator = bookDescSummary.Validators[0].(func(string) error)
 	// bookDescDescription is the schema descriptor for description field.
-	bookDescDescription := bookFields[3].Descriptor()
+	bookDescDescription := bookFields[4].Descriptor()
 	// book.DescriptionValidator is a validator for the "description" field. It is called by the builders before save.
 	book.DescriptionValidator = bookDescDescription.Validators[0].(func(string) error)
 	// bookDescCategory is the schema descriptor for category field.
-	bookDescCategory := bookFields[4].Descriptor()
+	bookDescCategory := bookFields[5].Descriptor()
 	// book.CategoryValidator is a validator for the "category" field. It is called by the builders before save.
 	book.CategoryValidator = bookDescCategory.Validators[0].(func(string) error)
+	// bookDescImageLink is the schema descriptor for image_link field.
+	bookDescImageLink := bookFields[6].Descriptor()
+	// book.ImageLinkValidator is a validator for the "image_link" field. It is called by the builders before save.
+	book.ImageLinkValidator = bookDescImageLink.Validators[0].(func(string) error)
 	// bookDescFeatured is the schema descriptor for featured field.
-	bookDescFeatured := bookFields[5].Descriptor()
+	bookDescFeatured := bookFields[7].Descriptor()
 	// book.DefaultFeatured holds the default value on creation for the featured field.
 	book.DefaultFeatured = bookDescFeatured.Default.(bool)
 	// bookDescID is the schema descriptor for id field.

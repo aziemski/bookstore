@@ -15,10 +15,14 @@ const (
 	FieldTitle = "title"
 	// FieldAuthor holds the string denoting the author field in the database.
 	FieldAuthor = "author"
+	// FieldSummary holds the string denoting the summary field in the database.
+	FieldSummary = "summary"
 	// FieldDescription holds the string denoting the description field in the database.
 	FieldDescription = "description"
 	// FieldCategory holds the string denoting the category field in the database.
 	FieldCategory = "category"
+	// FieldImageLink holds the string denoting the image_link field in the database.
+	FieldImageLink = "image_link"
 	// FieldFeatured holds the string denoting the featured field in the database.
 	FieldFeatured = "featured"
 	// Table holds the table name of the book in the database.
@@ -30,8 +34,10 @@ var Columns = []string{
 	FieldID,
 	FieldTitle,
 	FieldAuthor,
+	FieldSummary,
 	FieldDescription,
 	FieldCategory,
+	FieldImageLink,
 	FieldFeatured,
 }
 
@@ -50,10 +56,14 @@ var (
 	TitleValidator func(string) error
 	// AuthorValidator is a validator for the "author" field. It is called by the builders before save.
 	AuthorValidator func(string) error
+	// SummaryValidator is a validator for the "summary" field. It is called by the builders before save.
+	SummaryValidator func(string) error
 	// DescriptionValidator is a validator for the "description" field. It is called by the builders before save.
 	DescriptionValidator func(string) error
 	// CategoryValidator is a validator for the "category" field. It is called by the builders before save.
 	CategoryValidator func(string) error
+	// ImageLinkValidator is a validator for the "image_link" field. It is called by the builders before save.
+	ImageLinkValidator func(string) error
 	// DefaultFeatured holds the default value on creation for the "featured" field.
 	DefaultFeatured bool
 	// IDValidator is a validator for the "id" field. It is called by the builders before save.
@@ -78,6 +88,11 @@ func ByAuthor(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldAuthor, opts...).ToFunc()
 }
 
+// BySummary orders the results by the summary field.
+func BySummary(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldSummary, opts...).ToFunc()
+}
+
 // ByDescription orders the results by the description field.
 func ByDescription(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldDescription, opts...).ToFunc()
@@ -86,6 +101,11 @@ func ByDescription(opts ...sql.OrderTermOption) OrderOption {
 // ByCategory orders the results by the category field.
 func ByCategory(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldCategory, opts...).ToFunc()
+}
+
+// ByImageLink orders the results by the image_link field.
+func ByImageLink(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldImageLink, opts...).ToFunc()
 }
 
 // ByFeatured orders the results by the featured field.

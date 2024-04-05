@@ -2,7 +2,7 @@
   {
     "title": "To Kill a Mockingbird",
     "author": "Harper Lee",
-    "description": "A Pulitzer Prize-winning novel by Harper Lee. It is a classic of modern American literature dealing with themes of racism and injustice.",
+    "summary": "A Pulitzer Prize-winning novel by Harper Lee. It is a classic of modern American literature dealing with themes of racism and injustice.",
     "image_link": "https://http.dog/411.jpg",
     "category": "Fiction",
     "featured": true
@@ -10,7 +10,7 @@
   {
     "title": "1984",
     "author": "George Orwell",
-    "description": "A dystopian novel set in a totalitarian society, where the government monitors and controls every aspect of human life.",
+    "summary": "A dystopian novel set in a totalitarian society, where the government monitors and controls every aspect of human life.",
     "image_link": "https://http.cat/208.jpg",
     "category": "Science Fiction",
     "featured": false
@@ -18,7 +18,7 @@
   {
     "title": "The Great Gatsby",
     "author": "F. Scott Fitzgerald",
-    "description": "A novel set in the Roaring Twenties, exploring themes of decadence, idealism, and the American Dream.",
+    "summary": "A novel set in the Roaring Twenties, exploring themes of decadence, idealism, and the American Dream.",
     "image_link": "https://http.dog/101.jpg",
     "category": "Classic Literature",
     "featured": true
@@ -26,7 +26,7 @@
   {
     "title": "Pride and Prejudice",
     "author": "Jane Austen",
-    "description": "A classic romantic novel set in Georgian England, exploring themes of marriage, class, and social expectations.",
+    "summary": "A classic romantic novel set in Georgian England, exploring themes of marriage, class, and social expectations.",
     "image_link": "https://http.cat/405.jpg",
     "category": "Romance",
     "featured": false
@@ -34,7 +34,7 @@
   {
     "title": "The Catcher in the Rye",
     "author": "J.D. Salinger",
-    "description": "A coming-of-age novel narrated by a disaffected teenager, Holden Caulfield, as he navigates the challenges of adolescence and society.",
+    "summary": "A coming-of-age novel narrated by a disaffected teenager, Holden Caulfield, as he navigates the challenges of adolescence and society.",
     "image_link": "https://http.dog/303.jpg",
     "category": "Young Adult",
     "featured": true
@@ -42,7 +42,7 @@
   {
     "title": "To the Lighthouse",
     "author": "Virginia Woolf",
-    "description": "A novel that explores the passage of time and the complexity of human relationships through the experiences of the Ramsay family.",
+    "summary": "A novel that explores the passage of time and the complexity of human relationships through the experiences of the Ramsay family.",
     "image_link": "https://http.cat/503.jpg",
     "category": "Fiction",
     "featured": false
@@ -50,7 +50,7 @@
   {
     "title": "Moby-Dick",
     "author": "Herman Melville",
-    "description": "An epic tale of Captain Ahab's obsessive quest for revenge against the white whale, Moby Dick.",
+    "summary": "An epic tale of Captain Ahab's obsessive quest for revenge against the white whale, Moby Dick.",
     "image_link": "https://http.dog/203.jpg",
     "category": "Adventure",
     "featured": true
@@ -58,7 +58,7 @@
   {
     "title": "The Hobbit",
     "author": "J.R.R. Tolkien",
-    "description": "A fantasy novel about the journey of Bilbo Baggins, a hobbit who embarks on an adventure to reclaim the Lonely Mountain from the dragon Smaug.",
+    "summary": "A fantasy novel about the journey of Bilbo Baggins, a hobbit who embarks on an adventure to reclaim the Lonely Mountain from the dragon Smaug.",
     "image_link": "https://http.cat/500.jpg",
     "category": "Fantasy",
     "featured": false
@@ -66,7 +66,7 @@
   {
     "title": "The Grapes of Wrath",
     "author": "John Steinbeck",
-    "description": "A Pulitzer Prize-winning novel that tells the story of the Joad family, who are forced to leave their farm during the Great Depression and migrate to California in search of work.",
+    "summary": "A Pulitzer Prize-winning novel that tells the story of the Joad family, who are forced to leave their farm during the Great Depression and migrate to California in search of work.",
     "image_link": "https://http.dog/200.jpg",
     "category": "Historical Fiction",
     "featured": true
@@ -74,7 +74,7 @@
   {
     "title": "The Lord of the Rings",
     "author": "J.R.R. Tolkien",
-    "description": "A high-fantasy epic that follows the quest to destroy the One Ring, which threatens to enslave the world, undertaken by Frodo Baggins and his companions.",
+    "summary": "A high-fantasy epic that follows the quest to destroy the One Ring, which threatens to enslave the world, undertaken by Frodo Baggins and his companions.",
     "image_link": "https://http.cat/401.jpg",
     "category": "Fantasy",
     "featured": false

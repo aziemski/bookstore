@@ -59,34 +59,42 @@ func main() {
 	e.Logger.Fatal(e.Start(*address))
 }
 
-type FakeBook struct {
-	Title       string `json:"title"`
-	Author      string `json:"author"`
-	Description string `json:"description"`
-	ImageLink   string `json:"image_link"`
-	Category    string `json:"category"`
-	Featured    bool   `json:"featured"`
-}
+type (
+	FakeData struct {
+		string
+		LoremIpsum string     `json:"lorem_ipsum"`
+		Books      []FakeBook `json:"books"`
+	}
 
-func readFakeBooks(log *slog.Logger) []FakeBook {
-	var books []FakeBook
+	FakeBook struct {
+		Title     string `json:"title"`
+		Author    string `json:"author"`
+		Summary   string `json:"summary"`
+		ImageLink string `json:"image_link"`
+		Category  string `json:"category"`
+		Featured  bool   `json:"featured"`
+	}
+)
 
-	file, err := os.Open("assets/fake_books.json")
+func readFakeData(log *slog.Logger) FakeData {
+	result := FakeData{}
+
+	file, err := os.Open("assets/fake_data.json")
 	if err != nil {
 		log.Error("unexpected os.Open() err", xlog.Err(err))
-		return books
+		return result
 	}
 	defer func() {
 		_ = file.Close()
 	}()
 
 	decoder := json.NewDecoder(file)
-	if err := decoder.Decode(&books); err != nil {
+	if err := decoder.Decode(&result); err != nil {
 		log.Error("unexpected decoder.Decode() err", xlog.Err(err))
-		return nil
+		return result
 	}
 
-	return books
+	return result
 }
 
 func createFixtures(repo *core.Repository, log *slog.Logger) {
@@ -97,13 +105,18 @@ func createFixtures(repo *core.Repository, log *slog.Logger) {
 		}
 		time.Sleep(3 * time.Second)
 
-		fakeBooks := readFakeBooks(log)
-		for i, fb := range fakeBooks {
+		fd := readFakeData(log)
+		for i, fb := range fd.Books {
 			log.Info("inserting book")
-			_, err := repo.InsertNew(context.Background(), &core.NewBookSpec{
+			_, err := repo.InsertNew(context.Background(), &core.Book{
 				ID:          fmt.Sprintf("b%d", i),
 				Title:       fb.Title,
-				Description: fb.Description,
+				Author:      fb.Author,
+				Summary:     fb.Summary,
+				Description: fd.LoremIpsum,
+				ImageLink:   fb.ImageLink,
+				Category:    fb.Category,
+				Featured:    fb.Featured,
 			})
 			if err != nil {
 				log.Warn("cannot save book", xlog.Err(err))

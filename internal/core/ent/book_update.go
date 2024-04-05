@@ -55,6 +55,20 @@ func (bu *BookUpdate) SetNillableAuthor(s *string) *BookUpdate {
 	return bu
 }
 
+// SetSummary sets the "summary" field.
+func (bu *BookUpdate) SetSummary(s string) *BookUpdate {
+	bu.mutation.SetSummary(s)
+	return bu
+}
+
+// SetNillableSummary sets the "summary" field if the given value is not nil.
+func (bu *BookUpdate) SetNillableSummary(s *string) *BookUpdate {
+	if s != nil {
+		bu.SetSummary(*s)
+	}
+	return bu
+}
+
 // SetDescription sets the "description" field.
 func (bu *BookUpdate) SetDescription(s string) *BookUpdate {
 	bu.mutation.SetDescription(s)
@@ -79,6 +93,20 @@ func (bu *BookUpdate) SetCategory(s string) *BookUpdate {
 func (bu *BookUpdate) SetNillableCategory(s *string) *BookUpdate {
 	if s != nil {
 		bu.SetCategory(*s)
+	}
+	return bu
+}
+
+// SetImageLink sets the "image_link" field.
+func (bu *BookUpdate) SetImageLink(s string) *BookUpdate {
+	bu.mutation.SetImageLink(s)
+	return bu
+}
+
+// SetNillableImageLink sets the "image_link" field if the given value is not nil.
+func (bu *BookUpdate) SetNillableImageLink(s *string) *BookUpdate {
+	if s != nil {
+		bu.SetImageLink(*s)
 	}
 	return bu
 }
@@ -141,6 +169,11 @@ func (bu *BookUpdate) check() error {
 			return &ValidationError{Name: "author", err: fmt.Errorf(`ent: validator failed for field "Book.author": %w`, err)}
 		}
 	}
+	if v, ok := bu.mutation.Summary(); ok {
+		if err := book.SummaryValidator(v); err != nil {
+			return &ValidationError{Name: "summary", err: fmt.Errorf(`ent: validator failed for field "Book.summary": %w`, err)}
+		}
+	}
 	if v, ok := bu.mutation.Description(); ok {
 		if err := book.DescriptionValidator(v); err != nil {
 			return &ValidationError{Name: "description", err: fmt.Errorf(`ent: validator failed for field "Book.description": %w`, err)}
@@ -149,6 +182,11 @@ func (bu *BookUpdate) check() error {
 	if v, ok := bu.mutation.Category(); ok {
 		if err := book.CategoryValidator(v); err != nil {
 			return &ValidationError{Name: "category", err: fmt.Errorf(`ent: validator failed for field "Book.category": %w`, err)}
+		}
+	}
+	if v, ok := bu.mutation.ImageLink(); ok {
+		if err := book.ImageLinkValidator(v); err != nil {
+			return &ValidationError{Name: "image_link", err: fmt.Errorf(`ent: validator failed for field "Book.image_link": %w`, err)}
 		}
 	}
 	return nil
@@ -172,11 +210,17 @@ func (bu *BookUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if value, ok := bu.mutation.Author(); ok {
 		_spec.SetField(book.FieldAuthor, field.TypeString, value)
 	}
+	if value, ok := bu.mutation.Summary(); ok {
+		_spec.SetField(book.FieldSummary, field.TypeString, value)
+	}
 	if value, ok := bu.mutation.Description(); ok {
 		_spec.SetField(book.FieldDescription, field.TypeString, value)
 	}
 	if value, ok := bu.mutation.Category(); ok {
 		_spec.SetField(book.FieldCategory, field.TypeString, value)
+	}
+	if value, ok := bu.mutation.ImageLink(); ok {
+		_spec.SetField(book.FieldImageLink, field.TypeString, value)
 	}
 	if value, ok := bu.mutation.Featured(); ok {
 		_spec.SetField(book.FieldFeatured, field.TypeBool, value)
@@ -229,6 +273,20 @@ func (buo *BookUpdateOne) SetNillableAuthor(s *string) *BookUpdateOne {
 	return buo
 }
 
+// SetSummary sets the "summary" field.
+func (buo *BookUpdateOne) SetSummary(s string) *BookUpdateOne {
+	buo.mutation.SetSummary(s)
+	return buo
+}
+
+// SetNillableSummary sets the "summary" field if the given value is not nil.
+func (buo *BookUpdateOne) SetNillableSummary(s *string) *BookUpdateOne {
+	if s != nil {
+		buo.SetSummary(*s)
+	}
+	return buo
+}
+
 // SetDescription sets the "description" field.
 func (buo *BookUpdateOne) SetDescription(s string) *BookUpdateOne {
 	buo.mutation.SetDescription(s)
@@ -253,6 +311,20 @@ func (buo *BookUpdateOne) SetCategory(s string) *BookUpdateOne {
 func (buo *BookUpdateOne) SetNillableCategory(s *string) *BookUpdateOne {
 	if s != nil {
 		buo.SetCategory(*s)
+	}
+	return buo
+}
+
+// SetImageLink sets the "image_link" field.
+func (buo *BookUpdateOne) SetImageLink(s string) *BookUpdateOne {
+	buo.mutation.SetImageLink(s)
+	return buo
+}
+
+// SetNillableImageLink sets the "image_link" field if the given value is not nil.
+func (buo *BookUpdateOne) SetNillableImageLink(s *string) *BookUpdateOne {
+	if s != nil {
+		buo.SetImageLink(*s)
 	}
 	return buo
 }
@@ -328,6 +400,11 @@ func (buo *BookUpdateOne) check() error {
 			return &ValidationError{Name: "author", err: fmt.Errorf(`ent: validator failed for field "Book.author": %w`, err)}
 		}
 	}
+	if v, ok := buo.mutation.Summary(); ok {
+		if err := book.SummaryValidator(v); err != nil {
+			return &ValidationError{Name: "summary", err: fmt.Errorf(`ent: validator failed for field "Book.summary": %w`, err)}
+		}
+	}
 	if v, ok := buo.mutation.Description(); ok {
 		if err := book.DescriptionValidator(v); err != nil {
 			return &ValidationError{Name: "description", err: fmt.Errorf(`ent: validator failed for field "Book.description": %w`, err)}
@@ -336,6 +413,11 @@ func (buo *BookUpdateOne) check() error {
 	if v, ok := buo.mutation.Category(); ok {
 		if err := book.CategoryValidator(v); err != nil {
 			return &ValidationError{Name: "category", err: fmt.Errorf(`ent: validator failed for field "Book.category": %w`, err)}
+		}
+	}
+	if v, ok := buo.mutation.ImageLink(); ok {
+		if err := book.ImageLinkValidator(v); err != nil {
+			return &ValidationError{Name: "image_link", err: fmt.Errorf(`ent: validator failed for field "Book.image_link": %w`, err)}
 		}
 	}
 	return nil
@@ -376,11 +458,17 @@ func (buo *BookUpdateOne) sqlSave(ctx context.Context) (_node *Book, err error) 
 	if value, ok := buo.mutation.Author(); ok {
 		_spec.SetField(book.FieldAuthor, field.TypeString, value)
 	}
+	if value, ok := buo.mutation.Summary(); ok {
+		_spec.SetField(book.FieldSummary, field.TypeString, value)
+	}
 	if value, ok := buo.mutation.Description(); ok {
 		_spec.SetField(book.FieldDescription, field.TypeString, value)
 	}
 	if value, ok := buo.mutation.Category(); ok {
 		_spec.SetField(book.FieldCategory, field.TypeString, value)
+	}
+	if value, ok := buo.mutation.ImageLink(); ok {
+		_spec.SetField(book.FieldImageLink, field.TypeString, value)
 	}
 	if value, ok := buo.mutation.Featured(); ok {
 		_spec.SetField(book.FieldFeatured, field.TypeBool, value)

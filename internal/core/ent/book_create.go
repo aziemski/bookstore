@@ -31,6 +31,12 @@ func (bc *BookCreate) SetAuthor(s string) *BookCreate {
 	return bc
 }
 
+// SetSummary sets the "summary" field.
+func (bc *BookCreate) SetSummary(s string) *BookCreate {
+	bc.mutation.SetSummary(s)
+	return bc
+}
+
 // SetDescription sets the "description" field.
 func (bc *BookCreate) SetDescription(s string) *BookCreate {
 	bc.mutation.SetDescription(s)
@@ -40,6 +46,12 @@ func (bc *BookCreate) SetDescription(s string) *BookCreate {
 // SetCategory sets the "category" field.
 func (bc *BookCreate) SetCategory(s string) *BookCreate {
 	bc.mutation.SetCategory(s)
+	return bc
+}
+
+// SetImageLink sets the "image_link" field.
+func (bc *BookCreate) SetImageLink(s string) *BookCreate {
+	bc.mutation.SetImageLink(s)
 	return bc
 }
 
@@ -122,6 +134,14 @@ func (bc *BookCreate) check() error {
 			return &ValidationError{Name: "author", err: fmt.Errorf(`ent: validator failed for field "Book.author": %w`, err)}
 		}
 	}
+	if _, ok := bc.mutation.Summary(); !ok {
+		return &ValidationError{Name: "summary", err: errors.New(`ent: missing required field "Book.summary"`)}
+	}
+	if v, ok := bc.mutation.Summary(); ok {
+		if err := book.SummaryValidator(v); err != nil {
+			return &ValidationError{Name: "summary", err: fmt.Errorf(`ent: validator failed for field "Book.summary": %w`, err)}
+		}
+	}
 	if _, ok := bc.mutation.Description(); !ok {
 		return &ValidationError{Name: "description", err: errors.New(`ent: missing required field "Book.description"`)}
 	}
@@ -136,6 +156,14 @@ func (bc *BookCreate) check() error {
 	if v, ok := bc.mutation.Category(); ok {
 		if err := book.CategoryValidator(v); err != nil {
 			return &ValidationError{Name: "category", err: fmt.Errorf(`ent: validator failed for field "Book.category": %w`, err)}
+		}
+	}
+	if _, ok := bc.mutation.ImageLink(); !ok {
+		return &ValidationError{Name: "image_link", err: errors.New(`ent: missing required field "Book.image_link"`)}
+	}
+	if v, ok := bc.mutation.ImageLink(); ok {
+		if err := book.ImageLinkValidator(v); err != nil {
+			return &ValidationError{Name: "image_link", err: fmt.Errorf(`ent: validator failed for field "Book.image_link": %w`, err)}
 		}
 	}
 	if _, ok := bc.mutation.Featured(); !ok {
@@ -189,6 +217,10 @@ func (bc *BookCreate) createSpec() (*Book, *sqlgraph.CreateSpec) {
 		_spec.SetField(book.FieldAuthor, field.TypeString, value)
 		_node.Author = value
 	}
+	if value, ok := bc.mutation.Summary(); ok {
+		_spec.SetField(book.FieldSummary, field.TypeString, value)
+		_node.Summary = value
+	}
 	if value, ok := bc.mutation.Description(); ok {
 		_spec.SetField(book.FieldDescription, field.TypeString, value)
 		_node.Description = value
@@ -196,6 +228,10 @@ func (bc *BookCreate) createSpec() (*Book, *sqlgraph.CreateSpec) {
 	if value, ok := bc.mutation.Category(); ok {
 		_spec.SetField(book.FieldCategory, field.TypeString, value)
 		_node.Category = value
+	}
+	if value, ok := bc.mutation.ImageLink(); ok {
+		_spec.SetField(book.FieldImageLink, field.TypeString, value)
+		_node.ImageLink = value
 	}
 	if value, ok := bc.mutation.Featured(); ok {
 		_spec.SetField(book.FieldFeatured, field.TypeBool, value)

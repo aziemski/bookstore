@@ -1,0 +1,85 @@
+{
+  "lorem_ipsum": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate ex eget diam tristique, quis elementum erat vehicula. Proin molestie, nisi a ultricies cursus, ex augue varius risus, vel dignissim urna diam id justo. Sed commodo aliquam sagittis. Integer maximus lacus id nunc pulvinar, eu pellentesque tortor ornare. Nulla condimentum imperdiet enim eu mattis. Proin faucibus iaculis pellentesque. Suspendisse in maximus sem. Vestibulum pulvinar ipsum velit, quis accumsan eros bibendum at. In molestie, velit vel commodo sodales, enim magna sodales magna, sit amet venenatis orci libero in nisi. Duis faucibus maximus lectus, vel interdum libero venenatis a. Curabitur a scelerisque magna. Nunc dignissim odio a diam pharetra, quis mollis est rutrum. Quisque nec lacus posuere, pulvinar mauris non, placerat tortor. Suspendisse nibh augue, euismod ut lobortis at, bibendum ac nulla. Morbi ornare mollis nisi in sodales.\n\nMauris vulputate est ac ullamcorper feugiat. Fusce sed metus ac odio consectetur rhoncus in vitae mauris. Nam eu ullamcorper ligula. Maecenas vulputate turpis lacinia nunc pharetra, vel iaculis quam imperdiet. Nunc malesuada risus diam, in iaculis dui commodo in. Proin malesuada nibh dui. Quisque facilisis scelerisque urna nec bibendum. Aenean dignissim tellus a massa suscipit malesuada. Donec mollis orci vitae sem posuere sagittis. Ut iaculis, tellus vel ornare euismod, risus massa aliquet massa, quis bibendum ante dui sed eros. Maecenas tristique enim id enim ultricies, sit amet accumsan diam laoreet. Morbi eros nunc, finibus id ultrices vel, sollicitudin et velit. Phasellus aliquet risus purus, sit amet blandit elit porttitor eu. Proin nec mattis tellus. Praesent rhoncus, sapien id vehicula lobortis, urna nisl luctus mauris, vel eleifend nisl metus sed lectus. Vestibulum pharetra, elit consequat aliquam gravida, nisl tortor condimentum velit, vitae sagittis tellus enim quis urna. Maecenas cursus enim metus, sed pellentesque dolor scelerisque quis. Donec fringilla metus vel ex tempor condimentum. Curabitur mi.",
+  "books": [
+    {
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "summary": "A Pulitzer Prize-winning novel by Harper Lee. It is a classic of modern American literature dealing with themes of racism and injustice.",
+      "image_link": "https://http.dog/411.jpg",
+      "category": "Fiction",
+      "featured": true
+    },
+    {
+      "title": "1984",
+      "author": "George Orwell",
+      "summary": "A dystopian novel set in a totalitarian society, where the government monitors and controls every aspect of human life.",
+      "image_link": "https://http.cat/208.jpg",
+      "category": "Science Fiction",
+      "featured": false
+    },
+    {
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "summary": "A novel set in the Roaring Twenties, exploring themes of decadence, idealism, and the American Dream.",
+      "image_link": "https://http.dog/101.jpg",
+      "category": "Classic Literature",
+      "featured": true
+    },
+    {
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "summary": "A classic romantic novel set in Georgian England, exploring themes of marriage, class, and social expectations.",
+      "image_link": "https://http.cat/405.jpg",
+      "category": "Romance",
+      "featured": false
+    },
+    {
+      "title": "The Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "summary": "A coming-of-age novel narrated by a disaffected teenager, Holden Caulfield, as he navigates the challenges of adolescence and society.",
+      "image_link": "https://http.dog/303.jpg",
+      "category": "Young Adult",
+      "featured": true
+    },
+    {
+      "title": "To the Lighthouse",
+      "author": "Virginia Woolf",
+      "summary": "A novel that explores the passage of time and the complexity of human relationships through the experiences of the Ramsay family.",
+      "image_link": "https://http.cat/503.jpg",
+      "category": "Fiction",
+      "featured": false
+    },
+    {
+      "title": "Moby-Dick",
+      "author": "Herman Melville",
+      "summary": "An epic tale of Captain Ahab's obsessive quest for revenge against the white whale, Moby Dick.",
+      "image_link": "https://http.dog/203.jpg",
+      "category": "Adventure",
+      "featured": true
+    },
+    {
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "summary": "A fantasy novel about the journey of Bilbo Baggins, a hobbit who embarks on an adventure to reclaim the Lonely Mountain from the dragon Smaug.",
+      "image_link": "https://http.cat/500.jpg",
+      "category": "Fantasy",
+      "featured": false
+    },
+    {
+      "title": "The Grapes of Wrath",
+      "author": "John Steinbeck",
+      "summary": "A Pulitzer Prize-winning novel that tells the story of the Joad family, who are forced to leave their farm during the Great Depression and migrate to California in search of work.",
+      "image_link": "https://http.dog/200.jpg",
+      "category": "Historical Fiction",
+      "featured": true
+    },
+    {
+      "title": "The Lord of the Rings",
+      "author": "J.R.R. Tolkien",
+      "summary": "A high-fantasy epic that follows the quest to destroy the One Ring, which threatens to enslave the world, undertaken by Frodo Baggins and his companions.",
+      "image_link": "https://http.cat/401.jpg",
+      "category": "Fantasy",
+      "featured": false
+    }
+  ]
+}
