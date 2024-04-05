@@ -2,11 +2,11 @@ package main
 
 import (
 	"context"
+	"embed"
 	"encoding/json"
 	"flag"
 	"fmt"
 	"log/slog"
-	"os"
 	"time"
 
 	"github.com/aziemski/bookstore/internal/core"
@@ -59,6 +59,9 @@ func main() {
 	e.Logger.Fatal(e.Start(*address))
 }
 
+//go:embed assets/fake_data.json
+var fakeDataDir embed.FS
+
 type (
 	FakeData struct {
 		string
@@ -79,7 +82,7 @@ type (
 func readFakeData(log *slog.Logger) FakeData {
 	result := FakeData{}
 
-	file, err := os.Open("assets/fake_data.json")
+	file, err := fakeDataDir.Open("assets/fake_data.json")
 	if err != nil {
 		log.Error("unexpected os.Open() err", xlog.Err(err))
 		return result
