@@ -45,7 +45,7 @@ download-tools: ## Download all go tools
 download-tools: moq oapi_codegen golangci-lint
 
 .PHONY: generate
-generate: oapi_codegen moq templ ## Generate boilerplate
+generate: oapi_codegen moq ## Generate boilerplate
 	$(GO) generate ./...
 	@make templ
 

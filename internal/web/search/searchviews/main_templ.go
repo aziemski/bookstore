@@ -29,7 +29,7 @@ func SearchResult(query string, books []core.Book) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><title>Bookstore</title><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"stylesheet\" type=\"text/css\" href=\"/static/css/styles.css\"></head><body><header><div class=\"logo\"><a href=\"/\">Bookstore</a></div><nav><ul><li><a href=\"/\">Home</a></li><li><a href=\"/about\">About Project</a></li></ul></nav><div class=\"search\"><form action=\"/search\" method=\"GET\"><label><input type=\"text\" placeholder=\"Search...\" id=\"q\" name=\"q\" value=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><title>Anybook</title><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"stylesheet\" type=\"text/css\" href=\"/static/css/styles.css\"></head><body><header><div class=\"logo\"><a href=\"/\">Anybook</a></div><nav><ul><li><a href=\"/\">Home</a></li><li><a href=\"/about\">About Project</a></li></ul></nav><div class=\"search\"><form action=\"/search\" method=\"GET\"><label><input type=\"text\" placeholder=\"Search...\" id=\"q\" name=\"q\" value=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -113,7 +113,7 @@ func SearchResult(query string, books []core.Book) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div></div><footer><p>&copy; 2024 Bookstore. All right reserved </p></footer></body></html>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div></div><footer><p>&copy; 2024 Anybook. All right reserved </p></footer></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

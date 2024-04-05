@@ -9,6 +9,7 @@ require (
 	github.com/labstack/echo/v4 v4.11.4
 	github.com/mattn/go-sqlite3 v1.14.16
 	github.com/oapi-codegen/runtime v1.1.1
+	golang.org/x/crypto v0.17.0
 )
 
 require (
@@ -35,7 +36,6 @@ require (
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
 	github.com/zclconf/go-cty v1.8.0 // indirect
-	golang.org/x/crypto v0.17.0 // indirect
 	golang.org/x/mod v0.15.0 // indirect
 	golang.org/x/net v0.19.0 // indirect
 	golang.org/x/sys v0.17.0 // indirect
