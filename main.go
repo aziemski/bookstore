@@ -23,7 +23,7 @@ var cssDir embed.FS
 
 func main() {
 	address := flag.String("a", "localhost:8080", "server:port")
-	mode := flag.String("m", "http", "http|https")
+	mode := flag.String("m", "dev", "dev|prod")
 
 	flag.Parse()
 
@@ -58,11 +58,10 @@ func main() {
 
 	web.SetupRoutes(e, repo)
 
-	if *mode == "https" {
+	if *mode == "prod" {
 		e.AutoTLSManager.HostPolicy = autocert.HostWhitelist("anybook.online")
 		e.AutoTLSManager.Cache = autocert.DirCache(".certcache")
-		e.Logger.Fatal(e.StartAutoTLS(*address))
-
+		e.Logger.Fatal(e.StartAutoTLS(":443"))
 	} else {
 		e.Logger.Fatal(e.Start(*address))
 	}
