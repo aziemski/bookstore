@@ -13,6 +13,7 @@ import (
 	"github.com/aziemski/bookstore/internal/x/xlog"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"golang.org/x/crypto/acme/autocert"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -22,6 +23,8 @@ var cssDir embed.FS
 
 func main() {
 	address := flag.String("a", "localhost:8080", "server:port")
+	mode := flag.String("m", "http", "http|https")
+
 	flag.Parse()
 
 	log := xlog.GetLogger()
@@ -55,5 +58,12 @@ func main() {
 
 	web.SetupRoutes(e, repo)
 
-	e.Logger.Fatal(e.Start(*address))
+	if *mode == "https" {
+		e.AutoTLSManager.HostPolicy = autocert.HostWhitelist("anybook.online")
+		e.AutoTLSManager.Cache = autocert.DirCache(".certcache")
+		e.Logger.Fatal(e.StartAutoTLS(*address))
+
+	} else {
+		e.Logger.Fatal(e.Start(*address))
+	}
 }
