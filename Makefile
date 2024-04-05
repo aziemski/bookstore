@@ -61,6 +61,10 @@ templ.watch: ## Watch templates and generate views
 build: ## Build app
 	GOBIN=$(LOCALBIN) $(GO) install -ldflags $(LDFLAGS)  ./...
 
+.PHONY: build-linux
+build-linux: ## Build app for linux
+	CC=x86_64-linux-musl-gcc CXX=x86_64-linux-musl-g++ GOARCH=amd64 GOOS=linux CGO_ENABLED=1 go build -ldflags "-linkmode external -extldflags -static" -o ./bin/bookstore_linux_amd64 main.go
+
 .PHONY: run
 run:
 	$(GO) run . -a localhost:8080
