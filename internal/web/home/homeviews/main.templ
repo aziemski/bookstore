@@ -1,6 +1,10 @@
 package homeviews
 
-import "github.com/aziemski/bookstore/internal/core"
+import (
+	"fmt"
+
+    "github.com/aziemski/bookstore/internal/core"
+)
 
 templ HomeIndex(books []core.Book) {
 	<!DOCTYPE html>
@@ -42,7 +46,11 @@ templ HomeIndex(books []core.Book) {
             <div class="books">
             for _, book := range books {
                 <div class="book">
-                    <img src={book.ImageLink} alt=""/>
+                    <a href={ templ.URL(fmt.Sprintf("/details/%s", book.ID)) }>
+                        <span>
+                            <img src={book.ImageLink} alt=""/>
+                        </span>
+                    </a>
                     <h3>{book.Title}</h3>
                     <p>{book.Author}</p>
                 </div>
