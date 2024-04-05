@@ -1,6 +1,8 @@
 package homeviews
 
-templ HomeIndex(name string) {
+import "github.com/aziemski/bookstore/internal/core"
+
+templ HomeIndex(books []core.Book) {
 	<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -38,30 +40,14 @@ templ HomeIndex(name string) {
         <div class="main-content">
             <h2>Featured Books</h2>
             <div class="books">
+            for _, book := range books {
                 <div class="book">
                     <img src="https://httpcats.com/201.jpg" alt=""/>
-                    <h3>Book Title 201</h3>
+                    <h3>{book.Title}</h3>
                     <p>Author Name</p>
                     <p>$5.99</p>
                 </div>
-                <div class="book">
-                    <img src="https://httpcats.com/101.jpg" alt=""/>
-                    <h3>Book Title 101</h3>
-                    <p>Author Name</p>
-                    <p>$20.55</p>
-                </div>
-                <div class="book">
-                    <img src="https://http.dog/303.jpg" alt=""/>
-                    <h3>Book Title 303</h3>
-                    <p>Author Name</p>
-                    <p>$10.12</p>
-                </div>
-                <div class="book">
-                    <img src="https://http.dog/404.jpg" alt=""/>
-                    <h3>Book Title 404 </h3>
-                    <p>Author Name</p>
-                    <p>$14.32</p>
-                </div>
+            }
             </div>
         </div>
     </div>

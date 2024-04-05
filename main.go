@@ -54,7 +54,7 @@ func main() {
 
 	go createFixtures(repo, log)
 
-	web.SetupRoutes(e)
+	web.SetupRoutes(e, repo)
 
 	e.Logger.Fatal(e.Start(*address))
 }

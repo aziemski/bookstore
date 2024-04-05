@@ -2,8 +2,9 @@ package core
 
 import (
 	"context"
-
 	"github.com/aziemski/bookstore/internal/core/ent"
+	"github.com/aziemski/bookstore/internal/x/xlog"
+	"log/slog"
 )
 
 type Book struct {
@@ -57,4 +58,27 @@ func (r *Repository) FindByID(ctx context.Context, id string) (*Book, error) {
 
 func (r *Repository) GetTotalCount(ctx context.Context) (int, error) {
 	return r.db.Book.Query().Count(ctx)
+}
+
+func (r *Repository) FindFeaturedBooks(ctx context.Context) []Book {
+	var result []Book
+
+	found, err := r.db.Book.Query().
+		All(ctx)
+
+	if err != nil {
+		slog.Error("sql, unexpected FindFeaturedBooks err", xlog.Err(err))
+		return result
+	}
+
+	for _, in := range found {
+		out := Book{
+			ID:          in.ID,
+			Title:       in.Title,
+			Description: "",
+		}
+		result = append(result, out)
+	}
+
+	return result
 }

@@ -55,7 +55,7 @@ templ: ## Generate views
 
 .PHONY: templ
 templ.watch: ## Watch templates and generate views
-	fswatch -o -e ".*" -i "\\.templ*" . | templ generate ./...
+	fswatch -o -e ".*" -i "\\.templ*" . | xargs -n1 templ generate ./...
 
 .PHONY: build
 build: ## Build app

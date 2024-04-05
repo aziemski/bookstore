@@ -1,6 +1,7 @@
 package web
 
 import (
+	"github.com/aziemski/bookstore/internal/core"
 	"github.com/aziemski/bookstore/internal/web/about"
 	"github.com/aziemski/bookstore/internal/web/bookdetails"
 	"github.com/aziemski/bookstore/internal/web/home"
@@ -8,9 +9,9 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func SetupRoutes(e *echo.Echo) {
+func SetupRoutes(e *echo.Echo, repo *core.Repository) {
 	ah := &about.Handler{}
-	hh := &home.Handler{}
+	hh := home.NewHandler(repo)
 	bdh := &bookdetails.Handler{}
 	sh := &search.Handler{}
 
