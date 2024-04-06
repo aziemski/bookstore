@@ -94,9 +94,17 @@ func (s *Server) GetBooksId(c echo.Context, id string) error {
 	return c.JSON(http.StatusOK, apiBook(b))
 }
 
-func (s *Server) GetBooks(ctx echo.Context, params GetBooksParams) error {
-	// TODO implement me
-	panic("implement me")
+func (s *Server) GetBooks(c echo.Context, params GetBooksParams) error {
+	ctx := c.Request().Context()
+
+	found := s.repo.GetAll(ctx, core.QueryArgs{
+		Offset: params.Offset,
+		Limit:  params.Limit,
+	})
+
+	bookList := apiBookList(found)
+
+	return c.JSON(http.StatusOK, bookList)
 }
 
 func (s *Server) PutBooksId(c echo.Context, id string) error {

@@ -63,6 +63,37 @@ func (r *Repository) FindByID(ctx context.Context, id string) (*Book, error) {
 	return &out, nil
 }
 
+func (r *Repository) GetAll(ctx context.Context, args QueryArgs) []Book {
+	var result []Book
+	offset := 0
+	limit := 10
+
+	if args.Offset != nil {
+		offset = *args.Offset
+	}
+
+	if args.Limit != nil {
+		limit = *args.Limit
+	}
+
+	found, err := r.db.Book.Query().
+		Offset(offset).
+		Limit(limit).
+		All(ctx)
+
+	if err != nil {
+		slog.Error("sql, unexpected GetAll err", xlog.Err(err))
+		return result
+	}
+
+	for _, in := range found {
+		out := ent2core(in)
+		result = append(result, out)
+	}
+
+	return result
+}
+
 func (r *Repository) GetTotalCount(ctx context.Context) (int, error) {
 	return r.db.Book.Query().Count(ctx)
 }
@@ -72,6 +103,8 @@ func (r *Repository) FindFeaturedBooks(ctx context.Context) []Book {
 
 	found, err := r.db.Book.Query().
 		Where(book.FeaturedEQ(true)).
+		Offset(0).
+		Limit(20).
 		All(ctx)
 
 	if err != nil {
