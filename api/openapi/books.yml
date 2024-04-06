@@ -59,6 +59,7 @@ paths:
         schema:
           type: string
     get:
+      operationId: getBookByID
       summary: Get a book by ID
       responses:
         '200':
@@ -70,6 +71,7 @@ paths:
         '404':
           description: Book not found
     put:
+      operationId: updateBookByID
       summary: Update a book by ID
       requestBody:
         required: true
@@ -91,6 +93,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     delete:
+      operationId: deleteBookByID
       summary: Delete a book by ID
       responses:
         '204':

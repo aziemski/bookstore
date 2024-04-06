@@ -53,6 +53,24 @@ func (r *Repository) InsertNew(ctx context.Context, in *Book) (*Book, error) {
 	return &out, nil
 }
 
+func (r *Repository) Update(ctx context.Context, in *Book) (*Book, error) {
+	b, err := r.db.Book.UpdateOneID(in.ID).
+		SetTitle(in.Title).
+		SetAuthor(in.Author).
+		SetDescription(in.Description).
+		SetSummary(in.Summary).
+		SetImageLink(in.ImageLink).
+		SetCategory(in.Category).
+		SetFeatured(in.Featured).
+		Save(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	out := ent2core(b)
+	return &out, nil
+}
+
 func (r *Repository) FindByID(ctx context.Context, id string) (*Book, error) {
 	in, err := r.db.Book.Get(ctx, id)
 	if err != nil {

@@ -104,8 +104,8 @@ type GetBooksSearchParams struct {
 // PostBooksJSONRequestBody defines body for PostBooks for application/json ContentType.
 type PostBooksJSONRequestBody = Book
 
-// PutBooksIdJSONRequestBody defines body for PutBooksId for application/json ContentType.
-type PutBooksIdJSONRequestBody = Book
+// UpdateBookByIDJSONRequestBody defines body for UpdateBookByID for application/json ContentType.
+type UpdateBookByIDJSONRequestBody = Book
 
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
@@ -120,13 +120,13 @@ type ServerInterface interface {
 	GetBooksSearch(ctx echo.Context, params GetBooksSearchParams) error
 	// Delete a book by ID
 	// (DELETE /books/{id})
-	DeleteBooksId(ctx echo.Context, id string) error
+	DeleteBookByID(ctx echo.Context, id string) error
 	// Get a book by ID
 	// (GET /books/{id})
-	GetBooksId(ctx echo.Context, id string) error
+	GetBookByID(ctx echo.Context, id string) error
 	// Update a book by ID
 	// (PUT /books/{id})
-	PutBooksId(ctx echo.Context, id string) error
+	UpdateBookByID(ctx echo.Context, id string) error
 }
 
 // ServerInterfaceWrapper converts echo contexts to parameters.
@@ -200,8 +200,8 @@ func (w *ServerInterfaceWrapper) GetBooksSearch(ctx echo.Context) error {
 	return err
 }
 
-// DeleteBooksId converts echo context to params.
-func (w *ServerInterfaceWrapper) DeleteBooksId(ctx echo.Context) error {
+// DeleteBookByID converts echo context to params.
+func (w *ServerInterfaceWrapper) DeleteBookByID(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "id" -------------
 	var id string
@@ -212,12 +212,12 @@ func (w *ServerInterfaceWrapper) DeleteBooksId(ctx echo.Context) error {
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.DeleteBooksId(ctx, id)
+	err = w.Handler.DeleteBookByID(ctx, id)
 	return err
 }
 
-// GetBooksId converts echo context to params.
-func (w *ServerInterfaceWrapper) GetBooksId(ctx echo.Context) error {
+// GetBookByID converts echo context to params.
+func (w *ServerInterfaceWrapper) GetBookByID(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "id" -------------
 	var id string
@@ -228,12 +228,12 @@ func (w *ServerInterfaceWrapper) GetBooksId(ctx echo.Context) error {
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetBooksId(ctx, id)
+	err = w.Handler.GetBookByID(ctx, id)
 	return err
 }
 
-// PutBooksId converts echo context to params.
-func (w *ServerInterfaceWrapper) PutBooksId(ctx echo.Context) error {
+// UpdateBookByID converts echo context to params.
+func (w *ServerInterfaceWrapper) UpdateBookByID(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "id" -------------
 	var id string
@@ -244,7 +244,7 @@ func (w *ServerInterfaceWrapper) PutBooksId(ctx echo.Context) error {
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.PutBooksId(ctx, id)
+	err = w.Handler.UpdateBookByID(ctx, id)
 	return err
 }
 
@@ -279,32 +279,32 @@ func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL 
 	router.GET(baseURL+"/books", wrapper.GetBooks)
 	router.POST(baseURL+"/books", wrapper.PostBooks)
 	router.GET(baseURL+"/books/search", wrapper.GetBooksSearch)
-	router.DELETE(baseURL+"/books/:id", wrapper.DeleteBooksId)
-	router.GET(baseURL+"/books/:id", wrapper.GetBooksId)
-	router.PUT(baseURL+"/books/:id", wrapper.PutBooksId)
+	router.DELETE(baseURL+"/books/:id", wrapper.DeleteBookByID)
+	router.GET(baseURL+"/books/:id", wrapper.GetBookByID)
+	router.PUT(baseURL+"/books/:id", wrapper.UpdateBookByID)
 
 }
 
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
+	"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",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

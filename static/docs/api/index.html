@@ -960,20 +960,20 @@ ul.nav-tabs {
                     <li data-group="Default" data-name="booksGet" class="">
                       <a href="#api-Default-booksGet">booksGet</a>
                     </li>
-                    <li data-group="Default" data-name="booksIdDelete" class="">
-                      <a href="#api-Default-booksIdDelete">booksIdDelete</a>
-                    </li>
-                    <li data-group="Default" data-name="booksIdGet" class="">
-                      <a href="#api-Default-booksIdGet">booksIdGet</a>
-                    </li>
-                    <li data-group="Default" data-name="booksIdPut" class="">
-                      <a href="#api-Default-booksIdPut">booksIdPut</a>
-                    </li>
                     <li data-group="Default" data-name="booksPost" class="">
                       <a href="#api-Default-booksPost">booksPost</a>
                     </li>
                     <li data-group="Default" data-name="booksSearchGet" class="">
                       <a href="#api-Default-booksSearchGet">booksSearchGet</a>
+                    </li>
+                    <li data-group="Default" data-name="deleteBookByID" class="">
+                      <a href="#api-Default-deleteBookByID">deleteBookByID</a>
+                    </li>
+                    <li data-group="Default" data-name="getBookByID" class="">
+                      <a href="#api-Default-getBookByID">getBookByID</a>
+                    </li>
+                    <li data-group="Default" data-name="updateBookByID" class="">
+                      <a href="#api-Default-updateBookByID">updateBookByID</a>
                     </li>
           </ul>
         </nav>
@@ -1378,1236 +1378,6 @@ Maximum number of items to return
                                     </script>
                                   </div>
                                   <input id='responses-Default-booksGet-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-Default-booksIdDelete">
-                      <article id="api-Default-booksIdDelete-0" data-group="User" data-name="booksIdDelete" data-version="0">
-                        <div class="pull-left">
-                          <h1>booksIdDelete</h1>
-                          <p>Delete a book by ID</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked"></p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/books/{id}</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Default-booksIdDelete-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Default-booksIdDelete-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Default-booksIdDelete-0-dart">Dart</a></li>
-                          <li class=""><a href="#examples-Default-booksIdDelete-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Default-booksIdDelete-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Default-booksIdDelete-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Default-booksIdDelete-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Default-booksIdDelete-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Default-booksIdDelete-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Default-booksIdDelete-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Default-booksIdDelete-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Default-booksIdDelete-0-python">Python</a></li>
-                          <li class=""><a href="#examples-Default-booksIdDelete-0-rust">Rust</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Default-booksIdDelete-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X DELETE \
- -H "Accept: application/json" \
- "https://anybook.online/api/v1/books/{id}"
-</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-Default-booksIdDelete-0-java">
-                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.model.*;
-import org.openapitools.client.api.DefaultApi;
-
-import java.io.File;
-import java.util.*;
-
-public class DefaultApiExample {
-    public static void main(String[] args) {
-
-        // Create an instance of the API class
-        DefaultApi apiInstance = new DefaultApi();
-        String id = id_example; // String | ID of the book to perform operation on
-
-        try {
-            apiInstance.booksIdDelete(id);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#booksIdDelete");
-            e.printStackTrace();
-        }
-    }
-}
-</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Default-booksIdDelete-0-dart">
-                            <pre class="prettyprint"><code class="language-dart">import 'package:openapi/api.dart';
-
-final api_instance = DefaultApi();
-
-final String id = new String(); // String | ID of the book to perform operation on
-
-try {
-    final result = await api_instance.booksIdDelete(id);
-    print(result);
-} catch (e) {
-    print('Exception when calling DefaultApi->booksIdDelete: $e\n');
-}
-
-</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Default-booksIdDelete-0-android">
-                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.DefaultApi;
-
-public class DefaultApiExample {
-    public static void main(String[] args) {
-        DefaultApi apiInstance = new DefaultApi();
-        String id = id_example; // String | ID of the book to perform operation on
-
-        try {
-            apiInstance.booksIdDelete(id);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#booksIdDelete");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-Default-booksIdDelete-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-Default-booksIdDelete-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">
-
-// Create an instance of the API class
-DefaultApi *apiInstance = [[DefaultApi alloc] init];
-String *id = id_example; // ID of the book to perform operation on (default to null)
-
-// Delete a book by ID
-[apiInstance booksIdDeleteWith:id
-              completionHandler: ^(NSError* error) {
-    if (error) {
-        NSLog(@"Error: %@", error);
-    }
-}];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Default-booksIdDelete-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var BooksManagementApi = require('books_management_api');
-
-// Create an instance of the API class
-var api = new BooksManagementApi.DefaultApi()
-var id = id_example; // {String} ID of the book to perform operation on
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.booksIdDelete(id, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-Default-booksIdDelete-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-Default-booksIdDelete-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
-
-namespace Example
-{
-    public class booksIdDeleteExample
-    {
-        public void main()
-        {
-
-            // Create an instance of the API class
-            var apiInstance = new DefaultApi();
-            var id = id_example;  // String | ID of the book to perform operation on (default to null)
-
-            try {
-                // Delete a book by ID
-                apiInstance.booksIdDelete(id);
-            } catch (Exception e) {
-                Debug.Print("Exception when calling DefaultApi.booksIdDelete: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Default-booksIdDelete-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Create an instance of the API class
-$api_instance = new OpenAPITools\Client\Api\DefaultApi();
-$id = id_example; // String | ID of the book to perform operation on
-
-try {
-    $api_instance->booksIdDelete($id);
-} catch (Exception $e) {
-    echo 'Exception when calling DefaultApi->booksIdDelete: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Default-booksIdDelete-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::OPenAPIClient::Configuration;
-use WWW::OPenAPIClient::DefaultApi;
-
-# Create an instance of the API class
-my $api_instance = WWW::OPenAPIClient::DefaultApi->new();
-my $id = id_example; # String | ID of the book to perform operation on
-
-eval {
-    $api_instance->booksIdDelete(id => $id);
-};
-if ($@) {
-    warn "Exception when calling DefaultApi->booksIdDelete: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Default-booksIdDelete-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import openapi_client
-from openapi_client.rest import ApiException
-from pprint import pprint
-
-# Create an instance of the API class
-api_instance = openapi_client.DefaultApi()
-id = id_example # String | ID of the book to perform operation on (default to null)
-
-try:
-    # Delete a book by ID
-    api_instance.books_id_delete(id)
-except ApiException as e:
-    print("Exception when calling DefaultApi->booksIdDelete: %s\n" % e)</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Default-booksIdDelete-0-rust">
-                              <pre class="prettyprint"><code class="language-rust">extern crate DefaultApi;
-
-pub fn main() {
-    let id = id_example; // String
-
-    let mut context = DefaultApi::Context::default();
-    let result = client.booksIdDelete(id, &context).wait();
-
-    println!("{:?}", result);
-}
-</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Scopes</h2>
-                          <table>
-                            
-                          </table>
-
-                          <h2>Parameters</h2>
-
-                            <div class="methodsubtabletitle">Path parameters</div>
-                            <table id="methodsubtable">
-                                <tr>
-                                  <th width="150px">Name</th>
-                                  <th>Description</th>
-                                </tr>
-                                  <tr><td style="width:150px;">id*</td>
-<td>
-
-
-    <div id="d2e199_booksIdDelete_id">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-ID of the book to perform operation on
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
-
-
-
-
-
-                          <h2>Responses</h2>
-                            <h3 id="examples-Default-booksIdDelete-title-204"></h3>
-                            <p id="examples-Default-booksIdDelete-description-204" class="marked"></p>
-                            <script>
-                              var responseDefault204_description = `Book deleted successfully`;
-                              var responseDefault204_description_break = responseDefault204_description.indexOf('\n');
-                              if (responseDefault204_description_break == -1) {
-                                $("#examples-Default-booksIdDelete-title-204").text("Status: 204 - " + responseDefault204_description);
-                              } else {
-                                $("#examples-Default-booksIdDelete-title-204").text("Status: 204 - " + responseDefault204_description.substring(0, responseDefault204_description_break));
-                                $("#examples-Default-booksIdDelete-description-204").html(responseDefault204_description.substring(responseDefault204_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-Default-booksIdDelete-204" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-Default-booksIdDelete-204-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                            <h3 id="examples-Default-booksIdDelete-title-404"></h3>
-                            <p id="examples-Default-booksIdDelete-description-404" class="marked"></p>
-                            <script>
-                              var responseDefault404_description = `Book not found`;
-                              var responseDefault404_description_break = responseDefault404_description.indexOf('\n');
-                              if (responseDefault404_description_break == -1) {
-                                $("#examples-Default-booksIdDelete-title-404").text("Status: 404 - " + responseDefault404_description);
-                              } else {
-                                $("#examples-Default-booksIdDelete-title-404").text("Status: 404 - " + responseDefault404_description.substring(0, responseDefault404_description_break));
-                                $("#examples-Default-booksIdDelete-description-404").html(responseDefault404_description.substring(responseDefault404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-Default-booksIdDelete-404" class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-Default-booksIdDelete-404-schema">Schema</a>
-                                </li>
-
-
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-Default-booksIdDelete-404-wrapper" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-Default-booksIdDelete-404-schema">
-                                  <div id="responses-Default-booksIdDelete-schema-404" class="exampleStyle">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = ;
-                                        var schema = findNode('schema',schemaWrapper).schema;
-                                        if (!schema) {
-                                          schema = schemaWrapper.schema;
-                                        }
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                          Object.keys(schema.properties).forEach( (item) => {
-                                            if (schema.properties[item].$ref != null) {
-                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
-                                            }
-                                          });
-                                        } else if (schema.items != null && schema.items.$ref != null) {
-                                            schema.items = defsParser.$refs.get(schema.items.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-Default-booksIdDelete-404-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-Default-booksIdDelete-schema-404');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-Default-booksIdDelete-404-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-Default-booksIdGet">
-                      <article id="api-Default-booksIdGet-0" data-group="User" data-name="booksIdGet" data-version="0">
-                        <div class="pull-left">
-                          <h1>booksIdGet</h1>
-                          <p>Get a book by ID</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked"></p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/books/{id}</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Default-booksIdGet-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Default-booksIdGet-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Default-booksIdGet-0-dart">Dart</a></li>
-                          <li class=""><a href="#examples-Default-booksIdGet-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Default-booksIdGet-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Default-booksIdGet-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Default-booksIdGet-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Default-booksIdGet-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Default-booksIdGet-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Default-booksIdGet-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Default-booksIdGet-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Default-booksIdGet-0-python">Python</a></li>
-                          <li class=""><a href="#examples-Default-booksIdGet-0-rust">Rust</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Default-booksIdGet-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET \
- -H "Accept: application/json" \
- "https://anybook.online/api/v1/books/{id}"
-</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-Default-booksIdGet-0-java">
-                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.model.*;
-import org.openapitools.client.api.DefaultApi;
-
-import java.io.File;
-import java.util.*;
-
-public class DefaultApiExample {
-    public static void main(String[] args) {
-
-        // Create an instance of the API class
-        DefaultApi apiInstance = new DefaultApi();
-        String id = id_example; // String | ID of the book to perform operation on
-
-        try {
-            Book result = apiInstance.booksIdGet(id);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#booksIdGet");
-            e.printStackTrace();
-        }
-    }
-}
-</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Default-booksIdGet-0-dart">
-                            <pre class="prettyprint"><code class="language-dart">import 'package:openapi/api.dart';
-
-final api_instance = DefaultApi();
-
-final String id = new String(); // String | ID of the book to perform operation on
-
-try {
-    final result = await api_instance.booksIdGet(id);
-    print(result);
-} catch (e) {
-    print('Exception when calling DefaultApi->booksIdGet: $e\n');
-}
-
-</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Default-booksIdGet-0-android">
-                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.DefaultApi;
-
-public class DefaultApiExample {
-    public static void main(String[] args) {
-        DefaultApi apiInstance = new DefaultApi();
-        String id = id_example; // String | ID of the book to perform operation on
-
-        try {
-            Book result = apiInstance.booksIdGet(id);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#booksIdGet");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-Default-booksIdGet-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-Default-booksIdGet-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">
-
-// Create an instance of the API class
-DefaultApi *apiInstance = [[DefaultApi alloc] init];
-String *id = id_example; // ID of the book to perform operation on (default to null)
-
-// Get a book by ID
-[apiInstance booksIdGetWith:id
-              completionHandler: ^(Book output, NSError* error) {
-    if (output) {
-        NSLog(@"%@", output);
-    }
-    if (error) {
-        NSLog(@"Error: %@", error);
-    }
-}];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Default-booksIdGet-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var BooksManagementApi = require('books_management_api');
-
-// Create an instance of the API class
-var api = new BooksManagementApi.DefaultApi()
-var id = id_example; // {String} ID of the book to perform operation on
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.booksIdGet(id, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-Default-booksIdGet-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-Default-booksIdGet-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
-
-namespace Example
-{
-    public class booksIdGetExample
-    {
-        public void main()
-        {
-
-            // Create an instance of the API class
-            var apiInstance = new DefaultApi();
-            var id = id_example;  // String | ID of the book to perform operation on (default to null)
-
-            try {
-                // Get a book by ID
-                Book result = apiInstance.booksIdGet(id);
-                Debug.WriteLine(result);
-            } catch (Exception e) {
-                Debug.Print("Exception when calling DefaultApi.booksIdGet: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Default-booksIdGet-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Create an instance of the API class
-$api_instance = new OpenAPITools\Client\Api\DefaultApi();
-$id = id_example; // String | ID of the book to perform operation on
-
-try {
-    $result = $api_instance->booksIdGet($id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling DefaultApi->booksIdGet: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Default-booksIdGet-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::OPenAPIClient::Configuration;
-use WWW::OPenAPIClient::DefaultApi;
-
-# Create an instance of the API class
-my $api_instance = WWW::OPenAPIClient::DefaultApi->new();
-my $id = id_example; # String | ID of the book to perform operation on
-
-eval {
-    my $result = $api_instance->booksIdGet(id => $id);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling DefaultApi->booksIdGet: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Default-booksIdGet-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import openapi_client
-from openapi_client.rest import ApiException
-from pprint import pprint
-
-# Create an instance of the API class
-api_instance = openapi_client.DefaultApi()
-id = id_example # String | ID of the book to perform operation on (default to null)
-
-try:
-    # Get a book by ID
-    api_response = api_instance.books_id_get(id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling DefaultApi->booksIdGet: %s\n" % e)</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Default-booksIdGet-0-rust">
-                              <pre class="prettyprint"><code class="language-rust">extern crate DefaultApi;
-
-pub fn main() {
-    let id = id_example; // String
-
-    let mut context = DefaultApi::Context::default();
-    let result = client.booksIdGet(id, &context).wait();
-
-    println!("{:?}", result);
-}
-</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Scopes</h2>
-                          <table>
-                            
-                          </table>
-
-                          <h2>Parameters</h2>
-
-                            <div class="methodsubtabletitle">Path parameters</div>
-                            <table id="methodsubtable">
-                                <tr>
-                                  <th width="150px">Name</th>
-                                  <th>Description</th>
-                                </tr>
-                                  <tr><td style="width:150px;">id*</td>
-<td>
-
-
-    <div id="d2e199_booksIdGet_id">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-ID of the book to perform operation on
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
-
-
-
-
-
-                          <h2>Responses</h2>
-                            <h3 id="examples-Default-booksIdGet-title-200"></h3>
-                            <p id="examples-Default-booksIdGet-description-200" class="marked"></p>
-                            <script>
-                              var responseDefault200_description = `The requested book`;
-                              var responseDefault200_description_break = responseDefault200_description.indexOf('\n');
-                              if (responseDefault200_description_break == -1) {
-                                $("#examples-Default-booksIdGet-title-200").text("Status: 200 - " + responseDefault200_description);
-                              } else {
-                                $("#examples-Default-booksIdGet-title-200").text("Status: 200 - " + responseDefault200_description.substring(0, responseDefault200_description_break));
-                                $("#examples-Default-booksIdGet-description-200").html(responseDefault200_description.substring(responseDefault200_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-Default-booksIdGet-200" class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-Default-booksIdGet-200-schema">Schema</a>
-                                </li>
-
-
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-Default-booksIdGet-200-wrapper" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-Default-booksIdGet-200-schema">
-                                  <div id="responses-Default-booksIdGet-schema-200" class="exampleStyle">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = ;
-                                        var schema = findNode('schema',schemaWrapper).schema;
-                                        if (!schema) {
-                                          schema = schemaWrapper.schema;
-                                        }
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                          Object.keys(schema.properties).forEach( (item) => {
-                                            if (schema.properties[item].$ref != null) {
-                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
-                                            }
-                                          });
-                                        } else if (schema.items != null && schema.items.$ref != null) {
-                                            schema.items = defsParser.$refs.get(schema.items.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-Default-booksIdGet-200-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-Default-booksIdGet-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-Default-booksIdGet-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-                            <h3 id="examples-Default-booksIdGet-title-404"></h3>
-                            <p id="examples-Default-booksIdGet-description-404" class="marked"></p>
-                            <script>
-                              var responseDefault404_description = `Book not found`;
-                              var responseDefault404_description_break = responseDefault404_description.indexOf('\n');
-                              if (responseDefault404_description_break == -1) {
-                                $("#examples-Default-booksIdGet-title-404").text("Status: 404 - " + responseDefault404_description);
-                              } else {
-                                $("#examples-Default-booksIdGet-title-404").text("Status: 404 - " + responseDefault404_description.substring(0, responseDefault404_description_break));
-                                $("#examples-Default-booksIdGet-description-404").html(responseDefault404_description.substring(responseDefault404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-Default-booksIdGet-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-Default-booksIdGet-404-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-Default-booksIdPut">
-                      <article id="api-Default-booksIdPut-0" data-group="User" data-name="booksIdPut" data-version="0">
-                        <div class="pull-left">
-                          <h1>booksIdPut</h1>
-                          <p>Update a book by ID</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked"></p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/books/{id}</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Default-booksIdPut-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Default-booksIdPut-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Default-booksIdPut-0-dart">Dart</a></li>
-                          <li class=""><a href="#examples-Default-booksIdPut-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Default-booksIdPut-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Default-booksIdPut-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Default-booksIdPut-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Default-booksIdPut-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Default-booksIdPut-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Default-booksIdPut-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Default-booksIdPut-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Default-booksIdPut-0-python">Python</a></li>
-                          <li class=""><a href="#examples-Default-booksIdPut-0-rust">Rust</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Default-booksIdPut-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X PUT \
- -H "Accept: application/json" \
- -H "Content-Type: application/json" \
- "https://anybook.online/api/v1/books/{id}" \
- -d '{
-  &quot;summary&quot; : &quot;summary&quot;,
-  &quot;featured&quot; : true,
-  &quot;image_link&quot; : &quot;image_link&quot;,
-  &quot;author&quot; : &quot;author&quot;,
-  &quot;description&quot; : &quot;description&quot;,
-  &quot;id&quot; : &quot;id&quot;,
-  &quot;title&quot; : &quot;title&quot;,
-  &quot;category&quot; : &quot;category&quot;
-}'
-</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-Default-booksIdPut-0-java">
-                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.model.*;
-import org.openapitools.client.api.DefaultApi;
-
-import java.io.File;
-import java.util.*;
-
-public class DefaultApiExample {
-    public static void main(String[] args) {
-
-        // Create an instance of the API class
-        DefaultApi apiInstance = new DefaultApi();
-        String id = id_example; // String | ID of the book to perform operation on
-        Book book = ; // Book | 
-
-        try {
-            Book result = apiInstance.booksIdPut(id, book);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#booksIdPut");
-            e.printStackTrace();
-        }
-    }
-}
-</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Default-booksIdPut-0-dart">
-                            <pre class="prettyprint"><code class="language-dart">import 'package:openapi/api.dart';
-
-final api_instance = DefaultApi();
-
-final String id = new String(); // String | ID of the book to perform operation on
-final Book book = new Book(); // Book | 
-
-try {
-    final result = await api_instance.booksIdPut(id, book);
-    print(result);
-} catch (e) {
-    print('Exception when calling DefaultApi->booksIdPut: $e\n');
-}
-
-</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Default-booksIdPut-0-android">
-                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.DefaultApi;
-
-public class DefaultApiExample {
-    public static void main(String[] args) {
-        DefaultApi apiInstance = new DefaultApi();
-        String id = id_example; // String | ID of the book to perform operation on
-        Book book = ; // Book | 
-
-        try {
-            Book result = apiInstance.booksIdPut(id, book);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#booksIdPut");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-Default-booksIdPut-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-Default-booksIdPut-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">
-
-// Create an instance of the API class
-DefaultApi *apiInstance = [[DefaultApi alloc] init];
-String *id = id_example; // ID of the book to perform operation on (default to null)
-Book *book = ; // 
-
-// Update a book by ID
-[apiInstance booksIdPutWith:id
-    book:book
-              completionHandler: ^(Book output, NSError* error) {
-    if (output) {
-        NSLog(@"%@", output);
-    }
-    if (error) {
-        NSLog(@"Error: %@", error);
-    }
-}];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Default-booksIdPut-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var BooksManagementApi = require('books_management_api');
-
-// Create an instance of the API class
-var api = new BooksManagementApi.DefaultApi()
-var id = id_example; // {String} ID of the book to perform operation on
-var book = ; // {Book} 
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.booksIdPut(id, book, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-Default-booksIdPut-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-Default-booksIdPut-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using Org.OpenAPITools.Api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
-
-namespace Example
-{
-    public class booksIdPutExample
-    {
-        public void main()
-        {
-
-            // Create an instance of the API class
-            var apiInstance = new DefaultApi();
-            var id = id_example;  // String | ID of the book to perform operation on (default to null)
-            var book = new Book(); // Book | 
-
-            try {
-                // Update a book by ID
-                Book result = apiInstance.booksIdPut(id, book);
-                Debug.WriteLine(result);
-            } catch (Exception e) {
-                Debug.Print("Exception when calling DefaultApi.booksIdPut: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Default-booksIdPut-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Create an instance of the API class
-$api_instance = new OpenAPITools\Client\Api\DefaultApi();
-$id = id_example; // String | ID of the book to perform operation on
-$book = ; // Book | 
-
-try {
-    $result = $api_instance->booksIdPut($id, $book);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling DefaultApi->booksIdPut: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Default-booksIdPut-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::OPenAPIClient::Configuration;
-use WWW::OPenAPIClient::DefaultApi;
-
-# Create an instance of the API class
-my $api_instance = WWW::OPenAPIClient::DefaultApi->new();
-my $id = id_example; # String | ID of the book to perform operation on
-my $book = WWW::OPenAPIClient::Object::Book->new(); # Book | 
-
-eval {
-    my $result = $api_instance->booksIdPut(id => $id, book => $book);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling DefaultApi->booksIdPut: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Default-booksIdPut-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import openapi_client
-from openapi_client.rest import ApiException
-from pprint import pprint
-
-# Create an instance of the API class
-api_instance = openapi_client.DefaultApi()
-id = id_example # String | ID of the book to perform operation on (default to null)
-book =  # Book | 
-
-try:
-    # Update a book by ID
-    api_response = api_instance.books_id_put(id, book)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling DefaultApi->booksIdPut: %s\n" % e)</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Default-booksIdPut-0-rust">
-                              <pre class="prettyprint"><code class="language-rust">extern crate DefaultApi;
-
-pub fn main() {
-    let id = id_example; // String
-    let book = ; // Book
-
-    let mut context = DefaultApi::Context::default();
-    let result = client.booksIdPut(id, book, &context).wait();
-
-    println!("{:?}", result);
-}
-</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Scopes</h2>
-                          <table>
-                            
-                          </table>
-
-                          <h2>Parameters</h2>
-
-                            <div class="methodsubtabletitle">Path parameters</div>
-                            <table id="methodsubtable">
-                                <tr>
-                                  <th width="150px">Name</th>
-                                  <th>Description</th>
-                                </tr>
-                                  <tr><td style="width:150px;">id*</td>
-<td>
-
-
-    <div id="d2e199_booksIdPut_id">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-ID of the book to perform operation on
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">book <span style="color:red;">*</span></td>
-<td>
-<p class="marked"></p>
-<script>
-$(document).ready(function() {
-  var schemaWrapper = {
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/Book"
-      }
-    }
-  },
-  "required" : true
-};
-
-  var schema = findNode('schema',schemaWrapper).schema;
-  if (!schema) {
-    schema = schemaWrapper.schema;
-  }
-  if (schema.$ref != null) {
-    schema = defsParser.$refs.get(schema.$ref);
-  } else {
-    schemaWrapper.definitions = Object.assign({}, defs);
-    $RefParser.dereference(schemaWrapper).catch(function(err) {
-      console.log(err);
-    });
-  }
-
-  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_booksIdPut_book');
-  result.empty();
-  result.append(view.render());
-});
-</script>
-<div id="d2e199_booksIdPut_book"></div>
-</td>
-</tr>
-
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3 id="examples-Default-booksIdPut-title-200"></h3>
-                            <p id="examples-Default-booksIdPut-description-200" class="marked"></p>
-                            <script>
-                              var responseDefault200_description = `The updated book`;
-                              var responseDefault200_description_break = responseDefault200_description.indexOf('\n');
-                              if (responseDefault200_description_break == -1) {
-                                $("#examples-Default-booksIdPut-title-200").text("Status: 200 - " + responseDefault200_description);
-                              } else {
-                                $("#examples-Default-booksIdPut-title-200").text("Status: 200 - " + responseDefault200_description.substring(0, responseDefault200_description_break));
-                                $("#examples-Default-booksIdPut-description-200").html(responseDefault200_description.substring(responseDefault200_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-Default-booksIdPut-200" class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-Default-booksIdPut-200-schema">Schema</a>
-                                </li>
-
-
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-Default-booksIdPut-200-wrapper" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-Default-booksIdPut-200-schema">
-                                  <div id="responses-Default-booksIdPut-schema-200" class="exampleStyle">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = ;
-                                        var schema = findNode('schema',schemaWrapper).schema;
-                                        if (!schema) {
-                                          schema = schemaWrapper.schema;
-                                        }
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                          Object.keys(schema.properties).forEach( (item) => {
-                                            if (schema.properties[item].$ref != null) {
-                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
-                                            }
-                                          });
-                                        } else if (schema.items != null && schema.items.$ref != null) {
-                                            schema.items = defsParser.$refs.get(schema.items.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-Default-booksIdPut-200-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-Default-booksIdPut-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-Default-booksIdPut-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-                            <h3 id="examples-Default-booksIdPut-title-404"></h3>
-                            <p id="examples-Default-booksIdPut-description-404" class="marked"></p>
-                            <script>
-                              var responseDefault404_description = `Book not found`;
-                              var responseDefault404_description_break = responseDefault404_description.indexOf('\n');
-                              if (responseDefault404_description_break == -1) {
-                                $("#examples-Default-booksIdPut-title-404").text("Status: 404 - " + responseDefault404_description);
-                              } else {
-                                $("#examples-Default-booksIdPut-title-404").text("Status: 404 - " + responseDefault404_description.substring(0, responseDefault404_description_break));
-                                $("#examples-Default-booksIdPut-description-404").html(responseDefault404_description.substring(responseDefault404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-Default-booksIdPut-404" class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-Default-booksIdPut-404-schema">Schema</a>
-                                </li>
-
-
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-Default-booksIdPut-404-wrapper" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-Default-booksIdPut-404-schema">
-                                  <div id="responses-Default-booksIdPut-schema-404" class="exampleStyle">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = ;
-                                        var schema = findNode('schema',schemaWrapper).schema;
-                                        if (!schema) {
-                                          schema = schemaWrapper.schema;
-                                        }
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                          Object.keys(schema.properties).forEach( (item) => {
-                                            if (schema.properties[item].$ref != null) {
-                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
-                                            }
-                                          });
-                                        } else if (schema.items != null && schema.items.$ref != null) {
-                                            schema.items = defsParser.$refs.get(schema.items.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-Default-booksIdPut-404-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-Default-booksIdPut-schema-404');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-Default-booksIdPut-404-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
                         </article>
@@ -3406,6 +2176,1236 @@ Maximum number of items to return
                                     </script>
                                   </div>
                                   <input id='responses-Default-booksSearchGet-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-deleteBookByID">
+                      <article id="api-Default-deleteBookByID-0" data-group="User" data-name="deleteBookByID" data-version="0">
+                        <div class="pull-left">
+                          <h1>deleteBookByID</h1>
+                          <p>Delete a book by ID</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/books/{id}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-deleteBookByID-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-deleteBookByID-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-deleteBookByID-0-dart">Dart</a></li>
+                          <li class=""><a href="#examples-Default-deleteBookByID-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-deleteBookByID-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-deleteBookByID-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-deleteBookByID-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-deleteBookByID-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-deleteBookByID-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-deleteBookByID-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-deleteBookByID-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-deleteBookByID-0-python">Python</a></li>
+                          <li class=""><a href="#examples-Default-deleteBookByID-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-deleteBookByID-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X DELETE \
+ -H "Accept: application/json" \
+ "https://anybook.online/api/v1/books/{id}"
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-deleteBookByID-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        DefaultApi apiInstance = new DefaultApi();
+        String id = id_example; // String | ID of the book to perform operation on
+
+        try {
+            apiInstance.deleteBookByID(id);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#deleteBookByID");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-deleteBookByID-0-dart">
+                            <pre class="prettyprint"><code class="language-dart">import 'package:openapi/api.dart';
+
+final api_instance = DefaultApi();
+
+final String id = new String(); // String | ID of the book to perform operation on
+
+try {
+    final result = await api_instance.deleteBookByID(id);
+    print(result);
+} catch (e) {
+    print('Exception when calling DefaultApi->deleteBookByID: $e\n');
+}
+
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-deleteBookByID-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.DefaultApi;
+
+public class DefaultApiExample {
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        String id = id_example; // String | ID of the book to perform operation on
+
+        try {
+            apiInstance.deleteBookByID(id);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#deleteBookByID");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-deleteBookByID-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-deleteBookByID-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+String *id = id_example; // ID of the book to perform operation on (default to null)
+
+// Delete a book by ID
+[apiInstance deleteBookByIDWith:id
+              completionHandler: ^(NSError* error) {
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-deleteBookByID-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var BooksManagementApi = require('books_management_api');
+
+// Create an instance of the API class
+var api = new BooksManagementApi.DefaultApi()
+var id = id_example; // {String} ID of the book to perform operation on
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+api.deleteBookByID(id, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-deleteBookByID-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-deleteBookByID-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class deleteBookByIDExample
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new DefaultApi();
+            var id = id_example;  // String | ID of the book to perform operation on (default to null)
+
+            try {
+                // Delete a book by ID
+                apiInstance.deleteBookByID(id);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling DefaultApi.deleteBookByID: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-deleteBookByID-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\DefaultApi();
+$id = id_example; // String | ID of the book to perform operation on
+
+try {
+    $api_instance->deleteBookByID($id);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->deleteBookByID: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-deleteBookByID-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::DefaultApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::DefaultApi->new();
+my $id = id_example; # String | ID of the book to perform operation on
+
+eval {
+    $api_instance->deleteBookByID(id => $id);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->deleteBookByID: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-deleteBookByID-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.DefaultApi()
+id = id_example # String | ID of the book to perform operation on (default to null)
+
+try:
+    # Delete a book by ID
+    api_instance.delete_book_by_id(id)
+except ApiException as e:
+    print("Exception when calling DefaultApi->deleteBookByID: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-deleteBookByID-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate DefaultApi;
+
+pub fn main() {
+    let id = id_example; // String
+
+    let mut context = DefaultApi::Context::default();
+    let result = client.deleteBookByID(id, &context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">id*</td>
+<td>
+
+
+    <div id="d2e199_deleteBookByID_id">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+ID of the book to perform operation on
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-Default-deleteBookByID-title-204"></h3>
+                            <p id="examples-Default-deleteBookByID-description-204" class="marked"></p>
+                            <script>
+                              var responseDefault204_description = `Book deleted successfully`;
+                              var responseDefault204_description_break = responseDefault204_description.indexOf('\n');
+                              if (responseDefault204_description_break == -1) {
+                                $("#examples-Default-deleteBookByID-title-204").text("Status: 204 - " + responseDefault204_description);
+                              } else {
+                                $("#examples-Default-deleteBookByID-title-204").text("Status: 204 - " + responseDefault204_description.substring(0, responseDefault204_description_break));
+                                $("#examples-Default-deleteBookByID-description-204").html(responseDefault204_description.substring(responseDefault204_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Default-deleteBookByID-204" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Default-deleteBookByID-204-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-Default-deleteBookByID-title-404"></h3>
+                            <p id="examples-Default-deleteBookByID-description-404" class="marked"></p>
+                            <script>
+                              var responseDefault404_description = `Book not found`;
+                              var responseDefault404_description_break = responseDefault404_description.indexOf('\n');
+                              if (responseDefault404_description_break == -1) {
+                                $("#examples-Default-deleteBookByID-title-404").text("Status: 404 - " + responseDefault404_description);
+                              } else {
+                                $("#examples-Default-deleteBookByID-title-404").text("Status: 404 - " + responseDefault404_description.substring(0, responseDefault404_description_break));
+                                $("#examples-Default-deleteBookByID-description-404").html(responseDefault404_description.substring(responseDefault404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Default-deleteBookByID-404" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Default-deleteBookByID-404-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Default-deleteBookByID-404-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Default-deleteBookByID-404-schema">
+                                  <div id="responses-Default-deleteBookByID-schema-404" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = ;
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Default-deleteBookByID-404-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Default-deleteBookByID-schema-404');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Default-deleteBookByID-404-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-getBookByID">
+                      <article id="api-Default-getBookByID-0" data-group="User" data-name="getBookByID" data-version="0">
+                        <div class="pull-left">
+                          <h1>getBookByID</h1>
+                          <p>Get a book by ID</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/books/{id}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-getBookByID-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-getBookByID-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-getBookByID-0-dart">Dart</a></li>
+                          <li class=""><a href="#examples-Default-getBookByID-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-getBookByID-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-getBookByID-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-getBookByID-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-getBookByID-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-getBookByID-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-getBookByID-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-getBookByID-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-getBookByID-0-python">Python</a></li>
+                          <li class=""><a href="#examples-Default-getBookByID-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-getBookByID-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET \
+ -H "Accept: application/json" \
+ "https://anybook.online/api/v1/books/{id}"
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-getBookByID-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        DefaultApi apiInstance = new DefaultApi();
+        String id = id_example; // String | ID of the book to perform operation on
+
+        try {
+            Book result = apiInstance.getBookByID(id);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#getBookByID");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-getBookByID-0-dart">
+                            <pre class="prettyprint"><code class="language-dart">import 'package:openapi/api.dart';
+
+final api_instance = DefaultApi();
+
+final String id = new String(); // String | ID of the book to perform operation on
+
+try {
+    final result = await api_instance.getBookByID(id);
+    print(result);
+} catch (e) {
+    print('Exception when calling DefaultApi->getBookByID: $e\n');
+}
+
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-getBookByID-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.DefaultApi;
+
+public class DefaultApiExample {
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        String id = id_example; // String | ID of the book to perform operation on
+
+        try {
+            Book result = apiInstance.getBookByID(id);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#getBookByID");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-getBookByID-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-getBookByID-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+String *id = id_example; // ID of the book to perform operation on (default to null)
+
+// Get a book by ID
+[apiInstance getBookByIDWith:id
+              completionHandler: ^(Book output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-getBookByID-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var BooksManagementApi = require('books_management_api');
+
+// Create an instance of the API class
+var api = new BooksManagementApi.DefaultApi()
+var id = id_example; // {String} ID of the book to perform operation on
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.getBookByID(id, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-getBookByID-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-getBookByID-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class getBookByIDExample
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new DefaultApi();
+            var id = id_example;  // String | ID of the book to perform operation on (default to null)
+
+            try {
+                // Get a book by ID
+                Book result = apiInstance.getBookByID(id);
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling DefaultApi.getBookByID: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-getBookByID-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\DefaultApi();
+$id = id_example; // String | ID of the book to perform operation on
+
+try {
+    $result = $api_instance->getBookByID($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->getBookByID: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-getBookByID-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::DefaultApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::DefaultApi->new();
+my $id = id_example; # String | ID of the book to perform operation on
+
+eval {
+    my $result = $api_instance->getBookByID(id => $id);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->getBookByID: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-getBookByID-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.DefaultApi()
+id = id_example # String | ID of the book to perform operation on (default to null)
+
+try:
+    # Get a book by ID
+    api_response = api_instance.get_book_by_id(id)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->getBookByID: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-getBookByID-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate DefaultApi;
+
+pub fn main() {
+    let id = id_example; // String
+
+    let mut context = DefaultApi::Context::default();
+    let result = client.getBookByID(id, &context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">id*</td>
+<td>
+
+
+    <div id="d2e199_getBookByID_id">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+ID of the book to perform operation on
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-Default-getBookByID-title-200"></h3>
+                            <p id="examples-Default-getBookByID-description-200" class="marked"></p>
+                            <script>
+                              var responseDefault200_description = `The requested book`;
+                              var responseDefault200_description_break = responseDefault200_description.indexOf('\n');
+                              if (responseDefault200_description_break == -1) {
+                                $("#examples-Default-getBookByID-title-200").text("Status: 200 - " + responseDefault200_description);
+                              } else {
+                                $("#examples-Default-getBookByID-title-200").text("Status: 200 - " + responseDefault200_description.substring(0, responseDefault200_description_break));
+                                $("#examples-Default-getBookByID-description-200").html(responseDefault200_description.substring(responseDefault200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Default-getBookByID-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Default-getBookByID-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Default-getBookByID-200-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Default-getBookByID-200-schema">
+                                  <div id="responses-Default-getBookByID-schema-200" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = ;
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Default-getBookByID-200-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Default-getBookByID-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Default-getBookByID-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Default-getBookByID-title-404"></h3>
+                            <p id="examples-Default-getBookByID-description-404" class="marked"></p>
+                            <script>
+                              var responseDefault404_description = `Book not found`;
+                              var responseDefault404_description_break = responseDefault404_description.indexOf('\n');
+                              if (responseDefault404_description_break == -1) {
+                                $("#examples-Default-getBookByID-title-404").text("Status: 404 - " + responseDefault404_description);
+                              } else {
+                                $("#examples-Default-getBookByID-title-404").text("Status: 404 - " + responseDefault404_description.substring(0, responseDefault404_description_break));
+                                $("#examples-Default-getBookByID-description-404").html(responseDefault404_description.substring(responseDefault404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Default-getBookByID-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Default-getBookByID-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-updateBookByID">
+                      <article id="api-Default-updateBookByID-0" data-group="User" data-name="updateBookByID" data-version="0">
+                        <div class="pull-left">
+                          <h1>updateBookByID</h1>
+                          <p>Update a book by ID</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/books/{id}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-updateBookByID-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-updateBookByID-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-updateBookByID-0-dart">Dart</a></li>
+                          <li class=""><a href="#examples-Default-updateBookByID-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-updateBookByID-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-updateBookByID-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-updateBookByID-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-updateBookByID-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-updateBookByID-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-updateBookByID-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-updateBookByID-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-updateBookByID-0-python">Python</a></li>
+                          <li class=""><a href="#examples-Default-updateBookByID-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-updateBookByID-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X PUT \
+ -H "Accept: application/json" \
+ -H "Content-Type: application/json" \
+ "https://anybook.online/api/v1/books/{id}" \
+ -d '{
+  &quot;summary&quot; : &quot;summary&quot;,
+  &quot;featured&quot; : true,
+  &quot;image_link&quot; : &quot;image_link&quot;,
+  &quot;author&quot; : &quot;author&quot;,
+  &quot;description&quot; : &quot;description&quot;,
+  &quot;id&quot; : &quot;id&quot;,
+  &quot;title&quot; : &quot;title&quot;,
+  &quot;category&quot; : &quot;category&quot;
+}'
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-updateBookByID-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        DefaultApi apiInstance = new DefaultApi();
+        String id = id_example; // String | ID of the book to perform operation on
+        Book book = ; // Book | 
+
+        try {
+            Book result = apiInstance.updateBookByID(id, book);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#updateBookByID");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-updateBookByID-0-dart">
+                            <pre class="prettyprint"><code class="language-dart">import 'package:openapi/api.dart';
+
+final api_instance = DefaultApi();
+
+final String id = new String(); // String | ID of the book to perform operation on
+final Book book = new Book(); // Book | 
+
+try {
+    final result = await api_instance.updateBookByID(id, book);
+    print(result);
+} catch (e) {
+    print('Exception when calling DefaultApi->updateBookByID: $e\n');
+}
+
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-updateBookByID-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.DefaultApi;
+
+public class DefaultApiExample {
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        String id = id_example; // String | ID of the book to perform operation on
+        Book book = ; // Book | 
+
+        try {
+            Book result = apiInstance.updateBookByID(id, book);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#updateBookByID");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-updateBookByID-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-updateBookByID-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+String *id = id_example; // ID of the book to perform operation on (default to null)
+Book *book = ; // 
+
+// Update a book by ID
+[apiInstance updateBookByIDWith:id
+    book:book
+              completionHandler: ^(Book output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-updateBookByID-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var BooksManagementApi = require('books_management_api');
+
+// Create an instance of the API class
+var api = new BooksManagementApi.DefaultApi()
+var id = id_example; // {String} ID of the book to perform operation on
+var book = ; // {Book} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.updateBookByID(id, book, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-updateBookByID-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-updateBookByID-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class updateBookByIDExample
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new DefaultApi();
+            var id = id_example;  // String | ID of the book to perform operation on (default to null)
+            var book = new Book(); // Book | 
+
+            try {
+                // Update a book by ID
+                Book result = apiInstance.updateBookByID(id, book);
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling DefaultApi.updateBookByID: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-updateBookByID-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\DefaultApi();
+$id = id_example; // String | ID of the book to perform operation on
+$book = ; // Book | 
+
+try {
+    $result = $api_instance->updateBookByID($id, $book);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->updateBookByID: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-updateBookByID-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::DefaultApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::DefaultApi->new();
+my $id = id_example; # String | ID of the book to perform operation on
+my $book = WWW::OPenAPIClient::Object::Book->new(); # Book | 
+
+eval {
+    my $result = $api_instance->updateBookByID(id => $id, book => $book);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->updateBookByID: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-updateBookByID-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.DefaultApi()
+id = id_example # String | ID of the book to perform operation on (default to null)
+book =  # Book | 
+
+try:
+    # Update a book by ID
+    api_response = api_instance.update_book_by_id(id, book)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->updateBookByID: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-updateBookByID-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate DefaultApi;
+
+pub fn main() {
+    let id = id_example; // String
+    let book = ; // Book
+
+    let mut context = DefaultApi::Context::default();
+    let result = client.updateBookByID(id, book, &context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">id*</td>
+<td>
+
+
+    <div id="d2e199_updateBookByID_id">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+ID of the book to perform operation on
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">book <span style="color:red;">*</span></td>
+<td>
+<p class="marked"></p>
+<script>
+$(document).ready(function() {
+  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Book"
+      }
+    }
+  },
+  "required" : true
+};
+
+  var schema = findNode('schema',schemaWrapper).schema;
+  if (!schema) {
+    schema = schemaWrapper.schema;
+  }
+  if (schema.$ref != null) {
+    schema = defsParser.$refs.get(schema.$ref);
+  } else {
+    schemaWrapper.definitions = Object.assign({}, defs);
+    $RefParser.dereference(schemaWrapper).catch(function(err) {
+      console.log(err);
+    });
+  }
+
+  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+  var result = $('#d2e199_updateBookByID_book');
+  result.empty();
+  result.append(view.render());
+});
+</script>
+<div id="d2e199_updateBookByID_book"></div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-Default-updateBookByID-title-200"></h3>
+                            <p id="examples-Default-updateBookByID-description-200" class="marked"></p>
+                            <script>
+                              var responseDefault200_description = `The updated book`;
+                              var responseDefault200_description_break = responseDefault200_description.indexOf('\n');
+                              if (responseDefault200_description_break == -1) {
+                                $("#examples-Default-updateBookByID-title-200").text("Status: 200 - " + responseDefault200_description);
+                              } else {
+                                $("#examples-Default-updateBookByID-title-200").text("Status: 200 - " + responseDefault200_description.substring(0, responseDefault200_description_break));
+                                $("#examples-Default-updateBookByID-description-200").html(responseDefault200_description.substring(responseDefault200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Default-updateBookByID-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Default-updateBookByID-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Default-updateBookByID-200-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Default-updateBookByID-200-schema">
+                                  <div id="responses-Default-updateBookByID-schema-200" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = ;
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Default-updateBookByID-200-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Default-updateBookByID-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Default-updateBookByID-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Default-updateBookByID-title-404"></h3>
+                            <p id="examples-Default-updateBookByID-description-404" class="marked"></p>
+                            <script>
+                              var responseDefault404_description = `Book not found`;
+                              var responseDefault404_description_break = responseDefault404_description.indexOf('\n');
+                              if (responseDefault404_description_break == -1) {
+                                $("#examples-Default-updateBookByID-title-404").text("Status: 404 - " + responseDefault404_description);
+                              } else {
+                                $("#examples-Default-updateBookByID-title-404").text("Status: 404 - " + responseDefault404_description.substring(0, responseDefault404_description_break));
+                                $("#examples-Default-updateBookByID-description-404").html(responseDefault404_description.substring(responseDefault404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Default-updateBookByID-404" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Default-updateBookByID-404-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Default-updateBookByID-404-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Default-updateBookByID-404-schema">
+                                  <div id="responses-Default-updateBookByID-schema-404" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = ;
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Default-updateBookByID-404-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Default-updateBookByID-schema-404');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Default-updateBookByID-404-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
                         </article>

@@ -72,7 +72,7 @@ func (s *Server) GetBooksSearch(c echo.Context, params GetBooksSearchParams) err
 	return c.JSON(http.StatusOK, bookList)
 }
 
-func (s *Server) DeleteBooksId(c echo.Context, id string) error {
+func (s *Server) DeleteBookByID(c echo.Context, id string) error {
 	ctx := c.Request().Context()
 
 	err := s.repo.DeleteByID(ctx, id)
@@ -83,7 +83,7 @@ func (s *Server) DeleteBooksId(c echo.Context, id string) error {
 	return c.NoContent(http.StatusNoContent)
 }
 
-func (s *Server) GetBooksId(c echo.Context, id string) error {
+func (s *Server) GetBookByID(c echo.Context, id string) error {
 	ctx := c.Request().Context()
 
 	b, err := s.repo.FindByID(ctx, id)
@@ -107,9 +107,32 @@ func (s *Server) GetBooks(c echo.Context, params GetBooksParams) error {
 	return c.JSON(http.StatusOK, bookList)
 }
 
-func (s *Server) PutBooksId(c echo.Context, id string) error {
-	// TODO implement me
-	panic("implement me")
+func (s *Server) UpdateBookByID(c echo.Context, id string) error {
+	ctx := c.Request().Context()
+
+	var in Book
+	if err := c.Bind(&in); err != nil {
+		return errRsp(c, http.StatusBadRequest, err)
+	}
+
+	bookSpec := &core.Book{
+		ID:          id,
+		Title:       in.Title,
+		Author:      in.Author,
+		Summary:     in.Summary,
+		Description: in.Description,
+		ImageLink:   in.ImageLink,
+		Category:    in.Category,
+		Featured:    in.Featured,
+	}
+
+	updated, err := s.repo.Update(ctx, bookSpec)
+
+	if err != nil {
+		return errRsp(c, http.StatusBadRequest, err)
+	}
+
+	return c.JSON(http.StatusCreated, apiBook(updated))
 }
 
 func apiBookList(found []core.Book) BookList {
