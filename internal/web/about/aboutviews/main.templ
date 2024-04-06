@@ -1,5 +1,60 @@
 package aboutviews
 
-templ AboutIndex(name string) {
-	<div>About, { name }</div>
+templ AbouProject(query string) {
+	<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Anybook</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css"/>
+    </head>
+    <body>
+    <header>
+        <div class="logo">
+            <a href="/">Anybook</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Project</a></li>
+            </ul>
+        </nav>
+        <div class="search">
+            <form action="/search" method="GET">
+                 <label>
+                     <input type="text" placeholder="Search..." id="q" name="q" value={query}/>
+                   </label>
+                 <button type="submit">Find!</button>
+            </form>
+        </div>
+    </header>
+    <div class="main">
+
+        <div class="main-content">
+          <div class="about-content">
+                <h3>Used technologies</h3>
+                <ul>
+                    <li><a href="https://tip.golang.org/doc/go1.22">Go 1.22</a></li>
+                    <li><a href="https://entgo.io/">Ent. An entity framework for Go</a></li>
+                    <li><a href="https://www.sqlite.org/">SQLite</a></li>
+                    <li><a href="https://echo.labstack.com/">Echo. High performance, extensible, minimalist Go web framework</a></li>
+                    <li><a href="https://github.com/a-h/templ/">templ. A language for writing HTML user interfaces in Go.</a></li>
+                    <li><a href="https://openapi-generator.tech/">OpenAPI Doc Generator</a></li>
+                    <li><a href="https://github.com/deepmap/oapi-codegen/">OpenAPI Server Code Generator</a></li>
+                    <li><a href="https://letsencrypt.org/">Let's encrypt for TLS certificates</a></li>
+                    <li><a href="https://www.hetzner.com/">VPS Provider: Hetzner</a></li>
+                    <li><a href="https://www.godaddy.com/">Domain Provider: GoDaddy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Anybook. All right reserved </p>
+    </footer>
+
+    </body>
+
+    </html>
 }

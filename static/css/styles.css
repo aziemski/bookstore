@@ -206,3 +206,32 @@ footer {
     font-size: 12px;
 }
 
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+}
+
+.about-content ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.about-content ul li {
+    margin-left: 24px;
+    list-style: none;
+    text-decoration: none;
+}
+
+.about-content ul li a {
+    color: #666;
+    text-decoration: none;
+    transition: 0.4s ease;
+}
+
+.about-content ul li a:hover {
+    color: #ffb6c1;
+}

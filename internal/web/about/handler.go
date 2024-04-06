@@ -10,6 +10,6 @@ type Handler struct {
 }
 
 func (h *Handler) Handle(c echo.Context) error {
-	dv := aboutviews.AboutIndex("test")
+	dv := aboutviews.AbouProject("")
 	return xecho.RenderView(c, dv)
 }
