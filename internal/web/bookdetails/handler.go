@@ -8,18 +8,24 @@ import (
 )
 
 type Handler struct {
+	r *core.Repository
+}
+
+func NewHandler(r *core.Repository) *Handler {
+	return &Handler{r: r}
 }
 
 func (h *Handler) Handle(c echo.Context) error {
-	dv := bookdetailviews.BookDetails("", core.Book{
-		ID:          "id",
-		Title:       "title",
-		Author:      "authordd",
-		Summary:     "summary",
-		Description: "desc",
-		ImageLink:   "https://http.cat/208.jpg",
-		Category:    "category",
-		Featured:    false,
-	})
+	ctx := c.Request().Context()
+
+	bookID := c.Param("id")
+
+	book, err := h.r.FindByID(ctx, bookID)
+	if err != nil {
+		return err
+	}
+
+	dv := bookdetailviews.BookDetails("", *book)
+
 	return xecho.RenderView(c, dv)
 }

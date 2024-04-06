@@ -12,7 +12,7 @@ import (
 func SetupRoutes(e *echo.Echo, repo *core.Repository) {
 	ah := &about.Handler{}
 	hh := home.NewHandler(repo)
-	bdh := &bookdetails.Handler{}
+	bdh := bookdetails.NewHandler(repo)
 	sh := search.NewHandler(repo)
 
 	e.GET("/", hh.Handle)
