@@ -7,6 +7,7 @@ import (
 	"github.com/aziemski/bookstore/internal/core/ent"
 	"github.com/aziemski/bookstore/internal/core/ent/book"
 	"github.com/aziemski/bookstore/internal/x/xlog"
+	"github.com/lithammer/shortuuid/v4"
 )
 
 type Book struct {
@@ -29,8 +30,13 @@ func NewRepository(db *ent.Client) *Repository {
 }
 
 func (r *Repository) InsertNew(ctx context.Context, in *Book) (*Book, error) {
+	id := in.ID
+	if id == "" {
+		id = shortuuid.New()
+	}
+
 	b, err := r.db.Book.Create().
-		SetID(in.ID).
+		SetID(id).
 		SetTitle(in.Title).
 		SetAuthor(in.Author).
 		SetDescription(in.Description).

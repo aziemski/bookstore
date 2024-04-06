@@ -845,7 +845,7 @@ ul.nav-tabs {
     // Script section to load models into a JS Var
     var defs = {}
     defs["Book"] = {
-  "required" : [ "author", "title" ],
+  "required" : [ "author", "category", "description", "featured", "image_link", "summary", "title" ],
   "type" : "object",
   "properties" : {
     "id" : {
@@ -879,10 +879,20 @@ ul.nav-tabs {
     "summary" : {
       "type" : "string",
       "description" : "Summary of the book"
+    }
+  }
+};
+    defs["Error"] = {
+  "required" : [ "code", "msg" ],
+  "type" : "object",
+  "properties" : {
+    "code" : {
+      "type" : "string",
+      "description" : "Error code"
     },
-    "publication_year" : {
-      "type" : "integer",
-      "description" : "Year of publication of the book"
+    "msg" : {
+      "type" : "string",
+      "description" : "Description of the error"
     }
   }
 };
@@ -1336,6 +1346,7 @@ pub fn main() {
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Default-booksIdDelete-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X DELETE \
+ -H "Accept: application/json" \
  "https://anybook.online/api/v1/books/{id}"
 </code></pre>
                           </div>
@@ -1618,12 +1629,52 @@ ID of the book to perform operation on
 
 
                             <ul id="responses-detail-Default-booksIdDelete-404" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Default-booksIdDelete-404-schema">Schema</a>
+                                </li>
+
+
 
 
                             </ul>
 
 
                             <div class="tab-content" id="responses-Default-booksIdDelete-404-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Default-booksIdDelete-404-schema">
+                                  <div id="responses-Default-booksIdDelete-schema-404" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = ;
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Default-booksIdDelete-404-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Default-booksIdDelete-schema-404');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Default-booksIdDelete-404-schema-data' type='hidden' value=''></input>
+                                </div>
                             </div>
                         </article>
                       </div>
@@ -2046,7 +2097,6 @@ ID of the book to perform operation on
  -d '{
   &quot;summary&quot; : &quot;summary&quot;,
   &quot;featured&quot; : true,
-  &quot;publication_year&quot; : 0,
   &quot;image_link&quot; : &quot;image_link&quot;,
   &quot;author&quot; : &quot;author&quot;,
   &quot;description&quot; : &quot;description&quot;,
@@ -2441,12 +2491,52 @@ $(document).ready(function() {
 
 
                             <ul id="responses-detail-Default-booksIdPut-404" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Default-booksIdPut-404-schema">Schema</a>
+                                </li>
+
+
 
 
                             </ul>
 
 
                             <div class="tab-content" id="responses-Default-booksIdPut-404-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Default-booksIdPut-404-schema">
+                                  <div id="responses-Default-booksIdPut-schema-404" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = ;
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Default-booksIdPut-404-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Default-booksIdPut-schema-404');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Default-booksIdPut-404-schema-data' type='hidden' value=''></input>
+                                </div>
                             </div>
                         </article>
                       </div>
@@ -2492,7 +2582,6 @@ $(document).ready(function() {
  -d '{
   &quot;summary&quot; : &quot;summary&quot;,
   &quot;featured&quot; : true,
-  &quot;publication_year&quot; : 0,
   &quot;image_link&quot; : &quot;image_link&quot;,
   &quot;author&quot; : &quot;author&quot;,
   &quot;description&quot; : &quot;description&quot;,

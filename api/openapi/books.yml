@@ -72,6 +72,10 @@ paths:
                 $ref: '#/components/schemas/Book'
         '404':
           description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     delete:
       summary: Delete a book by ID
       responses:
@@ -79,6 +83,10 @@ paths:
           description: Book deleted successfully
         '404':
           description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /books/search:
     get:
       summary: Search books by title, author, or other attributes
@@ -139,12 +147,14 @@ components:
         summary:
           type: string
           description: Summary of the book
-        publication_year:
-          type: integer
-          description: Year of publication of the book
       required:
         - title
         - author
+        - category
+        - image_link
+        - description
+        - featured
+        - summary
     SearchResult:
       type: object
       properties:
@@ -178,3 +188,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SearchResult'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        msg:
+          type: string
+          description: Description of the error
+      required:
+        - code
+        - msg
+
