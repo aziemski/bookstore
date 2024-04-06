@@ -45,27 +45,10 @@ type Book struct {
 	Title string `json:"title"`
 }
 
-// Error defines model for Error.
-type Error struct {
-	// Code Error code
-	Code string `json:"code"`
-
-	// Msg Description of the error
-	Msg string `json:"msg"`
-}
-
-// SearchResponse defines model for SearchResponse.
-type SearchResponse struct {
-	Results *[]SearchResult `json:"results,omitempty"`
-
-	// TotalResults Total number of results
-	TotalResults *int `json:"total_results,omitempty"`
-}
-
-// SearchResult defines model for SearchResult.
-type SearchResult struct {
+// BookItem defines model for BookItem.
+type BookItem struct {
 	// Author Author of the book
-	Author *string `json:"author,omitempty"`
+	Author string `json:"author"`
 
 	// Id Unique identifier for the book
 	Id string `json:"id"`
@@ -78,6 +61,32 @@ type SearchResult struct {
 
 	// Title Title of the book
 	Title string `json:"title"`
+}
+
+// BookList defines model for BookList.
+type BookList struct {
+	Items []BookItem `json:"items"`
+
+	// Total Total number of results
+	Total int `json:"total"`
+}
+
+// Error defines model for Error.
+type Error struct {
+	// Code Error code
+	Code string `json:"code"`
+
+	// Msg Description of the error
+	Msg string `json:"msg"`
+}
+
+// GetBooksParams defines parameters for GetBooks.
+type GetBooksParams struct {
+	// Offset Number of items to skip
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+
+	// Limit Maximum number of items to return
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
 }
 
 // GetBooksSearchParams defines parameters for GetBooksSearch.
@@ -102,7 +111,7 @@ type PutBooksIdJSONRequestBody = Book
 type ServerInterface interface {
 	// Get all books
 	// (GET /books)
-	GetBooks(ctx echo.Context) error
+	GetBooks(ctx echo.Context, params GetBooksParams) error
 	// Create a new book
 	// (POST /books)
 	PostBooks(ctx echo.Context) error
@@ -129,8 +138,24 @@ type ServerInterfaceWrapper struct {
 func (w *ServerInterfaceWrapper) GetBooks(ctx echo.Context) error {
 	var err error
 
+	// Parameter object where we will unmarshal all parameters from the context
+	var params GetBooksParams
+	// ------------- Optional query parameter "offset" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "offset", ctx.QueryParams(), &params.Offset)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter offset: %s", err))
+	}
+
+	// ------------- Optional query parameter "limit" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "limit", ctx.QueryParams(), &params.Limit)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter limit: %s", err))
+	}
+
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetBooks(ctx)
+	err = w.Handler.GetBooks(ctx, params)
 	return err
 }
 
@@ -263,23 +288,23 @@ func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL 
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
+	"H4sIAAAAAAAC/+xWS4/bNhD+KwTbo7Cy25x0S7JFYSApFkhzChYFLY2syYqklhxuahj+78WQtmw91m6B",
+	"bZJDTrb4mNf3zTfcydLqzhow5GWxk75sQKv49421D/zbOduBI4S4qgI11vG/CnzpsCO0RhbydVwXthbU",
+	"gFjz3UzStgNZSE8OzUbuM1kqgo112+n9t4edaxYGt8ZGbk9f1+zUoCg4qKZGVqZCjtOLLw1QA663I9CL",
+	"4z1hnTCWTqbX1ragDNvGGasfDT4GEFiBIawRnKituxgharWBv1o0D1Nr79A8CLLxfjx3nq4o7RO4OZM+",
+	"aK3mqv8hbVwrGiG1ML39Jy9fvrvPpIPHgLHinw6GsiObzogxyHsI9xlop1Tue1d2/RlK4jCZuSsC/dLs",
+	"/YHrNVyRoZmAO0D0GnDv0NMUOCTQwz8/O6hlIX/KTwKWH9Qr7wmw750o59Q2fltS7UyuvCxM0GuIPHDg",
+	"Q0v+lDEagg24KZWjvewQ2FxWvzmXODdMqbTVTM3jYRH3ZoDSfvOvVA+iy2toHbyw0WncfBhNbWea5W4V",
+	"Sa6VURs0m0gN3wNfRBi9eM/boMGQeH23kpl8AueTheXN4mbB+dgOjOpQFvLXuJTJTlETy5Mnq8VObiAS",
+	"gmunOIRVJQv5O9Cbg9tOOaWBwHlZfBoH+0ePaASIm8s/YMeA8fZjgCg6RumYfF17YFFPTEq51yq0JItF",
+	"JjUa1EHH/1NajF2/V3/z6TNS9SE4oODMM0G0qPGZGJYcRDLLH+chLWdCume8fWeNT5T7ZbFIzDMEJhZV",
+	"dV3L0w6tyT/7NFNPfq/1WOzVyJQRQ0SLnjjjBOL+XKMYOqHa9riXyc76GYTvrO8hZtYCf1bbF00gBX/q",
+	"CXIB9pOiLf8HnyP1aUCUDhRBlYR2WLG3cUsoYeDLaT91SO5BubK52igf0rEr7ZJOichIQeD0Mxx9HPBz",
+	"IjM/uvA76MIkw1pR2bBK81xIXBGlQwKHakSzA/iRVmK9FVHPM5HmeMYvXhvfw4rI4ToQ+HMe7rDapzK1",
+	"QDAl4m1cj0GtKjmpyavpoOGzIpmrhA9lCd7XoW3jHH+VbrxIFdOEfqaE/MwXtQ2mGpUrJSRUepytt2J1",
+	"y4Fd7MK5zBdfRV4OEtoLTF/B/5BxVO5RuhflZHU7eMCSFR242jot+vII23cgz/5TA2Ilx9J8SXPuM9mF",
+	"uTESBpX/lnPk6wAdukrNwPwNG+VjjGjEnHgE3NOROMG1spANUeeLPN811hMTYZ+rDvOnJb8flUO1blM1",
+	"j/sDYZbKbNnHjTUtGmAn9/t/AgAA//+sVZQb4xAAAA==",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

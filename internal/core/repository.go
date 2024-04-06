@@ -114,6 +114,52 @@ func (r *Repository) Find(ctx context.Context, q string) []Book {
 	return result
 }
 
+type QueryArgs struct {
+	SearchTerm string
+	Offset     *int
+	Limit      *int
+}
+
+func (r *Repository) Query(ctx context.Context, args QueryArgs) []Book {
+	var result []Book
+	offset := 0
+	limit := 10
+	q := args.SearchTerm
+
+	if args.Offset != nil {
+		offset = *args.Offset
+	}
+
+	if args.Limit != nil {
+		limit = *args.Limit
+	}
+
+	found, err := r.db.Book.Query().
+		Where(
+			book.Or(
+				book.TitleContains(q),
+				book.AuthorContains(q),
+				book.SummaryContains(q),
+				book.DescriptionContains(q),
+				book.CategoryContains(q),
+			)).
+		Offset(offset).
+		Limit(limit).
+		All(ctx)
+
+	if err != nil {
+		slog.Error("sql, unexpected Query err", xlog.Err(err))
+		return result
+	}
+
+	for _, in := range found {
+		out := ent2core(in)
+		result = append(result, out)
+	}
+
+	return result
+}
+
 func ent2core(in *ent.Book) Book {
 	return Book{
 		ID:          in.ID,

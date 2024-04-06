@@ -882,37 +882,8 @@ ul.nav-tabs {
     }
   }
 };
-    defs["Error"] = {
-  "required" : [ "code", "msg" ],
-  "type" : "object",
-  "properties" : {
-    "code" : {
-      "type" : "string",
-      "description" : "Error code"
-    },
-    "msg" : {
-      "type" : "string",
-      "description" : "Description of the error"
-    }
-  }
-};
-    defs["SearchResponse"] = {
-  "type" : "object",
-  "properties" : {
-    "total_results" : {
-      "type" : "integer",
-      "description" : "Total number of results"
-    },
-    "results" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/SearchResult"
-      }
-    }
-  }
-};
-    defs["SearchResult"] = {
-  "required" : [ "id", "image_link", "summary", "title" ],
+    defs["BookItem"] = {
+  "required" : [ "author", "id", "image_link", "summary", "title" ],
   "type" : "object",
   "properties" : {
     "id" : {
@@ -934,6 +905,36 @@ ul.nav-tabs {
     "summary" : {
       "type" : "string",
       "description" : "Summary of the book"
+    }
+  }
+};
+    defs["BookList"] = {
+  "required" : [ "items", "total" ],
+  "type" : "object",
+  "properties" : {
+    "total" : {
+      "type" : "integer",
+      "description" : "Total number of results"
+    },
+    "items" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/BookItem"
+      }
+    }
+  }
+};
+    defs["Error"] = {
+  "required" : [ "code", "msg" ],
+  "type" : "object",
+  "properties" : {
+    "code" : {
+      "type" : "string",
+      "description" : "Error code"
+    },
+    "msg" : {
+      "type" : "string",
+      "description" : "Description of the error"
     }
   }
 };
@@ -1033,7 +1034,7 @@ ul.nav-tabs {
                           <div class="tab-pane active" id="examples-Default-booksGet-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: application/json" \
- "https://anybook.online/api/v1/books"
+ "https://anybook.online/api/v1/books?offset=56&limit=56"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-booksGet-0-java">
@@ -1050,9 +1051,11 @@ public class DefaultApiExample {
 
         // Create an instance of the API class
         DefaultApi apiInstance = new DefaultApi();
+        Integer offset = 56; // Integer | Number of items to skip
+        Integer limit = 56; // Integer | Maximum number of items to return
 
         try {
-            array[Book] result = apiInstance.booksGet();
+            BookList result = apiInstance.booksGet(offset, limit);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#booksGet");
@@ -1068,9 +1071,11 @@ public class DefaultApiExample {
 
 final api_instance = DefaultApi();
 
+final Integer offset = new Integer(); // Integer | Number of items to skip
+final Integer limit = new Integer(); // Integer | Maximum number of items to return
 
 try {
-    final result = await api_instance.booksGet();
+    final result = await api_instance.booksGet(offset, limit);
     print(result);
 } catch (e) {
     print('Exception when calling DefaultApi->booksGet: $e\n');
@@ -1085,9 +1090,11 @@ try {
 public class DefaultApiExample {
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
+        Integer offset = 56; // Integer | Number of items to skip
+        Integer limit = 56; // Integer | Maximum number of items to return
 
         try {
-            array[Book] result = apiInstance.booksGet();
+            BookList result = apiInstance.booksGet(offset, limit);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#booksGet");
@@ -1105,10 +1112,13 @@ public class DefaultApiExample {
 
 // Create an instance of the API class
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
+Integer *offset = 56; // Number of items to skip (optional) (default to 0)
+Integer *limit = 56; // Maximum number of items to return (optional) (default to 10)
 
 // Get all books
-[apiInstance booksGetWithCompletionHandler: 
-              ^(array[Book] output, NSError* error) {
+[apiInstance booksGetWith:offset
+    limit:limit
+              completionHandler: ^(BookList output, NSError* error) {
     if (output) {
         NSLog(@"%@", output);
     }
@@ -1124,6 +1134,11 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
 // Create an instance of the API class
 var api = new BooksManagementApi.DefaultApi()
+var opts = {
+  'offset': 56, // {Integer} Number of items to skip
+  'limit': 56 // {Integer} Maximum number of items to return
+};
+
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
@@ -1131,7 +1146,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.booksGet(callback);
+api.booksGet(opts, callback);
 </code></pre>
                             </div>
 
@@ -1154,10 +1169,12 @@ namespace Example
 
             // Create an instance of the API class
             var apiInstance = new DefaultApi();
+            var offset = 56;  // Integer | Number of items to skip (optional)  (default to 0)
+            var limit = 56;  // Integer | Maximum number of items to return (optional)  (default to 10)
 
             try {
                 // Get all books
-                array[Book] result = apiInstance.booksGet();
+                BookList result = apiInstance.booksGet(offset, limit);
                 Debug.WriteLine(result);
             } catch (Exception e) {
                 Debug.Print("Exception when calling DefaultApi.booksGet: " + e.Message );
@@ -1174,9 +1191,11 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Create an instance of the API class
 $api_instance = new OpenAPITools\Client\Api\DefaultApi();
+$offset = 56; // Integer | Number of items to skip
+$limit = 56; // Integer | Maximum number of items to return
 
 try {
-    $result = $api_instance->booksGet();
+    $result = $api_instance->booksGet($offset, $limit);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->booksGet: ', $e->getMessage(), PHP_EOL;
@@ -1191,9 +1210,11 @@ use WWW::OPenAPIClient::DefaultApi;
 
 # Create an instance of the API class
 my $api_instance = WWW::OPenAPIClient::DefaultApi->new();
+my $offset = 56; # Integer | Number of items to skip
+my $limit = 56; # Integer | Maximum number of items to return
 
 eval {
-    my $result = $api_instance->booksGet();
+    my $result = $api_instance->booksGet(offset => $offset, limit => $limit);
     print Dumper($result);
 };
 if ($@) {
@@ -1210,10 +1231,12 @@ from pprint import pprint
 
 # Create an instance of the API class
 api_instance = openapi_client.DefaultApi()
+offset = 56 # Integer | Number of items to skip (optional) (default to 0)
+limit = 56 # Integer | Maximum number of items to return (optional) (default to 10)
 
 try:
     # Get all books
-    api_response = api_instance.books_get()
+    api_response = api_instance.books_get(offset=offset, limit=limit)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DefaultApi->booksGet: %s\n" % e)</code></pre>
@@ -1223,9 +1246,11 @@ except ApiException as e:
                               <pre class="prettyprint"><code class="language-rust">extern crate DefaultApi;
 
 pub fn main() {
+    let offset = 56; // Integer
+    let limit = 56; // Integer
 
     let mut context = DefaultApi::Context::default();
-    let result = client.booksGet(&context).wait();
+    let result = client.booksGet(offset, limit, &context).wait();
 
     println!("{:?}", result);
 }
@@ -1244,6 +1269,53 @@ pub fn main() {
 
 
 
+                            <div class="methodsubtabletitle">Query parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">offset</td>
+<td>
+
+
+    <div id="d2e199_booksGet_offset">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
+                </span>
+
+                    <div class="inner description marked">
+Number of items to skip
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                                <tr><td style="width:150px;">limit</td>
+<td>
+
+
+    <div id="d2e199_booksGet_limit">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
+                </span>
+
+                    <div class="inner description marked">
+Maximum number of items to return
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
 
                           <h2>Responses</h2>
                             <h3 id="examples-Default-booksGet-title-200"></h3>
@@ -2981,7 +3053,7 @@ public class DefaultApiExample {
         Integer limit = 56; // Integer | Maximum number of items to return
 
         try {
-            SearchResponse result = apiInstance.booksSearchGet(q, offset, limit);
+            BookList result = apiInstance.booksSearchGet(q, offset, limit);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#booksSearchGet");
@@ -3022,7 +3094,7 @@ public class DefaultApiExample {
         Integer limit = 56; // Integer | Maximum number of items to return
 
         try {
-            SearchResponse result = apiInstance.booksSearchGet(q, offset, limit);
+            BookList result = apiInstance.booksSearchGet(q, offset, limit);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#booksSearchGet");
@@ -3048,7 +3120,7 @@ Integer *limit = 56; // Maximum number of items to return (optional) (default to
 [apiInstance booksSearchGetWith:q
     offset:offset
     limit:limit
-              completionHandler: ^(SearchResponse output, NSError* error) {
+              completionHandler: ^(BookList output, NSError* error) {
     if (output) {
         NSLog(@"%@", output);
     }
@@ -3106,7 +3178,7 @@ namespace Example
 
             try {
                 // Search books by title, author, or other attributes
-                SearchResponse result = apiInstance.booksSearchGet(q, offset, limit);
+                BookList result = apiInstance.booksSearchGet(q, offset, limit);
                 Debug.WriteLine(result);
             } catch (Exception e) {
                 Debug.Print("Exception when calling DefaultApi.booksSearchGet: " + e.Message );

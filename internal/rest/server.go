@@ -22,11 +22,6 @@ func (s *Server) RegisterWith(e *echo.Echo) {
 	RegisterHandlers(g, s)
 }
 
-func (s *Server) GetBooks(c echo.Context) error {
-	//TODO implement me
-	panic("implement me")
-}
-
 func (s *Server) PostBooks(c echo.Context) error {
 	ctx := c.Request().Context()
 
@@ -55,16 +50,30 @@ func (s *Server) PostBooks(c echo.Context) error {
 		return errRsp(c, http.StatusBadRequest, err)
 	}
 
-	return c.JSON(http.StatusCreated, core2api(created))
+	return c.JSON(http.StatusCreated, apiBook(created))
 }
 
 func (s *Server) GetBooksSearch(c echo.Context, params GetBooksSearchParams) error {
-	//TODO implement me
-	panic("implement me")
+	ctx := c.Request().Context()
+
+	q := ""
+	if params.Q != nil {
+		q = *params.Q
+	}
+
+	found := s.repo.Query(ctx, core.QueryArgs{
+		SearchTerm: q,
+		Offset:     params.Offset,
+		Limit:      params.Limit,
+	})
+
+	bookList := apiBookList(found)
+
+	return c.JSON(http.StatusOK, bookList)
 }
 
 func (s *Server) DeleteBooksId(c echo.Context, id string) error {
-	//TODO implement me
+	// TODO implement me
 	panic("implement me")
 }
 
@@ -76,15 +85,38 @@ func (s *Server) GetBooksId(c echo.Context, id string) error {
 		return err
 	}
 
-	return c.JSON(http.StatusOK, core2api(b))
+	return c.JSON(http.StatusOK, apiBook(b))
 }
 
-func (s *Server) PutBooksId(c echo.Context, id string) error {
-	//TODO implement me
+func (s *Server) GetBooks(ctx echo.Context, params GetBooksParams) error {
+	// TODO implement me
 	panic("implement me")
 }
 
-func core2api(in *core.Book) Book {
+func (s *Server) PutBooksId(c echo.Context, id string) error {
+	// TODO implement me
+	panic("implement me")
+}
+
+func apiBookList(found []core.Book) BookList {
+	items := make([]BookItem, 0, len(found))
+	for _, in := range found {
+		b := BookItem{
+			Author:    in.Author,
+			Id:        in.ID,
+			ImageLink: in.ImageLink,
+			Summary:   in.Summary,
+			Title:     in.Title,
+		}
+		items = append(items, b)
+	}
+	return BookList{
+		Items: items,
+		Total: len(items),
+	}
+}
+
+func apiBook(in *core.Book) Book {
 	return Book{
 		Author:      in.Author,
 		Category:    in.Category,
