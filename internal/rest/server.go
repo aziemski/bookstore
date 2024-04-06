@@ -33,6 +33,36 @@ func (s *Server) RegisterWith(e *echo.Echo) {
 	RegisterHandlers(g, s)
 }
 
+func (s *Server) GetBooks(ctx echo.Context) error {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (s *Server) PostBooks(ctx echo.Context) error {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (s *Server) GetBooksSearch(ctx echo.Context, params GetBooksSearchParams) error {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (s *Server) DeleteBooksId(ctx echo.Context, id string) error {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (s *Server) GetBooksId(ctx echo.Context, id string) error {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (s *Server) PutBooksId(ctx echo.Context, id string) error {
+	//TODO implement me
+	panic("implement me")
+}
+
 func core2api(m *core.Book) Book {
 	return Book{
 		Title: m.Title,

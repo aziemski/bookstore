@@ -20,14 +20,98 @@ import (
 
 // Book defines model for Book.
 type Book struct {
+	// Author Author of the book
+	Author string `json:"author"`
+
+	// Category Category of the book
+	Category *string `json:"category,omitempty"`
+
+	// Description Description of the book
+	Description *string `json:"description,omitempty"`
+
+	// Featured Indicates whether the book is featured or not
+	Featured *bool `json:"featured,omitempty"`
+
+	// Id Unique identifier for the book
+	Id *string `json:"id,omitempty"`
+
+	// ImageLink Link to the image of the book cover
+	ImageLink *string `json:"image_link,omitempty"`
+
+	// PublicationYear Year of publication of the book
+	PublicationYear *int `json:"publication_year,omitempty"`
+
+	// Summary Summary of the book
+	Summary *string `json:"summary,omitempty"`
+
+	// Title Title of the book
 	Title string `json:"title"`
 }
 
+// SearchResponse defines model for SearchResponse.
+type SearchResponse struct {
+	Results *[]SearchResult `json:"results,omitempty"`
+
+	// TotalResults Total number of results
+	TotalResults *int `json:"total_results,omitempty"`
+}
+
+// SearchResult defines model for SearchResult.
+type SearchResult struct {
+	// Author Author of the book
+	Author *string `json:"author,omitempty"`
+
+	// Id Unique identifier for the book
+	Id string `json:"id"`
+
+	// ImageLink Link to the image of the book cover
+	ImageLink string `json:"image_link"`
+
+	// Summary Summary of the book
+	Summary string `json:"summary"`
+
+	// Title Title of the book
+	Title string `json:"title"`
+}
+
+// GetBooksSearchParams defines parameters for GetBooksSearch.
+type GetBooksSearchParams struct {
+	// Q Search query term
+	Q *string `form:"q,omitempty" json:"q,omitempty"`
+
+	// Offset Number of items to skip
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+
+	// Limit Maximum number of items to return
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// PostBooksJSONRequestBody defines body for PostBooks for application/json ContentType.
+type PostBooksJSONRequestBody = Book
+
+// PutBooksIdJSONRequestBody defines body for PutBooksId for application/json ContentType.
+type PutBooksIdJSONRequestBody = Book
+
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
-
+	// Get all books
+	// (GET /books)
+	GetBooks(ctx echo.Context) error
+	// Create a new book
+	// (POST /books)
+	PostBooks(ctx echo.Context) error
+	// Search books by title, author, or other attributes
+	// (GET /books/search)
+	GetBooksSearch(ctx echo.Context, params GetBooksSearchParams) error
+	// Delete a book by ID
+	// (DELETE /books/{id})
+	DeleteBooksId(ctx echo.Context, id string) error
+	// Get a book by ID
 	// (GET /books/{id})
-	GetBookByID(ctx echo.Context, id string) error
+	GetBooksId(ctx echo.Context, id string) error
+	// Update a book by ID
+	// (PUT /books/{id})
+	PutBooksId(ctx echo.Context, id string) error
 }
 
 // ServerInterfaceWrapper converts echo contexts to parameters.
@@ -35,8 +119,58 @@ type ServerInterfaceWrapper struct {
 	Handler ServerInterface
 }
 
-// GetBookByID converts echo context to params.
-func (w *ServerInterfaceWrapper) GetBookByID(ctx echo.Context) error {
+// GetBooks converts echo context to params.
+func (w *ServerInterfaceWrapper) GetBooks(ctx echo.Context) error {
+	var err error
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.GetBooks(ctx)
+	return err
+}
+
+// PostBooks converts echo context to params.
+func (w *ServerInterfaceWrapper) PostBooks(ctx echo.Context) error {
+	var err error
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PostBooks(ctx)
+	return err
+}
+
+// GetBooksSearch converts echo context to params.
+func (w *ServerInterfaceWrapper) GetBooksSearch(ctx echo.Context) error {
+	var err error
+
+	// Parameter object where we will unmarshal all parameters from the context
+	var params GetBooksSearchParams
+	// ------------- Optional query parameter "q" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "q", ctx.QueryParams(), &params.Q)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter q: %s", err))
+	}
+
+	// ------------- Optional query parameter "offset" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "offset", ctx.QueryParams(), &params.Offset)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter offset: %s", err))
+	}
+
+	// ------------- Optional query parameter "limit" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "limit", ctx.QueryParams(), &params.Limit)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter limit: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.GetBooksSearch(ctx, params)
+	return err
+}
+
+// DeleteBooksId converts echo context to params.
+func (w *ServerInterfaceWrapper) DeleteBooksId(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "id" -------------
 	var id string
@@ -47,7 +181,39 @@ func (w *ServerInterfaceWrapper) GetBookByID(ctx echo.Context) error {
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetBookByID(ctx, id)
+	err = w.Handler.DeleteBooksId(ctx, id)
+	return err
+}
+
+// GetBooksId converts echo context to params.
+func (w *ServerInterfaceWrapper) GetBooksId(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "id" -------------
+	var id string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "id", ctx.Param("id"), &id, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter id: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.GetBooksId(ctx, id)
+	return err
+}
+
+// PutBooksId converts echo context to params.
+func (w *ServerInterfaceWrapper) PutBooksId(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "id" -------------
+	var id string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "id", ctx.Param("id"), &id, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter id: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PutBooksId(ctx, id)
 	return err
 }
 
@@ -79,19 +245,35 @@ func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL 
 		Handler: si,
 	}
 
-	router.GET(baseURL+"/books/:id", wrapper.GetBookByID)
+	router.GET(baseURL+"/books", wrapper.GetBooks)
+	router.POST(baseURL+"/books", wrapper.PostBooks)
+	router.GET(baseURL+"/books/search", wrapper.GetBooksSearch)
+	router.DELETE(baseURL+"/books/:id", wrapper.DeleteBooksId)
+	router.GET(baseURL+"/books/:id", wrapper.GetBooksId)
+	router.PUT(baseURL+"/books/:id", wrapper.PutBooksId)
 
 }
 
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"H4sIAAAAAAAC/2xRwa7aMBD8FTTtMcKhvfmIKiG+AXFwkoWYJrZrb5CiyP9erUNKn8Rp7fV4Z3ZmQevH",
-	"4B05TtALUtvTaMrx6P1vqSH6QJEtlS5bHqgc5kDQSBytuyPnCpH+TDZSB315wa7VBvPNg1pGFpx1Ny8T",
-	"OkpttIGtd9CFLqHaCP7dnxTTijjs632NXMEHciZYaPwsrQrBcF/kqUa+qcV2Wa53YimygBGecweNE7EM",
-	"P87nX+VrNCMxxQR9+SRqZzuIaOhCgwrOjKKw9N9Lc5yoehn4yaCrgFPwLq1O/qhrKa13TK7INCEMti1C",
-	"1SOJgOW/ed8j3aDxTb0TU6+4VMmqmPtV/4l4J47smlnWyLlgEsXntu8UB2j0zCFppZbeJ5b1sjLBqudB",
-	"AjDRmmZYRW/va343Mw0MDeNmYdl7N1hHQnPNfwMAAP//EPGYFVoCAAA=",
+	"H4sIAAAAAAAC/8xWTY/bNhD9KwTbo7Cy25x022SBwkBTLJrmUASLBS2NLGYlkiaHmxqG/3sxQ1u2Ja2d",
+	"Nm2SkySS8+brzaO2srSdswYMBllsZSgb6BS/vrb2iZ7OWwceNfCqithYT28VhNJrh9oaWchbXhe2FtiA",
+	"WJJtJnHjQBYyoNdmJXeZLBXCyvrN2P7NfucawpnVEOTu+HUNpwaF0UM1BlmYSlOcQXxqABvwPY7QQRzs",
+	"hPXCWDxCL61tQRnC1hOo741eRxC6AoO61uBFbf3FCHWnVvDYavM0RvtVmyeBlu353Gm6orTP4KcgXVy2",
+	"lJu25nEDaqKNf4LiJp6cnK6kNggr8IQaYtepqZ6+SxvXWoEaWxhb/0HLl213mfSwjpr7+GEPlB04+tCf",
+	"t8uPUCL5egfKl83vEJw1Acb09hBim0ZBI3T88qOHWhbyh/w4Kvl+TvIeL7aMv3eovFcb/rao2scT1EGO",
+	"tC1M7JbAZT8cHJd5dykZcv4fT+p3y+Hvhm26kllPuZNEjyGOCUgY2tR2oiv3C65mp4xaabPiGELvoWA5",
+	"DuItbUMHBsXt/UJm8hl8SAjzm9nNjDK0DoxyWhbyZ17KpFPYMCfyhFps5QqYMkQYnvJFJQv5C+DrvVu/",
+	"HxE+/NNsRo/SGgTDdsq5gz7kH0PS4jQTnz06fL+MRmY31Hh5K1odkFqTgt+dkoBCFqptD3uZdDZMZHZv",
+	"w0lq6wj0WW3+UVbXkzmnCPoIu1El5/+DzwGVGxClB4VQJSafV+wNbwklDHw67idm5IEl5SpBkvIws7zq",
+	"AMEHWXwYTSSfEusIfiMQfEeDQhu8IjNpVEetX9PM9CmPpm4I+1svl8wz0pDwpN0L4LauA+CZhwpqxZI5",
+	"y2Snje5ix+9jzR26fqv+otMnit2H4AGjNy8E0epOvxDDnIJIsPRxGtJ8IqSHLxzNz7rM0uU4Qa0kQp3C",
+	"siGNIq1MjBGl1wheqwHZ9hRgconlRrCaZSLdTRn9RFn+xVKIXi8jQjhl41ZXu1SsFhDGdLzjdQ5qUY1F",
+	"69VYZumsSHCVCLEsIYQ6ti1f1q9etDAWRW2jqQbppQCESnfWciMWdwR0cXamIp19FVHYC18vC/8mY9bb",
+	"QboXRWBxd3avoxUOfG19J/ryCNvPDd1Ux7HRlRwK6iWleKA/3Cnxj2eV/5bq/3UaHV2lvqzN7xlh0Gk+",
+	"Av750OjoW1nIBtGFIs+3jQ1Ijdvlyun8eU5/J8prtWxT9of9M/mTymzIx401rTYsOg+7vwMAAP//cOIo",
+	"1pYOAAA=",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

@@ -23,14 +23,14 @@ func AbouProject(query string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><title>Anybook</title><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"stylesheet\" type=\"text/css\" href=\"/static/css/styles.css\"></head><body><header><div class=\"logo\"><a href=\"/\">Anybook</a></div><nav><ul><li><a href=\"/\">Home</a></li><li><a href=\"/about\">About Project</a></li></ul></nav><div class=\"search\"><form action=\"/search\" method=\"GET\"><label><input type=\"text\" placeholder=\"Search...\" id=\"q\" name=\"q\" value=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><title>Anybook</title><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"stylesheet\" type=\"text/css\" href=\"/static/css/styles.css\"></head><body><header><div class=\"logo\"><a href=\"/\">Anybook</a></div><nav><ul><li><a href=\"/\">Home</a></li><li><a href=\"/static/docs/api/index.html\">REST API</a></li><li><a href=\"/about\">About Project</a></li></ul></nav><div class=\"search\"><form action=\"/search\" method=\"GET\"><label><input type=\"text\" placeholder=\"Search...\" id=\"q\" name=\"q\" value=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(query)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/web/about/aboutviews/main.templ`, Line: 26, Col: 92}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/web/about/aboutviews/main.templ`, Line: 27, Col: 92}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
