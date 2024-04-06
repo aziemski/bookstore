@@ -1,5 +1,69 @@
 package bookdetailviews
 
-templ BookDetailsIndex(name string) {
-	<div>BookDetails, { name }</div>
+import (
+    "github.com/aziemski/bookstore/internal/core"
+)
+
+
+templ BookDetails(query string, book core.Book) {
+	<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Anybook</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css"/>
+    </head>
+    <body>
+    <header>
+        <div class="logo">
+            <a href="/">Anybook</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Project</a></li>
+            </ul>
+        </nav>
+        <div class="search">
+            <form action="/search" method="GET">
+                 <label>
+                     <input type="text" placeholder="Search..." id="q" name="q" value={query}/>
+                   </label>
+                 <button type="submit">Find!</button>
+            </form>
+        </div>
+    </header>
+    <div class="main">
+
+        <div class="main-content">
+            <div class="details-content">
+                <div class="details-item-container-img">
+                    <img src={book.ImageLink} alt=""/>
+                </div>
+                <div class="details-item-container-txt">
+                    <div class="details-item-txt-title">
+                       <h3>{book.Author}</h3>
+                    </div>
+                    <div class="details-item-txt-author">
+                       {book.Author}
+                    </div>
+                    <div class="details-item-txt-summary">
+                       {book.Author}
+                    </div>
+                    <div class="details-item-txt-description">
+                       {book.Author}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Anybook. All right reserved </p>
+    </footer>
+
+    </body>
+
+    </html>
 }
