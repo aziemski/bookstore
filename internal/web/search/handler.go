@@ -29,7 +29,8 @@ func (h *Handler) Handle(c echo.Context) error {
 		slog.Error("bind error", "err", err)
 	}
 
-	books := h.r.Find(ctx, q)
+	limit := 20
+	books := h.r.Query(ctx, core.QueryArgs{SearchTerm: q, Limit: &limit})
 
 	sv := searchviews.SearchResult(q, books)
 
