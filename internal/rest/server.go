@@ -73,8 +73,14 @@ func (s *Server) GetBooksSearch(c echo.Context, params GetBooksSearchParams) err
 }
 
 func (s *Server) DeleteBooksId(c echo.Context, id string) error {
-	// TODO implement me
-	panic("implement me")
+	ctx := c.Request().Context()
+
+	err := s.repo.DeleteByID(ctx, id)
+	if err != nil {
+		return errRsp(c, http.StatusNotFound, err)
+	}
+
+	return c.NoContent(http.StatusNoContent)
 }
 
 func (s *Server) GetBooksId(c echo.Context, id string) error {
@@ -82,7 +88,7 @@ func (s *Server) GetBooksId(c echo.Context, id string) error {
 
 	b, err := s.repo.FindByID(ctx, id)
 	if err != nil {
-		return err
+		return errRsp(c, http.StatusNotFound, err)
 	}
 
 	return c.JSON(http.StatusOK, apiBook(b))

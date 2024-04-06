@@ -133,6 +133,12 @@ func (r *Repository) Query(ctx context.Context, args QueryArgs) []Book {
 	return result
 }
 
+func (r *Repository) DeleteByID(ctx context.Context, id string) error {
+	err := r.db.Book.DeleteOneID(id).
+		Exec(ctx)
+	return err
+}
+
 func ent2core(in *ent.Book) Book {
 	return Book{
 		ID:          in.ID,
