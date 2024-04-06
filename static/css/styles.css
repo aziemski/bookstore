@@ -17,6 +17,12 @@ header {
     z-index: 100;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
 .logo {
     font-size: 32px;
     font-weight: bold;
@@ -88,6 +94,7 @@ nav ul li a:hover {
     align-items: center;
     flex-direction: column;
     text-align: center;
+    flex-grow: 1;
 }
 
 .main h1 {
@@ -106,6 +113,8 @@ nav ul li a:hover {
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    flex-grow: 1;
+    width: 90%;
 }
 
 .books {
@@ -159,3 +168,41 @@ footer {
     padding: 18px;
     text-align: center;
 }
+
+.details-content {
+    display: flex;
+    gap: 4em;
+}
+
+.details-item-container-img img {
+    height: 280px;
+    width: 296px;
+    margin-bottom: 10px;
+}
+
+.details-item-container-txt {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+}
+
+.details-item-txt-title {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.details-item-txt-author {
+    font-size: 18px;
+    color: #666;
+}
+
+.details-item-txt-summary {
+    font-size: 14px;
+    color: #666;
+}
+
+.details-item-txt-description {
+    font-size: 12px;
+}
+
